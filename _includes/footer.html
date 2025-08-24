@@ -1,0 +1,56 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p>{{ site.description | escape }}</p>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <div class="social-media-list">
+          {%- if site.github_username -%}
+            <a href="https://github.com/{{ site.github_username| cgi_escape | escape }}" title="{{ site.github_username| escape }}">
+              <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg>
+            </a>
+          {%- endif -%}
+          {%- if site.linkedin_username -%}
+            <a href="https://www.linkedin.com/in/{{ site.linkedin_username| cgi_escape | escape }}" title="{{ site.linkedin_username| escape }}">
+              <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .social-media-list {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+  
+  .social-media-list a {
+    display: inline-block;
+  }
+  
+  .site-footer {
+    padding: 20px 0;
+  }
+  
+  .footer-col-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-col-1 {
+    flex: 1;
+  }
+  
+  .footer-col-2 {
+    flex: 0;
+  }
+</style>

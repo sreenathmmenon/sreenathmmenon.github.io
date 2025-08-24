@@ -1,0 +1,61 @@
+# Site settings
+title: Sreenath M Menon
+email: zreenathmenon@gmail.com
+description: >-
+  Software Engineer passionate about AI, cloud, and open source.
+  Building tools that make developers' lives easier.
+baseurl: ""
+url: "https://sreenathmmenon.github.io"
+github_username: sreenathmmenon
+linkedin_username: sreenathmmenon
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Navigation
+header_pages:
+  - open-source.md
+  - til.md
+  - blog.md
+  - bookshelf.md
+  - bookmarks.md
+  - about.md
+
+# Collections for TIL posts and Blog
+collections:
+  til:
+    output: true
+    permalink: /:collection/:name/
+  blog:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "til"
+    values:
+      layout: "post"
+      author: "Sreenath M Menon"
+  - scope:
+      path: ""
+      type: "blog"
+    values:
+      layout: "post"
+      author: "Sreenath M Menon"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
