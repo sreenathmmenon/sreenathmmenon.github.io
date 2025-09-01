@@ -4,7 +4,7 @@ date: 2024-12-24
 tags: [mongodb, linux, troubleshooting, rhel]
 ---
 
-RHEL VM's UI stopped loading. Found MongoDB was down. Root cause: `/var/log` partition was 100% full.
+Our project UI stopped functioning. Investigation showed MongoDB was down on the RHEL VM. Root cause: `/var/log` partition was 100% full.
 
 ```bash
 # Check disk usage
