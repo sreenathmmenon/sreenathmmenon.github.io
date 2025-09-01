@@ -14,7 +14,7 @@ Then I came across [this VentureBeat article](https://venturebeat.com/ai/ibm-see
 
 So I created a config system. Users could specify different providers and models, pass API keys through config files or environment variables, and set a default provider. Clean and flexible.
 
-**Ref:** [https://venturebeat.com/ai/ibm-sees-enterprise-customers-are-using-everything-when-it-comes-to-ai-the-challenge-is-matching-the-llm-to-the-right-use-case/](https://venturebeat.com/ai/ibm-sees-enterprise-customers-are-using-everything-when-it-comes-to-ai-the-challenge-is-matching-the-llm-to-the-right-use-case/)
+*Ref: [https://venturebeat.com/ai/ibm-sees-enterprise-customers-are-using-everything-when-it-comes-to-ai-the-challenge-is-matching-the-llm-to-the-right-use-case/](https://venturebeat.com/ai/ibm-sees-enterprise-customers-are-using-everything-when-it-comes-to-ai-the-challenge-is-matching-the-llm-to-the-right-use-case/)*
 
 By the hackathon submission deadline, we supported Anthropic, Gemini, Watsonx, and Ollama. Same app, different brains.
 
