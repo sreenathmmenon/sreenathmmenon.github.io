@@ -121,6 +121,17 @@ p code, li code {
   }
 }
 
+// Fix link hover colors
+a {
+  color: var(--accent-color);
+  
+  &:hover {
+    color: var(--accent-color) !important;
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+}
+
 // Project cards styling
 .project-card {
   background: var(--card-bg);
