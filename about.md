@@ -4,8 +4,6 @@ title: About
 permalink: /about/
 ---
 
-# About Me
-
 I've been writing code for over 13 years, mostly working on infrastructure and cloud systems. These days I'm fascinated by how AI can make complex systems more approachable.
 
 Started my career building web applications, then got into cloud infrastructure when OpenStack was still the hot new thing. Now I spend time figuring out how to make infrastructure operations more conversational and less about remembering obscure CLI commands.

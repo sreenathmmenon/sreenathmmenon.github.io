@@ -4,8 +4,6 @@ title: Today I Learned
 permalink: /til/
 ---
 
-# Today I Learned
-
 Quick notes on things I discover while coding. Inspired by [Hashrocket's TIL](https://til.hashrocket.com/).
 
 {% assign sorted_til = site.til | sort: 'date' | reverse %}

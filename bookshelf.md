@@ -4,8 +4,6 @@ title: Bookshelf
 permalink: /bookshelf/
 ---
 
-# Bookshelf
-
 Books that shaped how I think about software, systems, and life.
 
 ## Recently Completed

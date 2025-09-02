@@ -4,7 +4,6 @@ title: Open Source
 permalink: /open-source/
 ---
 
-# Open Source Projects
 
 ## [llmswap](https://pypi.org/project/llmswap/)
 *Python package for switching between LLM providers*

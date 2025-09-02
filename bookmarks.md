@@ -4,8 +4,6 @@ title: Bookmarks
 permalink: /bookmarks/
 ---
 
-# Bookmarks
-
 Useful resources I keep coming back to.
 
 ## Technical Blogs

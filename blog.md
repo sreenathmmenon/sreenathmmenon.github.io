@@ -4,7 +4,6 @@ title: Blog
 permalink: /blog/
 ---
 
-# Blog
 
 Longer technical posts and deep dives into software engineering topics.
 
