@@ -1,6 +1,5 @@
 ---
 layout: home
-title: Sreenath M Menon - Software Engineer
 ---
 
 <div style="display: flex; align-items: center; margin-bottom: 2rem; gap: 2rem; flex-wrap: wrap;">
