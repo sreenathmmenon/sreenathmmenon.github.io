@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I've been writing code for over 13 years, mostly working on infrastructure and cloud systems. These days I'm fascinated by how AI can make complex systems more approachable.
+I've been writing code for over 13 years. Started with grep and bash scripts in 2011, now I'm teaching LLMs to debug for me. The tools changed, but the tea addiction stayed constant - hard to shake after 25 years growing up in tea plantations.
 
 Started my career building web applications, then got into cloud infrastructure when OpenStack was still the hot new thing. Now I spend time figuring out how to make infrastructure operations more conversational and less about remembering obscure CLI commands.
 

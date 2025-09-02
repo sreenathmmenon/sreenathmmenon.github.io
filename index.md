@@ -35,5 +35,5 @@ Check out my [Today I Learned](/til/) posts for quick technical insights, or bro
 ---
 
 <div style="text-align: center; font-style: italic; color: #666;">
-Building the future of infrastructure, one commit at a time.
+Tea, terminals, and troubleshooting since 2011.
 </div>
