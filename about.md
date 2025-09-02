@@ -18,7 +18,7 @@ Also experimenting with Anthropic's Model Context Protocol to see if we can make
 
 I read a lot about distributed systems and software architecture. Always trying to understand how large-scale systems actually work in practice, not just in theory.
 
-Occasionally write about technical stuff on my [Substack](https://sreenathmmenon.substack.com/), though not as consistently as I'd like.
+Occasionally write about technical stuff on my Substack, though not as consistently as I'd like.
 
 ## Background
 

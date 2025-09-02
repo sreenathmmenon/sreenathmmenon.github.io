@@ -30,7 +30,7 @@ Check out my [Today I Learned](/til/) posts for quick technical insights, or bro
 - 📧 [Email](mailto:zreenathmenon@gmail.com)
 - 💼 [LinkedIn](https://linkedin.com/in/sreenathmmenon)  
 - 🐙 [GitHub](https://github.com/sreenathmmenon)
-- ✍️ [Substack](https://sreenathmmenon.substack.com/)
+- ✍️ [Substack](#)
 
 ---
 
