@@ -190,9 +190,11 @@ footer.site-footer,
   background-color: var(--card-bg) !important;
   color: var(--text-color) !important;
   border-top: 1px solid var(--border-color) !important;
+  margin-top: 3rem;
   
   .footer-col-wrapper {
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .footer-col {
@@ -203,36 +205,44 @@ footer.site-footer,
   .footer-col-1,
   .footer-col-2,
   .footer-col-3,
-  p.text {
+  p {
     color: var(--text-secondary) !important;
   }
   
-  .footer-col a,
-  a {
-    color: var(--text-secondary) !important;
-    opacity: 0.9;
-    
-    &:hover {
-      color: var(--accent-color) !important;
-      opacity: 1;
-    }
-  }
-  
-  .social-links {
+  // Social media icons styling
+  .social-media-list {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
     
     a {
-      color: var(--bg-color) !important;
-      font-size: 1.5rem;
-      transition: color 0.3s ease;
+      display: inline-block;
+      transition: all 0.3s ease;
       
       &:hover {
-        color: var(--accent-color) !important;
+        transform: translateY(-2px);
+        opacity: 0.8;
       }
     }
+    
+    .svg-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-secondary) !important;
+      transition: fill 0.3s ease;
+      
+      &:hover {
+        fill: var(--accent-color) !important;
+      }
+    }
+  }
+  
+  // Fix SVG icon colors in both themes
+  svg.svg-icon {
+    fill: var(--text-secondary) !important;
+  }
+  
+  a:hover svg.svg-icon {
+    fill: var(--accent-color) !important;
   }
 }
 
