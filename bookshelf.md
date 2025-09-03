@@ -12,7 +12,7 @@ Books that shaped how I think about software, systems, and life.
 Practical insights on building a meaningful life and career. Great perspective on balancing ambition with fulfillment.
 
 **"Serve to Win" by Novak Djokovic**  
-More than a tennis book - fascinating insights on mental strength, discipline, and peak performance.
+More than a tennis book - fascinating insights on mental training, nutrition, meditation, discipline, and peak performance.
 
 ## Want to Read
 
