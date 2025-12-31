@@ -8,17 +8,25 @@ Useful resources I keep coming back to.
 
 ## Technical Blogs
 
-**[High Scalability](http://highscalability.com/)**  
+**[Simon Willison's Weblog](https://simonwillison.net/)**
+Deep dives into LLMs, Python, and SQLite. Great practical AI insights.
+
+**[High Scalability](http://highscalability.com/)**
 Real-world architecture deep dives. The Netflix and Uber case studies are fascinating.
 
-**[Martin Fowler's Blog](https://martinfowler.com/)**  
+**[Martin Fowler's Blog](https://martinfowler.com/)**
 Still the gold standard for software architecture writing.
 
-**[Julia Evans](https://jvns.ca/)**  
+**[Julia Evans](https://jvns.ca/)**
 Makes complex systems concepts accessible. Her zines are brilliant.
 
-**[Brendan Gregg's Blog](http://www.brendangregg.com/)**  
+**[Brendan Gregg's Blog](http://www.brendangregg.com/)**
 The go-to resource for anything performance-related.
+
+## Podcasts
+
+**[Dwarkesh Podcast](https://www.dwarkeshpatel.com/podcast)**
+In-depth conversations with leading AI researchers and builders. The Andrej Karpathy and other technical interviews are exceptional.
 
 ## Tools I Use
 
