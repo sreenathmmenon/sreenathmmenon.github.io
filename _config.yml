@@ -19,12 +19,12 @@ plugins:
 
 # Navigation
 header_pages:
+  - about.md
   - open-source.md
   - til.md
   - blog.md
   - bookshelf.md
   - bookmarks.md
-  - about.md
 
 # Collections for TIL posts and Blog
 collections:

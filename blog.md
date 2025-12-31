@@ -4,6 +4,7 @@ title: Blog
 permalink: /blog/
 ---
 
+# Blog ({{ site.blog | size }} articles)
 
 Longer technical posts and deep dives into software engineering topics.
 
