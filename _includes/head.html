@@ -14,7 +14,10 @@
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
-  
+
+  <!-- Lunr.js for search -->
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+
   <!-- Theme toggle script -->
   <script>
     // Check for saved theme preference or default to light

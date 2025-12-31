@@ -1,0 +1,77 @@
+<div class="search-container">
+  <input type="text" id="search-input" placeholder="Search articles..." />
+  <div id="search-results"></div>
+</div>
+
+<script>
+(function() {
+  var searchInput = document.getElementById('search-input');
+  var searchResults = document.getElementById('search-results');
+  var lunrIndex, searchData;
+
+  // Load search data and build index
+  fetch('/search.json')
+    .then(response => response.json())
+    .then(data => {
+      searchData = data;
+
+      // Build lunr index
+      lunrIndex = lunr(function() {
+        this.ref('url');
+        this.field('title', { boost: 10 });
+        this.field('content');
+        this.field('tags', { boost: 5 });
+        this.field('category');
+
+        data.forEach(function(doc) {
+          this.add(doc);
+        }, this);
+      });
+    });
+
+  // Search function
+  function performSearch(query) {
+    if (!query || !lunrIndex) {
+      searchResults.innerHTML = '';
+      searchResults.style.display = 'none';
+      return;
+    }
+
+    var results = lunrIndex.search(query);
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      searchResults.style.display = 'block';
+      return;
+    }
+
+    var html = '<div class="search-results-list">';
+    results.slice(0, 5).forEach(function(result) {
+      var item = searchData.find(function(d) { return d.url === result.ref; });
+      if (item) {
+        html += '<div class="search-result-item">';
+        html += '<div class="search-result-category">' + item.category + '</div>';
+        html += '<a href="' + item.url + '">' + item.title + '</a>';
+        html += '<div class="search-result-date">' + item.date + '</div>';
+        html += '</div>';
+      }
+    });
+    html += '</div>';
+
+    searchResults.innerHTML = html;
+    searchResults.style.display = 'block';
+  }
+
+  // Event listeners
+  searchInput.addEventListener('input', function(e) {
+    performSearch(e.target.value);
+  });
+
+  // Close search results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+})();
+</script>

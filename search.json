@@ -1,0 +1,26 @@
+---
+layout: null
+---
+[
+  {% for post in site.blog %}
+    {
+      "title"    : "{{ post.title | escape }}",
+      "category" : "Blog",
+      "tags"     : "{{ post.tags | join: ', ' }}",
+      "url"      : "{{ site.baseurl }}{{ post.url }}",
+      "date"     : "{{ post.date | date: '%B %d, %Y' }}",
+      "content"  : "{{ post.content | strip_html | strip_newlines | escape }}"
+    } {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  ,
+  {% for post in site.til %}
+    {
+      "title"    : "{{ post.title | escape }}",
+      "category" : "TIL",
+      "tags"     : "{{ post.tags | join: ', ' }}",
+      "url"      : "{{ site.baseurl }}{{ post.url }}",
+      "date"     : "{{ post.date | date: '%B %Y' }}",
+      "content"  : "{{ post.content | strip_html | strip_newlines | escape }}"
+    } {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
