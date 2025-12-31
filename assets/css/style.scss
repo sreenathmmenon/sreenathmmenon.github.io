@@ -51,7 +51,7 @@
 
 // Apply theme variables
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.7;
   color: var(--text-color);
   background-color: var(--bg-color);
@@ -60,6 +60,7 @@ body {
 
 // Fix code blocks in dark theme
 .highlight, pre, code {
+  font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
   background-color: var(--card-bg) !important;
   color: var(--text-color) !important;
   border: 1px solid var(--border-color) !important;
@@ -71,6 +72,7 @@ body {
 
 // Fix inline code
 p code, li code {
+  font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
   background-color: var(--card-bg) !important;
   color: var(--accent-color) !important;
   padding: 2px 4px !important;
