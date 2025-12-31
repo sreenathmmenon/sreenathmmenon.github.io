@@ -4,9 +4,11 @@ title: Blog
 permalink: /blog/
 ---
 
-# Blog ({{ site.blog | size }} articles)
-
 Longer technical posts and deep dives into software engineering topics.
+
+*{{ site.blog | size }} articles*
+
+---
 
 {% assign sorted_blog = site.blog | sort: 'date' | reverse %}
 {% if sorted_blog.size > 0 %}
