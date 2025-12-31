@@ -1,6 +1,6 @@
 ---
 title: "MongoDB Text Search is Pretty Good Actually"
-date: 2024-11-25
+date: 2025-11-25
 tags: [mongodb, search, database]
 ---
 

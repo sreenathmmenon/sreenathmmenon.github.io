@@ -1,6 +1,6 @@
 ---
 title: "Extending XFS Filesystem on LVM When Logs Fill Up"
-date: 2024-08-15
+date: 2025-08-15
 tags: [linux, xfs, lvm, rhel, storage]
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Why our UI search was taking forever"
-date: 2024-09-22
+date: 2025-09-22
 tags: [mongodb, search, performance, infrastructure]
 ---
 
