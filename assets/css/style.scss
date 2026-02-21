@@ -95,8 +95,9 @@ p code, li code {
 .site-nav .page-link {
   color: var(--text-secondary);
   font-weight: 500;
-  margin-left: 1.5rem;
-  
+  margin-left: 1rem;
+  font-size: 0.95rem;
+
   &:hover {
     color: var(--accent-color);
     text-decoration: none;
