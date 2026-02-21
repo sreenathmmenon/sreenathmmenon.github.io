@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Today I Learned
+nav_title: TIL
 permalink: /til/
 ---
 
