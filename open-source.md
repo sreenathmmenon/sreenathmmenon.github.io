@@ -29,11 +29,4 @@ Still rough around the edges, but it works.
 
 ---
 
-## Alexa Skills
-*Voice apps I built years ago*
-
-Made a few Alexa skills for fun back when voice assistants were the hot new thing. Nothing groundbreaking, but good learning experience with natural language processing.
-
----
-
 That's pretty much it for now. I prefer building things I actually use rather than creating projects just for the portfolio.

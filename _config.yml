@@ -21,6 +21,7 @@ plugins:
 header_pages:
   - about.md
   - open-source.md
+  - labs.md
   - til.md
   - blog.md
   - bookshelf.md
