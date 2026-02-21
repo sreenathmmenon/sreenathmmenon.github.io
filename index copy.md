@@ -14,7 +14,7 @@ layout: home
 
 <div class="project-card">
   <h3>🤖 llmswap</h3>
-  <p>Python package for seamless switching between LLM providers (OpenAI, Anthropic, Google, Ollama). <strong>6,000+ PyPI downloads</strong> in first month.</p>
+  <p>Python package for seamless switching between LLM providers (OpenAI, Anthropic, Google, Ollama). <strong>30,000+ PyPI downloads</strong>.</p>
   <p><a href="https://pypi.org/project/llmswap/" target="_blank">View on PyPI →</a></p>
 </div>
 

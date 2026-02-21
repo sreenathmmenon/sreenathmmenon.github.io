@@ -15,7 +15,7 @@ layout: home
 
 ## What I'm Building
 
-🤖 **llmswap** - Python package for seamless switching between LLM providers (OpenAI, Anthropic, Google, Ollama). **6,000+ PyPI downloads**. [View on PyPI →](https://pypi.org/project/llmswap/)
+🤖 **llmswap** - Python package for seamless switching between LLM providers (OpenAI, Anthropic, Google, Ollama). **30,000+ PyPI downloads**. [View on PyPI →](https://pypi.org/project/llmswap/)
 
 🔧 **OpenStack MCP Server** - Natural language infrastructure management for OpenStack environments using Model Context Protocol. [View on GitHub →](https://github.com/sreenathmmenon/openstack-mcp-server)
 

@@ -1,7 +1,7 @@
 ---
 title: "What I Learned Building a CLI That People Actually Use"
 date: 2025-09-15
-excerpt: "Lessons from building llmswap's command-line interface - from argparse chaos to a tool with 6000+ downloads."
+excerpt: "Lessons from building llmswap's command-line interface - from argparse chaos to a tool with 30,000+ downloads."
 tags: [python, cli, argparse, ux, developer-tools]
 keywords: "CLI design, argparse, Python CLI, developer tools, user experience, command-line interface"
 ---
@@ -14,7 +14,7 @@ llmswap --ask "What is Docker?" --provider anthropic --model claude-3-opus-20240
 # Nobody wants to type this.
 ```
 
-After building, testing, and iterating for months, the CLI now has 6000+ downloads on PyPI. Here's what I learned about making command-line tools people actually want to use.
+After building, testing, and iterating for months, the CLI now has 30,000+ downloads on PyPI. Here's what I learned about making command-line tools people actually want to use.
 
 ## Lesson 1: Start With the User Experience, Not the Code
 
