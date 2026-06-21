@@ -33,7 +33,7 @@ B.Tech in Information Technology, Cochin University of Science & Technology. Adv
 
 Lately I've taken up flying — a DJI Mini 5 Pro over the green ridges near home. I see the truth from above: every path that looks impossible from the ground is obvious from the air. I've learned to live from that altitude — to see my whole life as one landscape, not one hard step at a time.
 
-I seem to like the view from up there in general — I've also flown the world's longest urban zipline, starting some 170 metres above Dubai Marina.
+I seem to like the view from up there in general — I've also flown the world's longest urban zipline, a 1 km descent from 170 metres above Dubai Marina.
 
 <figure class="photo">
   <img src="{{ '/assets/images/drone-tea-estate.jpg' | relative_url }}" alt="Aerial view of terraced tea estates over green ridges near Vagamon, Kerala, shot from a drone" width="1400" height="683" loading="lazy">
