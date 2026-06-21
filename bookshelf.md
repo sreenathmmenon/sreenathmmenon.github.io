@@ -12,7 +12,10 @@ Books that shaped how I think about software, systems, and life.
 Practical insights on building a meaningful life and career. Great perspective on balancing ambition with fulfillment.
 
 **"Serve to Win" by Novak Djokovic**  
-More than a tennis book - fascinating insights on mental training, nutrition, meditation, discipline, and peak performance.
+More than a tennis book. Fascinating insights on mental training, nutrition, meditation, discipline, and peak performance.
+
+**"Uptime" by Laura Mae Martin**  
+A practical guide to personal productivity and wellbeing from Google's executive productivity advisor. Good, grounded ideas on protecting focus and avoiding burnout.
 
 ## Want to Read
 

@@ -53,6 +53,22 @@ Still the most comprehensive cloud infrastructure docs I've found.
 **[Python Type Hints Cheat Sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)**  
 Because I always forget the syntax for complex types.
 
+## Papers Worth Knowing
+
+The foundational reads behind a lot of what I write about. I have not studied every one of these end to end, but they are the references I keep coming back to when I want to actually understand how modern AI systems work.
+
+**[Attention Is All You Need](https://arxiv.org/abs/1706.03762)** (Vaswani et al., 2017)  
+The paper that introduced the Transformer and quietly started the whole modern LLM era.
+
+**[Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)** (Lewis et al., 2020)  
+The original RAG paper. Where the idea of pairing a model with an external memory got its name.
+
+**[Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)** (Liu et al., 2023)  
+Shows that models attend well to the start and end of a long context and go blind in the middle. Changed how I think about prompt order.
+
+**[Reciprocal Rank Fusion](https://dl.acm.org/doi/10.1145/1571941.1572114)** (Cormack, Clarke & Büttcher, 2009)  
+The simple one-line trick for combining keyword and vector search rankings. Still the default in most hybrid search engines.
+
 ## Documentation Worth Reading
 
 **[Stripe API Docs](https://stripe.com/docs/api)**  
