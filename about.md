@@ -29,6 +29,10 @@ Led cloud-management product development and architected an OpenStack-based bill
 
 B.Tech in Information Technology, Cochin University of Science & Technology. Advanced Certification in AI & ML, IIIT Hyderabad. Based in Bengaluru, India.
 
+## From above
+
+Lately I've taken up flying — a DJI Mini 5 Pro over the green ridges near home. I see the truth from above: every path that looks impossible from the ground is obvious from the air. I've learned to live from that altitude — to see my whole life as one landscape, not one hard step at a time.
+
 ---
 
 *Always happy to talk infrastructure, AI, or anything in between. Drop me a line at [{{ site.email }}](mailto:{{ site.email }}).*
