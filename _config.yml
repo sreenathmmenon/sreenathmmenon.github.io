@@ -57,6 +57,8 @@ header_pages:
   - labs.md
   - til.md
   - blog.md
+  - bookshelf.md
+  - bookmarks.md
   - about.md
 
 # Collections for TIL posts and Blog
