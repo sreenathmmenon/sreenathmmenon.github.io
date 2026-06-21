@@ -36,8 +36,8 @@ Lately I've taken up flying — a DJI Mini 5 Pro over the green ridges near home
 I seem to like the view from up there in general — I've also flown the world's longest urban zipline, starting some 170 metres above Dubai Marina.
 
 <figure class="photo">
-  <img src="{{ '/assets/images/drone-tea-estate.jpg' | relative_url }}" alt="Aerial view of terraced tea estates over green ridges, shot from a drone" width="1400" height="683" loading="lazy">
-  <figcaption>Tea country from above — DJI Mini 5 Pro.</figcaption>
+  <img src="{{ '/assets/images/drone-tea-estate.jpg' | relative_url }}" alt="Aerial view of terraced tea estates over green ridges near Vagamon, Kerala, shot from a drone" width="1400" height="683" loading="lazy">
+  <figcaption>Tea estates near Vagamon, from above — DJI Mini 5 Pro.</figcaption>
 </figure>
 
 ---
