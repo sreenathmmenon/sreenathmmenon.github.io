@@ -218,6 +218,11 @@ img{max-width:100%;}
 .prose img{border-radius:var(--r-md);border:1px solid var(--border);}
 .prose hr{border:0;border-top:1px solid var(--border);margin:var(--sp-8) 0;}
 
+/* full-width-ish photo figure (e.g. drone shot on About) */
+.photo{margin:var(--sp-6) 0;}
+.photo img{width:100%;height:auto;border-radius:var(--r-lg);border:1px solid var(--border);box-shadow:var(--glow);display:block;}
+.photo figcaption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-3);margin-top:var(--sp-3);text-align:center;}
+
 /* content list (TIL / Blog index entries rendered in markdown) */
 .page .prose h2 a{text-decoration:none;color:var(--text);}
 .page .prose h2 a:hover{color:var(--accent);}
