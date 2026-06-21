@@ -269,6 +269,37 @@ img{max-width:100%;}
   .viz-cursor{animation:none;}
 }
 
+/* =========================================================================
+   RICH CONTENT PAGES (bookmarks, bookshelf, etc.)
+   Opt-in via `rich: true` front matter. Turns plain bold-led lists into
+   tidy, theme-safe resource entries. Works in dark + light automatically.
+   ========================================================================= */
+.prose-rich h2{
+  font-size:1.5rem;margin:var(--sp-10) 0 var(--sp-5);padding-bottom:var(--sp-3);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;gap:var(--sp-3);
+}
+.prose-rich h2::before{
+  content:"";width:10px;height:10px;border-radius:3px;background:var(--grad);flex:none;
+}
+/* each "**Title** description" paragraph becomes a card */
+.prose-rich > p{
+  background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-4) var(--sp-5);
+  margin-bottom:var(--sp-3);color:var(--text-2);transition:border-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.prose-rich > p:hover{transform:translateX(3px);box-shadow:var(--glow);}
+.prose-rich > p strong,.prose-rich > p a:first-child{display:inline;font-size:1.02rem;}
+.prose-rich > p a{color:var(--accent);text-decoration:none;font-weight:600;}
+.prose-rich > p a:hover{color:var(--accent-2);text-decoration:underline;}
+/* the intro line stays plain (lead), and any italic-only note stays plain too */
+.prose-rich > p:first-of-type{background:none;border:0;padding:0;color:var(--text-2);font-size:var(--fs-lg);}
+.prose-rich > p:has(> em:only-child){
+  background:none;border:0;padding:0;color:var(--text-3);font-style:italic;text-align:center;margin-top:var(--sp-8);
+}
+.prose-rich > p:first-of-type:hover,
+.prose-rich > p:has(> em:only-child):hover{transform:none;box-shadow:none;}
+.prose-rich em{font-style:italic;}
+
 /* post footer note (corrections / contact) */
 .post-note{margin-top:var(--sp-10);padding-top:var(--sp-5);border-top:1px solid var(--border);color:var(--text-3);font-size:.92rem;}
 .post-note a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}

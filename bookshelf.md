@@ -2,6 +2,7 @@
 layout: page
 title: Bookshelf
 permalink: /bookshelf/
+rich: true
 ---
 
 Books that shaped how I think about software, systems, and life.

@@ -2,6 +2,7 @@
 layout: page
 title: Bookmarks
 permalink: /bookmarks/
+rich: true
 ---
 
 Useful resources I keep coming back to.
@@ -57,6 +58,9 @@ Because I always forget the syntax for complex types.
 
 The foundational reads behind a lot of what I write about. I have not studied every one of these end to end, but they are the references I keep coming back to when I want to actually understand how modern AI systems work.
 
+**[Scalable and Efficient Large-Scale Log Analysis with LLMs](https://arxiv.org/abs/2511.14803)** (Gupta et al., 2025)  
+A production case study on using LLMs to automate IT log analysis and issue diagnosis across many software products. Close to my own world, and I have had the chance to talk with some of the people behind it.
+
 **[Attention Is All You Need](https://arxiv.org/abs/1706.03762)** (Vaswani et al., 2017)  
 The paper that introduced the Transformer and quietly started the whole modern LLM era.
 
@@ -66,7 +70,7 @@ The original RAG paper. Where the idea of pairing a model with an external memor
 **[Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)** (Liu et al., 2023)  
 Shows that models attend well to the start and end of a long context and go blind in the middle. Changed how I think about prompt order.
 
-**[Reciprocal Rank Fusion](https://dl.acm.org/doi/10.1145/1571941.1572114)** (Cormack, Clarke & Büttcher, 2009)  
+**[Reciprocal Rank Fusion](https://ir.webis.de/anthology/2009.sigirconf_conference-2009.146/)** (Cormack, Clarke & Büttcher, 2009)  
 The simple one-line trick for combining keyword and vector search rankings. Still the default in most hybrid search engines.
 
 ## Documentation Worth Reading
