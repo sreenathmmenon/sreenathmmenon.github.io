@@ -1,6 +1,6 @@
 # Sreenath M Menon
 
-> Staff Software Engineer with 14+ years of experience in product engineering and applied AI, based in Bengaluru, India. Creator of llmswap, an open-source LLM toolkit with 41,000+ downloads. Works at the intersection of cloud infrastructure, developer tooling, and AI agents.
+> Staff Software Engineer with 14+ years of experience in product engineering, based in Bengaluru, India. Creator of llmswap, an open-source LLM toolkit with 41,000+ downloads. Builds open-source AI agents and developer tooling, working at the intersection of cloud infrastructure and applied AI.
 
 Sreenath M Menon is a staff software engineer at IBM (India Systems Development Lab). He builds open-source AI tools and has placed Top 15 of 70,000+ at the Meta x Hugging Face x PyTorch OpenEnv hackathon and Top 50 at the Anthropic x Accel hackathon.
 
@@ -13,7 +13,7 @@ Sreenath M Menon is a staff software engineer at IBM (India Systems Development 
 
 ## Experience
 
-- Staff Software Engineer, IBM (India Systems Development Lab), 2019 to present. Product engineering and applied AI; title progression from Staff to Advisory Software Engineer.
+- Staff Software Engineer, IBM (India Systems Development Lab), 2019 to present. Product engineering on enterprise software; title progression from Staff to Advisory Software Engineer.
 - Systems Analyst, UST Global, 2018 to 2019. Customer-interaction platform on AWS Connect, Transcribe, and Comprehend.
 - Senior Software Engineer L2, Poornam Info Vision, 2011 to 2018. Cloud-management product development and an OpenStack-based billing platform.
 

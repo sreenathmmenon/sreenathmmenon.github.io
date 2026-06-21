@@ -3,8 +3,8 @@ title: Sreenath M Menon
 lang: en
 email: zreenathmenon@gmail.com
 description: >-
-  Staff Software Engineer (14+ years) in product engineering and applied AI.
-  Creator of llmswap (41K+ downloads). Building open-source AI tools and infrastructure.
+  Staff Software Engineer (14+ years). Creator of llmswap (41K+ downloads).
+  Building open-source AI tools, agents, and infrastructure.
 baseurl: ""
 url: "https://sreenathmenon.com"
 github_username: sreenathmmenon
@@ -30,8 +30,8 @@ hero:
   lede: >-
     I'm a staff software engineer with 14+ years building enterprise software and open-source AI
     tools, lately safe and auditable autonomous systems. I created llmswap (41K+ downloads), placed
-    Top 15 of 70,000+ at the Meta × Hugging Face × PyTorch hackathon, and I'm currently at IBM working
-    in product engineering and applied AI.
+    Top 15 of 70,000+ at the Meta × Hugging Face × PyTorch hackathon, and build AI agents and
+    developer tooling. I'm currently a staff engineer at IBM.
 focus:
   - Applied AI & Agents
   - Product Engineering

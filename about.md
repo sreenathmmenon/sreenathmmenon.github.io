@@ -6,7 +6,7 @@ eyebrow: About
 subtitle: Staff Software Engineer · 14+ years · Bengaluru, India
 ---
 
-I'm a staff software engineer with **14+ years** building enterprise software and open-source AI tools. I started with bash and `grep` in 2011, moved into cloud infrastructure when OpenStack was new, and now work at the seam between natural language and systems, in product engineering and applied AI.
+I'm a staff software engineer with **14+ years** building enterprise software and open-source AI tools. I started with bash and `grep` in 2011, moved into cloud infrastructure when OpenStack was new, and now work at the seam between natural language and systems, building AI agents and developer tooling.
 
 I created [**llmswap**](https://llmswap.org), a provider-agnostic LLM toolkit with **41K+ downloads**, and I build AI agents, developer tools, and infrastructure experiments. My hackathon work placed **Top 15 of 70,000+** at the Meta × Hugging Face × PyTorch OpenEnv hackathon and **Top 50** at the Anthropic + Accel hackathon.
 
@@ -17,7 +17,7 @@ Reliable software, good developer experience, and tools that earn a place in som
 ## Experience
 
 **IBM · ISDL**, Staff Software Engineer (2019 to present)
-Product engineering and applied AI on enterprise software. Title progression from Staff → Senior Staff → Advisory Software Engineer.
+Product engineering on enterprise software. Title progression from Staff → Senior Staff → Advisory Software Engineer.
 
 **UST Global**, Systems Analyst (2018 to 2019)
 Built a customer-interaction platform integrating AWS Connect, Transcribe and Comprehend for real-time call processing and sentiment analysis.
