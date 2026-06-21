@@ -55,7 +55,6 @@ plugins:
 # Navigation
 header_pages:
   - labs.md
-  - til.md
   - blog.md
   - bookshelf.md
   - bookmarks.md

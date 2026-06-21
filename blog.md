@@ -4,7 +4,7 @@ title: Blog
 permalink: /blog/
 ---
 
-Longer technical posts and deep dives into software engineering topics.
+Longer technical posts and deep dives into software engineering topics. For shorter notes, see my [Today I Learned](/til/) collection.
 
 *{{ site.blog | size }} articles*
 
