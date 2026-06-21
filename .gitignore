@@ -8,3 +8,12 @@ Gemfile.lock
 .DS_Store
 *.pdf
 previews/
+
+# Local AI-assistant config / working notes (not part of the site)
+CLAUDE.md
+AGENTS.md
+.cursorrules
+.cursor/
+.aider*
+.github/copilot-instructions.md
+bin/

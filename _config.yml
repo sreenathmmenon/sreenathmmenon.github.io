@@ -92,6 +92,8 @@ exclude:
   - Gemfile.lock
   - previews/
   - _templates/
+  - CLAUDE.md
+  - bin/
   - node_modules
   - vendor/bundle/
   - vendor/cache/

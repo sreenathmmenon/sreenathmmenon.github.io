@@ -13,7 +13,12 @@ layout: default
   <div class="prose reveal">
     {{ content }}
   </div>
-  <p class="reveal" style="margin-top:3rem">
+
+  <footer class="post-note reveal">
+    Spotted a mistake or want to chat about it? <a href="mailto:{{ site.email }}">Email me</a> or <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener">find me on LinkedIn</a>.
+  </footer>
+
+  <p class="reveal" style="margin-top:2rem">
     <a href="{% if page.collection == 'til' %}{{ '/til/' | relative_url }}{% else %}{{ '/blog/' | relative_url }}{% endif %}">← Back to {{ page.collection | default: 'writing' }}</a>
   </p>
 </article>

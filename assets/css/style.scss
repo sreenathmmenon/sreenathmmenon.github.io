@@ -227,6 +227,47 @@ img{max-width:100%;}
 .page .prose h2 a{text-decoration:none;color:var(--text);}
 .page .prose h2 a:hover{color:var(--accent);}
 
+/* =========================================================================
+   REUSABLE POST VISUAL COMPONENTS
+   Drop these classes into any blog/TIL post for diagrams that work in BOTH
+   themes automatically. ALWAYS use these (or var(--...)) — never hardcode hex.
+   ========================================================================= */
+
+/* figure + caption wrapper for any in-post diagram */
+.post-fig{margin:2.5rem 0;}
+.post-fig figcaption{font-family:var(--font-mono);font-size:.8rem;color:var(--text-3);margin-top:.9rem;text-align:center;line-height:1.5;}
+
+/* generic demo card (panel that holds a diagram) */
+.viz-card{background:var(--surface);border:1px solid var(--border-2);border-radius:14px;padding:1.2rem;box-shadow:var(--glow);}
+
+/* a chip / token / tag, theme-safe */
+.viz-chip{font-family:var(--font-mono);font-size:.85rem;padding:.3rem .6rem;border-radius:7px;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-2);display:inline-block;}
+.viz-chip--accent{background:transparent;border-color:var(--accent);color:var(--accent);font-weight:600;}
+.viz-chip--solid{background:var(--grad);border-color:transparent;color:var(--accent-ink);font-weight:600;}
+
+/* a labelled row (left label, content, optional right tag) */
+.viz-row{display:flex;align-items:center;gap:.8rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.6rem .85rem;font-size:.9rem;color:var(--text-2);}
+.viz-row + .viz-row{margin-top:.55rem;}
+.viz-row .viz-label{font-family:var(--font-mono);color:var(--accent);font-weight:600;flex:none;}
+
+/* numbered step circle */
+.viz-num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--grad);color:var(--accent-ink);font-family:var(--font-mono);font-weight:600;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+
+/* a flex group of chips/rows that wraps on mobile */
+.viz-group{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;}
+
+/* blinking cursor for "typing" demos */
+.viz-cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-2px;animation:viz-blink 1.05s steps(1) infinite;}
+@keyframes viz-blink{50%{opacity:0;}}
+
+@media (prefers-reduced-motion: reduce){
+  .viz-cursor{animation:none;}
+}
+
+/* post footer note (corrections / contact) */
+.post-note{margin-top:var(--sp-10);padding-top:var(--sp-5);border-top:1px solid var(--border);color:var(--text-3);font-size:.92rem;}
+.post-note a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
+
 /* error page */
 .error-page{text-align:center;padding-block:var(--sp-12);}
 .error-page .error-code{font-family:var(--font-mono);font-size:4rem;color:var(--accent);margin-bottom:var(--sp-2);}
