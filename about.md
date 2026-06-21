@@ -33,6 +33,8 @@ B.Tech in Information Technology, Cochin University of Science & Technology. Adv
 
 Lately I've taken up flying — a DJI Mini 5 Pro over the green ridges near home. I see the truth from above: every path that looks impossible from the ground is obvious from the air. I've learned to live from that altitude — to see my whole life as one landscape, not one hard step at a time.
 
+I seem to like the view from up there in general — I've also flown the world's longest urban zipline, starting some 170 metres above Dubai Marina.
+
 ---
 
 *Always happy to talk infrastructure, AI, or anything in between. Drop me a line at [{{ site.email }}](mailto:{{ site.email }}).*
