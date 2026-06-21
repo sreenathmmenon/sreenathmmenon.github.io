@@ -30,7 +30,7 @@
   blurb: >-
     An RL environment for AI-assisted clinical triage for India's 1.07M frontline ASHA health
     workers. Multi-agent, adaptive curriculum, GRPO-trained to 0.947 peak reward. Built for the
-    Meta × Hugging Face × PyTorch hackathon — Top 15 of 70,000+.
+    Meta × Hugging Face × PyTorch hackathon: Top 15 of 70,000+.
   stack: [Python, OpenEnv, "GRPO · Qwen3"]
   links:
     - { label: GitHub, url: "https://github.com/sreenathmmenon/asha-sahayak" }
@@ -39,7 +39,7 @@
 - name: Sampark OS
   featured: false
   blurb: >-
-    An autonomous AI broker for India's informal maritime economy — a 4-agent swarm that
+    An autonomous AI broker for India's informal maritime economy: a 4-agent swarm that
     negotiates fish prices for Kerala fishermen. Claude Vision grades catch from photos; agents
     broadcast over WhatsApp/Telegram, reject predatory bids, and close deals.
   stack: [TypeScript, Claude Vision, Multi-agent]
@@ -49,7 +49,7 @@
 - name: Eklavya Council
   featured: false
   blurb: >-
-    An AI thinking environment — not a chatbot. Expert AI personas debate a question in
+    An AI thinking environment, not a chatbot. Expert AI personas debate a question in
     structured rounds; a synthesis engine produces decisions, dissent, open questions, and action items.
   stack: [TypeScript, Anthropic Claude]
   links:
@@ -59,7 +59,7 @@
 - name: Aegis WAF
   featured: false
   blurb: >-
-    An AI-powered Web Application Firewall for LLM apps — multi-layered defense against prompt
+    An AI-powered Web Application Firewall for LLM apps: multi-layered defense against prompt
     injection, jailbreaks, and adversarial inputs. Scored 90/100 across two judges at the Deriv AI hackathon.
   stack: [TypeScript, Next.js]
   links:

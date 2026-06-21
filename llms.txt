@@ -13,9 +13,9 @@ Sreenath M Menon is a staff software engineer at IBM (India Systems Development 
 
 ## Experience
 
-- Staff Software Engineer, IBM (India Systems Development Lab), 2019–present. Product engineering and applied AI; title progression from Staff to Advisory Software Engineer.
-- Systems Analyst, UST Global, 2018–2019. Customer-interaction platform on AWS Connect, Transcribe, and Comprehend.
-- Senior Software Engineer L2, Poornam Info Vision, 2011–2018. Cloud-management product development and an OpenStack-based billing platform.
+- Staff Software Engineer, IBM (India Systems Development Lab), 2019 to present. Product engineering and applied AI; title progression from Staff to Advisory Software Engineer.
+- Systems Analyst, UST Global, 2018 to 2019. Customer-interaction platform on AWS Connect, Transcribe, and Comprehend.
+- Senior Software Engineer L2, Poornam Info Vision, 2011 to 2018. Cloud-management product development and an OpenStack-based billing platform.
 
 ## Projects
 
@@ -28,9 +28,9 @@ Sreenath M Menon is a staff software engineer at IBM (India Systems Development 
 
 ## Recognition
 
-- Top 15 of 70,000+ — Meta x Hugging Face x PyTorch OpenEnv hackathon (2026).
-- Top 50 Finalist — Anthropic x Accel hackathon; invited to Anthropic India Dev Day (2025).
-- 96/100 — OpenAI x OutSkill hackathon.
+- Top 15 of 70,000+ at the Meta x Hugging Face x PyTorch OpenEnv hackathon (2026).
+- Top 50 Finalist at the Anthropic x Accel hackathon; invited to Anthropic India Dev Day (2025).
+- 96/100 at the OpenAI x OutSkill hackathon.
 - Featured on Hacker News (2x Show HN).
 - Advanced Certification in AI & ML, IIIT Hyderabad.
 

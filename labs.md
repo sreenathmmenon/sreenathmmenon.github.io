@@ -9,7 +9,7 @@ eyebrow: Labs
   <header class="page-header reveal">
     <span class="eyebrow">Labs</span>
     <h1>Projects &amp; experiments</h1>
-    <p class="meta">Things I'm building — open source, hackathon work, and side projects.</p>
+    <p class="meta">Things I'm building: open source, hackathon work, and side projects.</p>
   </header>
 
   <div class="proj-grid reveal">

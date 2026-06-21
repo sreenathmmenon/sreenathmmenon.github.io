@@ -1,5 +1,5 @@
-# Experience — title + dates only for current employer (no internal project detail).
-- when: 2019 — Present
+# Experience: title + dates only for current employer (no internal project detail).
+- when: 2019 to Present
   company: IBM · ISDL
   role: Staff Software Engineer
   progression: Staff → Senior Staff → Advisory Software Engineer
@@ -7,16 +7,16 @@
     Product engineering and applied AI on enterprise software. Title progression from Staff to
     Advisory Software Engineer over 5+ years.
 
-- when: 2018 — 2019
+- when: 2018 to 2019
   company: UST Global
   role: Systems Analyst
   desc: >-
     Built a customer-interaction platform integrating AWS Connect, Transcribe and Comprehend for
     real-time call processing and sentiment analysis.
 
-- when: 2011 — 2018
+- when: 2011 to 2018
   company: Poornam Info Vision
   role: Senior Software Engineer (L2)
   desc: >-
-    Led cloud-management product development and architected an OpenStack-based billing platform —
+    Led cloud-management product development and architected an OpenStack-based billing platform,
     cutting customer onboarding from 2 days to 2 hours and improving VM migration workflows by 30%.
