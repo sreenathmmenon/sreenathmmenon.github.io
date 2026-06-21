@@ -2,36 +2,31 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {%- comment -%} Set theme before paint to avoid a flash (dark default; respects saved choice / system) {%- endcomment -%}
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('theme');
+        if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); }
+        // else: leave unset → CSS uses dark by default, light if system prefers light
+      }catch(e){}
+    })();
+  </script>
+
   {%- seo -%}
 
-  <!-- Google Fonts: Inter for body, JetBrains Mono for code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
+  <link rel="alternate icon" href="{{ '/assets/favicon.svg' | relative_url }}">
+
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
-  
-  <!-- Theme toggle script -->
-  <script>
-    // Check for saved theme preference or default to light
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Theme toggle function
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      // Update button text
-      const button = document.querySelector('.theme-toggle');
-      button.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    }
-  </script>
 </head>

@@ -1,0 +1,65 @@
+# Single source of truth for projects. featured:true shows on the homepage; all show on /labs/.
+
+- name: llmswap
+  featured: true
+  blurb: >-
+    Provider-agnostic LLM SDK + CLI supporting 11 providers (OpenAI, Anthropic, Gemini,
+    Groq, Watsonx, Ollama, xAI, Sarvam…) with zero vendor lock-in. Workspace memory,
+    universal tool-calling, an MCP client, and cost visibility.
+  metric: 41K+ downloads · 5 contributors · Homebrew tap
+  stack: [Python, TypeScript, MCP]
+  links:
+    - { label: PyPI, url: "https://pypi.org/project/llmswap" }
+    - { label: llmswap.org, url: "https://llmswap.org" }
+    - { label: GitHub, url: "https://github.com/sreenathmmenon/llmswap" }
+
+- name: Krelvan
+  featured: true
+  blurb: >-
+    Self-hostable platform: describe an outcome in plain English, get a fully-owned running
+    multi-agent system. A signed, append-only event ledger is the runtime — crash mid-run and
+    resume with no action repeated. Deny-by-default, human-in-the-loop.
+  stack: [TypeScript, Next.js, Event-sourced]
+  links:
+    - { label: krelvan.com, url: "https://krelvan.com" }
+    - { label: GitHub, url: "https://github.com/sreenathmmenon/krelvan" }
+
+- name: Asha Sahayak
+  featured: true
+  blurb: >-
+    An RL environment for AI-assisted clinical triage for India's 1.07M frontline ASHA health
+    workers. Multi-agent, adaptive curriculum, GRPO-trained to 0.947 peak reward. Built for the
+    Meta × Hugging Face × PyTorch hackathon — Top 15 of 70,000+.
+  stack: [Python, OpenEnv, "GRPO · Qwen3"]
+  links:
+    - { label: GitHub, url: "https://github.com/sreenathmmenon/asha-sahayak" }
+    - { label: HuggingFace, url: "https://huggingface.co/spaces/sreenathmmenon/asha-sahayak" }
+
+- name: Sampark OS
+  featured: false
+  blurb: >-
+    An autonomous AI broker for India's informal maritime economy — a 4-agent swarm that
+    negotiates fish prices for Kerala fishermen. Claude Vision grades catch from photos; agents
+    broadcast over WhatsApp/Telegram, reject predatory bids, and close deals.
+  stack: [TypeScript, Claude Vision, Multi-agent]
+  links:
+    - { label: GitHub, url: "https://github.com/sreenathmmenon/sampark-os" }
+
+- name: Eklavya Council
+  featured: false
+  blurb: >-
+    An AI thinking environment — not a chatbot. Expert AI personas debate a question in
+    structured rounds; a synthesis engine produces decisions, dissent, open questions, and action items.
+  stack: [TypeScript, Anthropic Claude]
+  links:
+    - { label: npm, url: "https://npmjs.com/package/eklavya-council" }
+    - { label: Demo, url: "https://eklavya-council.onrender.com" }
+
+- name: Aegis WAF
+  featured: false
+  blurb: >-
+    An AI-powered Web Application Firewall for LLM apps — multi-layered defense against prompt
+    injection, jailbreaks, and adversarial inputs. Scored 90/100 across two judges at the Deriv AI hackathon.
+  stack: [TypeScript, Next.js]
+  links:
+    - { label: Demo, url: "https://aegis-waf.vercel.app" }

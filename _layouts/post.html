@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<article class="page container">
+  <header class="page-header reveal">
+    <span class="eyebrow">{{ page.collection | default: 'Writing' }}</span>
+    <h1>{{ page.title }}</h1>
+    <p class="meta">
+      {{ page.date | date: "%B %-d, %Y" }}
+      {%- if page.tags and page.tags.size > 0 %} · {% for t in page.tags %}#{{ t }} {% endfor %}{% endif -%}
+    </p>
+  </header>
+  <div class="prose reveal">
+    {{ content }}
+  </div>
+  <p class="reveal" style="margin-top:3rem">
+    <a href="{% if page.collection == 'til' %}{{ '/til/' | relative_url }}{% else %}{{ '/blog/' | relative_url }}{% endif %}">← Back to {{ page.collection | default: 'writing' }}</a>
+  </p>
+</article>

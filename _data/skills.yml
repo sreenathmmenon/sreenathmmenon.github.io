@@ -1,0 +1,8 @@
+- group: AI / ML
+  items: [LLMs, RAG, AI Agents, MCP Protocol, Reinforcement Learning, LangChain, LangGraph, CrewAI, Vector DBs]
+
+- group: Languages & API
+  items: [Python, TypeScript, Go, React, GraphQL, FastAPI, Node.js]
+
+- group: Platform & Data
+  items: [Kubernetes, Docker, AWS, Azure, GCP, OpenStack, Kafka, MongoDB, PostgreSQL]

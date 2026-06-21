@@ -1,56 +1,26 @@
 ---
-layout: page
+layout: default
 title: Labs
 permalink: /labs/
+eyebrow: Labs
 ---
 
-Projects, experiments, and things I'm building.
+<article class="page container">
+  <header class="page-header reveal">
+    <span class="eyebrow">Labs</span>
+    <h1>Projects &amp; experiments</h1>
+    <p class="meta">Things I'm building — open source, hackathon work, and side projects.</p>
+  </header>
 
----
-
-<div class="project-card">
-  <h3>Eklavya Council</h3>
-  <p>The debate your question deserves. A council of expert AI personas debate in structured rounds. A synthesis engine produces decisions, dissent, open questions, and action items.</p>
-  <p style="margin-top: 0.8rem; color: #888; font-size: 0.9rem;">TypeScript • Anthropic Claude</p>
-  <p style="margin-top: 0.8rem;">
-    <a href="https://github.com/sreenathmmenon/eklavya-council" target="_blank" rel="noopener noreferrer">GitHub</a> •
-    <a href="https://eklavya-council.onrender.com" target="_blank" rel="noopener noreferrer">Demo</a>
-  </p>
-</div>
-
-<div class="project-card">
-  <h3>Aegis WAF</h3>
-  <p>AI-powered Web Application Firewall for LLM protection. Multi-layered defense against prompt injection attacks.</p>
-  <p style="margin-top: 0.8rem; color: #888; font-size: 0.9rem;">TypeScript • Next.js • OpenAI</p>
-  <p style="margin-top: 0.8rem;">
-    <a href="https://github.com/sreenathmmenon/aegis-waf" target="_blank" rel="noopener noreferrer">GitHub</a> •
-    <a href="https://aegis-waf.vercel.app" target="_blank" rel="noopener noreferrer">Demo</a>
-  </p>
-</div>
-
-<div class="project-card">
-  <h3>InfraAgent</h3>
-  <p>AI-powered DevOps copilot with human-in-the-loop. Automates infrastructure issue resolution with AI log analysis and automated post-mortems.</p>
-  <p style="margin-top: 0.8rem; color: #888; font-size: 0.9rem;">Python • AI Agents</p>
-  <p style="margin-top: 0.8rem;">
-    <a href="https://github.com/sreenathmmenon/infraagent" target="_blank" rel="noopener noreferrer">GitHub</a> •
-    <a href="http://infra-agent-lilac.vercel.app" target="_blank" rel="noopener noreferrer">Demo</a>
-  </p>
-</div>
-
-<div class="project-card">
-  <h3>EngineIQ</h3>
-  <p>Democratizing knowledge access for equitable tech workplaces. AI agent for organizational intelligence.</p>
-  <p style="margin-top: 0.8rem; color: #888; font-size: 0.9rem;">Python • Google Gemini 2.0 • Qdrant</p>
-  <p style="margin-top: 0.8rem;">
-    <a href="https://github.com/sreenathmmenon/EngineIQ" target="_blank" rel="noopener noreferrer">GitHub</a>
-  </p>
-</div>
-
-<div class="project-card">
-  <h3>QuantumNow</h3>
-  <p>Gratitude practice app based on Joe Dispenza's teachings.</p>
-  <p style="margin-top: 0.8rem;">
-    <a href="https://quantumnow.vercel.app" target="_blank" rel="noopener noreferrer">Demo</a>
-  </p>
-</div>
+  <div class="proj-grid reveal">
+    {%- for p in site.data.projects -%}
+    <article class="card">
+      <div class="ptop"><h3>{{ p.name }}</h3></div>
+      <p class="blurb">{{ p.blurb }}</p>
+      {%- if p.metric %}<span class="metric"><span class="pulse"></span>{{ p.metric }}</span>{% endif -%}
+      {%- if p.stack %}<ul class="stack">{% for t in p.stack %}<li>{{ t }}</li>{% endfor %}</ul>{% endif -%}
+      {%- if p.links %}<p class="plinks">{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% endfor %}</p>{% endif -%}
+    </article>
+    {%- endfor -%}
+  </div>
+</article>

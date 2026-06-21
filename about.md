@@ -2,30 +2,33 @@
 layout: page
 title: About
 permalink: /about/
+eyebrow: About
+subtitle: Staff Software Engineer · 14+ years · Bengaluru, India
 ---
 
-I've been writing code for over 13 years. Started with grep and bash scripts in 2011, now I'm teaching LLMs to debug for me. The tools changed, but the tea addiction stayed constant - hard to shake after 25 years growing up in tea plantations.
+I'm a staff software engineer with **14+ years** building enterprise software and open-source AI tools. I started with bash and `grep` in 2011, moved into cloud infrastructure when OpenStack was new, and now work at the seam between natural language and systems — in product engineering and applied AI.
 
-Started my career building web applications, then got into cloud infrastructure when OpenStack was still the hot new thing. Now I spend time figuring out how to make infrastructure operations more conversational and less about remembering obscure CLI commands.
+I created [**llmswap**](https://llmswap.org) — a provider-agnostic LLM toolkit with **41K+ downloads** — and I build AI agents, developer tools, and infrastructure experiments. My hackathon work placed **Top 15 of 70,000+** at the Meta × Hugging Face × PyTorch OpenEnv hackathon and **Top 50** at the Anthropic + Accel hackathon.
 
-## What I'm Working On
+## What I care about
 
-Currently exploring how Large Language Models can bridge the gap between natural language and system operations. Built some tools like [llmswap](https://pypi.org/project/llmswap/) to make working with different AI providers easier.
+Reliable software, good developer experience, and tools that earn a place in someone's daily workflow. I like working close to real production systems — and I've learned the most from watching them break, and fixing them, at scale.
 
-Also experimenting with Anthropic's Model Context Protocol to see if we can make infrastructure management more intuitive.
+## Experience
 
-## When I'm Not Coding
+**IBM · ISDL** — Staff Software Engineer (2019 – present)
+Product engineering and applied AI on enterprise software. Title progression from Staff → Senior Staff → Advisory Software Engineer.
 
-I read a lot about distributed systems and software architecture. Always trying to understand how large-scale systems actually work in practice, not just in theory.
+**UST Global** — Systems Analyst (2018 – 2019)
+Built a customer-interaction platform integrating AWS Connect, Transcribe and Comprehend for real-time call processing and sentiment analysis.
 
-Occasionally write about technical stuff on my Substack, though not as consistently as I'd like.
+**Poornam Info Vision** — Senior Software Engineer L2 (2011 – 2018)
+Led cloud-management product development and architected an OpenStack-based billing platform — cutting customer onboarding from 2 days to 2 hours.
 
 ## Background
 
-Based in Bengaluru, India. B.Tech in Information Technology from Cochin University.
-
-Been fortunate to work on systems that handle real user traffic and see how things break (and fix them) at scale.
+B.Tech in Information Technology, Cochin University of Science & Technology. Advanced Certification in AI & ML, IIIT Hyderabad. Based in Bengaluru, India.
 
 ---
 
-*Always happy to chat about infrastructure, AI, or anything in between. Drop me a line at [zreenathmenon@gmail.com](mailto:zreenathmenon@gmail.com).*
+*Always happy to talk infrastructure, AI, or anything in between. Drop me a line at [{{ site.email }}](mailto:{{ site.email }}).*

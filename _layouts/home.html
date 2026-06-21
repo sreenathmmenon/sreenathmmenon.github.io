@@ -1,0 +1,109 @@
+---
+layout: default
+---
+
+<!-- HERO -->
+<header class="hero container" id="top">
+  <div class="hero-inner reveal">
+    <img class="avatar" src="{{ '/assets/images/sreenath.jpg' | relative_url }}" alt="{{ site.title }}" width="120" height="120">
+    <span class="eyebrow">{{ site.hero.eyebrow }}</span>
+    <h1>{{ site.hero.headline }}</h1>
+    <p class="lede">{{ site.hero.lede }}</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:{{ site.email }}">Get in touch</a>
+      <a class="btn btn-ghost" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+  </div>
+</header>
+
+<!-- TRUST BAND -->
+<div class="band">
+  <div class="container">
+    <span class="label">Focus</span>
+    {%- for f in site.focus -%}
+      <span class="item">{{ f }}</span>{% unless forloop.last %}<span class="sep">·</span>{% endunless %}
+    {%- endfor -%}
+  </div>
+</div>
+
+<!-- SELECTED WORK -->
+<section class="section container" id="work">
+  <div class="shead reveal">
+    <div class="section-head-row">
+      <div><span class="eyebrow">Selected work</span><h2>Open source &amp; projects.</h2></div>
+      <a class="viewall" href="{{ '/labs/' | relative_url }}">all projects →</a>
+    </div>
+    <p class="sub">Tools I've built and open-sourced — most started as something I needed, then grew a community.</p>
+  </div>
+  <div class="proj-grid">
+    {%- assign featured = site.data.projects | where: "featured", true -%}
+    {%- for p in featured -%}
+    <article class="card reveal">
+      <div class="ptop"><h3>{{ p.name }}</h3><span class="idx">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span></div>
+      <p class="blurb">{{ p.blurb }}</p>
+      {%- if p.metric %}<span class="metric"><span class="pulse"></span>{{ p.metric }}</span>{% endif -%}
+      {%- if p.stack %}<ul class="stack">{% for t in p.stack %}<li>{{ t }}</li>{% endfor %}</ul>{% endif -%}
+      {%- if p.links %}<p class="plinks">{% for l in p.links %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% endfor %}</p>{% endif -%}
+    </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section container" id="experience">
+  <div class="shead reveal"><span class="eyebrow">Experience</span><h2>14+ years, from grep to agents.</h2></div>
+  <div class="xp reveal">
+    {%- for x in site.data.experience -%}
+    <div class="xp-item">
+      <div class="xp-when">{{ x.when }}<span class="co">{{ x.company }}</span></div>
+      <div>
+        <div class="xp-role">{{ x.role }}{% if x.progression %}<span class="prog">{{ x.progression }}</span>{% endif %}</div>
+        <p class="xp-desc">{{ x.desc }}</p>
+      </div>
+    </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- RECOGNITION -->
+<section class="section container" id="recognition">
+  <div class="shead reveal"><span class="eyebrow">Recognition</span><h2>Where the work got noticed.</h2></div>
+  <div class="rec-grid reveal">
+    {%- for r in site.data.recognition -%}
+    <div class="rec{% if r.highlight %} hl{% endif %}">
+      <div class="big">{{ r.title }}{% if r.suffix %} <span class="muted" style="font-size:.8rem">{{ r.suffix }}</span>{% endif %}</div>
+      <div class="sub">{{ r.detail }}</div>
+    </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- ABOUT + SKILLS -->
+<section class="section container" id="about">
+  <div class="shead reveal">
+    <span class="eyebrow">About</span>
+    <h2 style="max-width:24ch">I build things people keep using.</h2>
+    <p class="sub">{{ site.about_blurb }}</p>
+  </div>
+  <div class="reveal">
+    {%- for group in site.data.skills -%}
+    <div class="skillgroup">
+      <div class="k">{{ group.group }}</div>
+      <div class="skills">{% for s in group.items %}<span class="skill">{{ s }}</span>{% endfor %}</div>
+    </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="section container" id="contact">
+  <div class="close reveal">
+    <h2>Let's build something.</h2>
+    <p class="sub">I'm always happy to talk infrastructure, applied AI, open source, or anything in between. Drop me a line.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:{{ site.email }}">Email me</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener">LinkedIn →</a>
+      <a class="btn btn-ghost" href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub →</a>
+    </div>
+  </div>
+</section>

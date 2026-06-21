@@ -1,31 +1,60 @@
 # Site settings
 title: Sreenath M Menon
+lang: en
 email: zreenathmenon@gmail.com
 description: >-
-  Software Engineer passionate about AI, cloud, and open source.
-  Building tools that make developers' lives easier.
+  Staff Software Engineer (14+ years) in product engineering and applied AI.
+  Creator of llmswap (41K+ downloads). Building open-source AI tools and infrastructure.
 baseurl: ""
 url: "https://sreenathmenon.com"
 github_username: sreenathmmenon
 linkedin_username: sreenathmmenon
 
+# SEO / jekyll-seo-tag
+author:
+  name: Sreenath M Menon
+  email: zreenathmenon@gmail.com
+twitter:
+  card: summary_large_image
+logo: /assets/favicon.svg
+social:
+  name: Sreenath M Menon
+  links:
+    - https://github.com/sreenathmmenon
+    - https://www.linkedin.com/in/sreenathmmenon
+
+# Homepage hero + content (used by _layouts/home.html)
+hero:
+  eyebrow: "Staff Software Engineer · IBM · Bengaluru"
+  headline: "Sreenath M Menon"
+  lede: >-
+    I'm a staff software engineer with 14+ years building enterprise software and open-source AI
+    tools. I created llmswap (41K+ downloads), placed Top 15 of 70,000+ at the Meta × Hugging Face ×
+    PyTorch hackathon, and I'm currently at IBM working in product engineering and applied AI.
+focus:
+  - Applied AI & Agents
+  - Product Engineering
+  - Cloud Infrastructure
+  - MCP & RAG
+  - Distributed Systems
+about_blurb: >-
+  I started with bash and grep in 2011, moved into cloud infrastructure when OpenStack was new, and
+  now work at the seam between natural language and systems. I care about reliable software, good
+  developer experience, and tools that earn a place in someone's daily workflow. Based in Bengaluru.
+
 # Build settings
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-sitemap
+  - jekyll-sitemap   # auto-generates /sitemap.xml on every build (for Google Search Console)
   - jekyll-seo-tag
 
 # Navigation
 header_pages:
-  - about.md
-  - open-source.md
   - labs.md
   - til.md
   - blog.md
-  - bookshelf.md
-  - bookmarks.md
+  - about.md
 
 # Collections for TIL posts and Blog
 collections:
@@ -38,6 +67,9 @@ collections:
 
 # Defaults
 defaults:
+  - scope: { path: "" }
+    values:
+      image: /assets/images/sreenath.jpg
   - scope:
       path: ""
       type: "til"
@@ -55,6 +87,8 @@ defaults:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - previews/
+  - _templates/
   - node_modules
   - vendor/bundle/
   - vendor/cache/
