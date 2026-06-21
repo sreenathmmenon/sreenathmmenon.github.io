@@ -29,8 +29,9 @@ hero:
   headline: "Sreenath M Menon"
   lede: >-
     I'm a staff software engineer with 14+ years building enterprise software and open-source AI
-    tools. I created llmswap (41K+ downloads), placed Top 15 of 70,000+ at the Meta × Hugging Face ×
-    PyTorch hackathon, and I'm currently at IBM working in product engineering and applied AI.
+    tools — lately, safe and auditable autonomous systems. I created llmswap (41K+ downloads), placed
+    Top 15 of 70,000+ at the Meta × Hugging Face × PyTorch hackathon, and I'm currently at IBM working
+    in product engineering and applied AI.
 focus:
   - Applied AI & Agents
   - Product Engineering
@@ -39,8 +40,10 @@ focus:
   - Distributed Systems
 about_blurb: >-
   I started with bash and grep in 2011, moved into cloud infrastructure when OpenStack was new, and
-  now work at the seam between natural language and systems. I care about reliable software, good
-  developer experience, and tools that earn a place in someone's daily workflow. Based in Bengaluru.
+  now work at the seam between natural language and systems — building safe, auditable autonomous
+  systems where every action is signed, every budget enforced, and every decision reversible. I care
+  about reliable software, good developer experience, and tools that earn a place in someone's daily
+  workflow. Based in Bengaluru.
 
 # Build settings
 markdown: kramdown

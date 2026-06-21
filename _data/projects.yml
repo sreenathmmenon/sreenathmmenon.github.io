@@ -1,5 +1,17 @@
 # Single source of truth for projects. featured:true shows on the homepage; all show on /labs/.
 
+- name: Krelvan
+  featured: true
+  tagline: The operating system for autonomous work.
+  blurb: >-
+    You declare intent; Krelvan compiles an agent, signs every action, enforces every budget, and
+    audits the proof. Every plugin hot-swappable, every run crash-recoverable, every decision
+    human-reversible. Self-hostable, on a signed append-only event-sourced runtime.
+  stack: [TypeScript, Next.js, Event-sourced, MCP]
+  links:
+    - { label: krelvan.com, url: "https://krelvan.com" }
+    - { label: GitHub, url: "https://github.com/sreenathmmenon/krelvan" }
+
 - name: llmswap
   featured: true
   blurb: >-
@@ -12,18 +24,6 @@
     - { label: PyPI, url: "https://pypi.org/project/llmswap" }
     - { label: llmswap.org, url: "https://llmswap.org" }
     - { label: GitHub, url: "https://github.com/sreenathmmenon/llmswap" }
-
-- name: Krelvan
-  featured: true
-  tagline: The operating system for autonomous work.
-  blurb: >-
-    You declare intent; Krelvan compiles an agent, signs every action, enforces every budget, and
-    audits the proof. Every plugin hot-swappable, every run crash-recoverable, every decision
-    human-reversible. Self-hostable, on a signed append-only event-sourced runtime.
-  stack: [TypeScript, Next.js, Event-sourced, MCP]
-  links:
-    - { label: krelvan.com, url: "https://krelvan.com" }
-    - { label: GitHub, url: "https://github.com/sreenathmmenon/krelvan" }
 
 - name: Asha Sahayak
   featured: true
