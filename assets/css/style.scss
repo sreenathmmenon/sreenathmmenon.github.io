@@ -240,6 +240,11 @@ img{max-width:100%;}
 /* generic demo card (panel that holds a diagram) */
 .viz-card{background:var(--surface);border:1px solid var(--border-2);border-radius:14px;padding:1.2rem;box-shadow:var(--glow);}
 
+/* tables inside posts: never overflow the screen on mobile, scroll instead */
+.prose table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.post-fig table{display:table;width:100%;}
+.post-fig{overflow-x:auto;}
+
 /* a chip / token / tag, theme-safe */
 .viz-chip{font-family:var(--font-mono);font-size:.85rem;padding:.3rem .6rem;border-radius:7px;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-2);display:inline-block;}
 .viz-chip--accent{background:transparent;border-color:var(--accent);color:var(--accent);font-weight:600;}
