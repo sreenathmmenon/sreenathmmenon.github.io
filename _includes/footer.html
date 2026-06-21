@@ -13,10 +13,15 @@
   // reveal-on-scroll (CSS handles reduced-motion)
   (function(){
     var els = document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window) || !els.length){ els.forEach(function(e){e.classList.add('in');}); return; }
+    if(!els.length) return;
+    function showAll(){ els.forEach(function(e){ e.classList.add('in'); }); }
+    // If anything goes wrong (no observer, tall blocks, JS errors), never leave text hidden.
+    if(!('IntersectionObserver' in window)){ showAll(); return; }
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold:.1 });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
     els.forEach(function(e){ io.observe(e); });
+    // Safety net: reveal everything shortly after load no matter what.
+    setTimeout(showAll, 1200);
   })();
 </script>

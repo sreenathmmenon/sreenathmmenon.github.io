@@ -274,9 +274,11 @@ img{max-width:100%;}
 .error-page h1{margin-bottom:var(--sp-4);}
 .error-page .error-msg{color:var(--text-2);margin-bottom:var(--sp-6);}
 
-/* ---------- reveal on scroll ---------- */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
-.reveal.in{opacity:1;transform:none;}
+/* ---------- reveal on scroll ----------
+   Only hide if JS is confirmed working (html.js). Without JS, or if the
+   observer never fires, text stays fully visible. Animation is enhancement only. */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.js .reveal.in{opacity:1;transform:none;}
 
 @media (prefers-reduced-motion: reduce){
   *{scroll-behavior:auto !important;}

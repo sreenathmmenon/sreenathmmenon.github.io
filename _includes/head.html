@@ -6,6 +6,8 @@
   {%- comment -%} Set theme before paint to avoid a flash (dark default; respects saved choice / system) {%- endcomment -%}
   <script>
     (function(){
+      // mark JS as available so reveal-on-scroll only hides content when it can un-hide it
+      document.documentElement.className += ' js';
       try{
         var t = localStorage.getItem('theme');
         if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); }

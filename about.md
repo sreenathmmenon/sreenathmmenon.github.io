@@ -16,8 +16,8 @@ Reliable software, good developer experience, and tools that earn a place in som
 
 ## Experience
 
-**IBM · ISDL**, Staff Software Engineer (2019 to present)
-Product engineering on enterprise software. Title progression from Staff → Senior Staff → Advisory Software Engineer.
+**IBM**, Staff Software Engineer (2019 to present)
+Product engineering on enterprise software, working across large-scale platform features used by customers worldwide.
 
 **UST Global**, Systems Analyst (2018 to 2019)
 Built a customer-interaction platform integrating AWS Connect, Transcribe and Comprehend for real-time call processing and sentiment analysis.
@@ -27,7 +27,7 @@ Led cloud-management product development and architected an OpenStack-based bill
 
 ## Background
 
-B.Tech in Information Technology, Cochin University of Science & Technology. Advanced Certification in AI & ML, IIIT Hyderabad. Based in Bengaluru, India.
+B.Tech in Information Technology, Cochin University of Science & Technology. Based in Bengaluru, India.
 
 ## From above
 
