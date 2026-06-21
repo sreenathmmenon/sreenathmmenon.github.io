@@ -1,0 +1,51 @@
+# Sreenath M Menon
+
+> Staff Software Engineer with 14+ years of experience in product engineering and applied AI, based in Bengaluru, India. Creator of llmswap, an open-source LLM toolkit with 41,000+ downloads. Works at the intersection of cloud infrastructure, developer tooling, and AI agents.
+
+Sreenath M Menon is a staff software engineer at IBM (India Systems Development Lab). He builds open-source AI tools and has placed Top 15 of 70,000+ at the Meta x Hugging Face x PyTorch OpenEnv hackathon and Top 50 at the Anthropic x Accel hackathon.
+
+## Profile
+
+- [Website](https://sreenathmenon.com): Personal site with projects, experience, and writing.
+- [About](https://sreenathmenon.com/about/): Background, experience timeline, and skills.
+- [GitHub](https://github.com/sreenathmmenon): Open-source projects and code.
+- [LinkedIn](https://www.linkedin.com/in/sreenathmmenon): Professional profile.
+
+## Experience
+
+- Staff Software Engineer, IBM (India Systems Development Lab), 2019–present. Product engineering and applied AI; title progression from Staff to Advisory Software Engineer.
+- Systems Analyst, UST Global, 2018–2019. Customer-interaction platform on AWS Connect, Transcribe, and Comprehend.
+- Senior Software Engineer L2, Poornam Info Vision, 2011–2018. Cloud-management product development and an OpenStack-based billing platform.
+
+## Projects
+
+- [llmswap](https://llmswap.org): Provider-agnostic LLM SDK and CLI supporting 11 providers with zero vendor lock-in. 41,000+ downloads. [PyPI](https://pypi.org/project/llmswap), [GitHub](https://github.com/sreenathmmenon/llmswap).
+- [Krelvan](https://krelvan.com): Self-hostable platform that turns a plain-English outcome into a running multi-agent system on a signed, append-only event-sourced runtime. [GitHub](https://github.com/sreenathmmenon/krelvan).
+- [Asha Sahayak](https://github.com/sreenathmmenon/asha-sahayak): Reinforcement-learning environment for AI-assisted clinical triage for India's ASHA health workers. Top 15 of 70,000+ at the Meta x Hugging Face x PyTorch hackathon.
+- [Sampark OS](https://github.com/sreenathmmenon/sampark-os): Autonomous AI broker for India's informal maritime economy using a multi-agent swarm and Claude Vision.
+- [Eklavya Council](https://npmjs.com/package/eklavya-council): Structured AI debate engine where expert personas debate a question and a synthesis engine produces decisions and action items.
+- [Aegis WAF](https://aegis-waf.vercel.app): AI-powered web application firewall defending LLM apps against prompt injection and adversarial inputs.
+
+## Recognition
+
+- Top 15 of 70,000+ — Meta x Hugging Face x PyTorch OpenEnv hackathon (2026).
+- Top 50 Finalist — Anthropic x Accel hackathon; invited to Anthropic India Dev Day (2025).
+- 96/100 — OpenAI x OutSkill hackathon.
+- Featured on Hacker News (2x Show HN).
+- Advanced Certification in AI & ML, IIIT Hyderabad.
+
+## Skills
+
+- Languages: Python, TypeScript, Go.
+- AI/ML: LLMs, RAG, AI agents, MCP protocol, reinforcement learning, LangChain, LangGraph, CrewAI, vector databases.
+- Platform & data: Kubernetes, Docker, AWS, Azure, GCP, OpenStack, Kafka, MongoDB, PostgreSQL.
+
+## What this person does not do
+
+- This is an individual engineer's personal site, not a company or an agency.
+- Does not sell products or services and does not list pricing.
+
+## Contact
+
+- Email: zreenathmenon@gmail.com
+- Location: Bengaluru, India.
