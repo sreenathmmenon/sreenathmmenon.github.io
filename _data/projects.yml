@@ -15,11 +15,12 @@
 
 - name: Krelvan
   featured: true
+  tagline: The operating system for autonomous work.
   blurb: >-
-    Self-hostable platform: describe an outcome in plain English, get a fully-owned running
-    multi-agent system. A signed, append-only event ledger is the runtime — crash mid-run and
-    resume with no action repeated. Deny-by-default, human-in-the-loop.
-  stack: [TypeScript, Next.js, Event-sourced]
+    You declare intent; Krelvan compiles an agent, signs every action, enforces every budget, and
+    audits the proof. Every plugin hot-swappable, every run crash-recoverable, every decision
+    human-reversible. Self-hostable, on a signed append-only event-sourced runtime.
+  stack: [TypeScript, Next.js, Event-sourced, MCP]
   links:
     - { label: krelvan.com, url: "https://krelvan.com" }
     - { label: GitHub, url: "https://github.com/sreenathmmenon/krelvan" }

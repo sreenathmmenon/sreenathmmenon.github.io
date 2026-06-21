@@ -20,7 +20,7 @@ Sreenath M Menon is a staff software engineer at IBM (India Systems Development 
 ## Projects
 
 - [llmswap](https://llmswap.org): Provider-agnostic LLM SDK and CLI supporting 11 providers with zero vendor lock-in. 41,000+ downloads. [PyPI](https://pypi.org/project/llmswap), [GitHub](https://github.com/sreenathmmenon/llmswap).
-- [Krelvan](https://krelvan.com): Self-hostable platform that turns a plain-English outcome into a running multi-agent system on a signed, append-only event-sourced runtime. [GitHub](https://github.com/sreenathmmenon/krelvan).
+- [Krelvan](https://krelvan.com): An operating system for autonomous work. You declare intent and it compiles an agent, signs every action, enforces every budget, and audits the proof; every plugin hot-swappable, every run crash-recoverable, every decision human-reversible. Self-hostable, on a signed append-only event-sourced runtime. [GitHub](https://github.com/sreenathmmenon/krelvan).
 - [Asha Sahayak](https://github.com/sreenathmmenon/asha-sahayak): Reinforcement-learning environment for AI-assisted clinical triage for India's ASHA health workers. Top 15 of 70,000+ at the Meta x Hugging Face x PyTorch hackathon.
 - [Sampark OS](https://github.com/sreenathmmenon/sampark-os): Autonomous AI broker for India's informal maritime economy using a multi-agent swarm and Claude Vision.
 - [Eklavya Council](https://npmjs.com/package/eklavya-council): Structured AI debate engine where expert personas debate a question and a synthesis engine produces decisions and action items.

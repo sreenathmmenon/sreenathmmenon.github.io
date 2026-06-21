@@ -146,6 +146,7 @@ img{max-width:100%;}
 .card .ptop{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-3);}
 .card h3{font-size:var(--fs-h3);}
 .card .idx{font-family:var(--font-mono);font-size:.78rem;color:var(--text-3);}
+.card .ptagline{font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--accent);margin:0 0 var(--sp-3);letter-spacing:-.01em;}
 .card .blurb{color:var(--text-2);font-size:var(--fs-sm);margin-bottom:var(--sp-4);}
 .metric{display:inline-flex;align-items:center;gap:var(--sp-2);font-family:var(--font-mono);font-size:.78rem;color:var(--green);margin-bottom:var(--sp-4);}
 .metric .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}

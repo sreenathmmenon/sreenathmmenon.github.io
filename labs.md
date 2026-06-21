@@ -16,6 +16,7 @@ eyebrow: Labs
     {%- for p in site.data.projects -%}
     <article class="card">
       <div class="ptop"><h3>{{ p.name }}</h3></div>
+      {%- if p.tagline %}<p class="ptagline">{{ p.tagline }}</p>{% endif -%}
       <p class="blurb">{{ p.blurb }}</p>
       {%- if p.metric %}<span class="metric"><span class="pulse"></span>{{ p.metric }}</span>{% endif -%}
       {%- if p.stack %}<ul class="stack">{% for t in p.stack %}<li>{{ t }}</li>{% endfor %}</ul>{% endif -%}
