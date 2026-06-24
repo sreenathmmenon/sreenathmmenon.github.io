@@ -1,6 +1,8 @@
 ---
 title: "Why our UI search was taking forever"
 date: 2025-09-22
+redirect_from:
+  - /til/2024-09-22-mongodb-indexes-infrastructure-search/
 tags: [mongodb, search, performance, infrastructure]
 ---
 

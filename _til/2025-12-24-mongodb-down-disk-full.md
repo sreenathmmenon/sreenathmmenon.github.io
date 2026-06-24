@@ -1,6 +1,8 @@
 ---
 title: "MongoDB Crashed Due to Full /var/log Partition"
 date: 2025-12-24
+redirect_from:
+  - /til/2024-12-24-mongodb-down-disk-full/
 tags: [mongodb, linux, troubleshooting, rhel]
 ---
 

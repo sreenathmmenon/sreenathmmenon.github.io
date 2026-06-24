@@ -1,6 +1,8 @@
 ---
 title: "Switching LLM Providers Without Rewriting Code"
 date: 2025-12-20
+redirect_from:
+  - /til/2024-12-20-switching-llm-providers/
 tags: [python, llm, api]
 ---
 

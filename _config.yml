@@ -51,6 +51,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap   # auto-generates /sitemap.xml on every build (for Google Search Console)
   - jekyll-seo-tag
+  - jekyll-redirect-from   # 301-redirects old URLs (e.g. posts whose date changed) to current ones
 
 # Navigation
 header_pages:

@@ -1,6 +1,8 @@
 ---
 title: "MongoDB Text Search is Pretty Good Actually"
 date: 2025-11-25
+redirect_from:
+  - /til/2024-11-25-mongodb-text-search/
 tags: [mongodb, search, database]
 ---
 

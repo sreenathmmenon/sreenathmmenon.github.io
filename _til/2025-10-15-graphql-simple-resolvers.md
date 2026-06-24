@@ -1,6 +1,8 @@
 ---
 title: "GraphQL Resolvers Don't Have to be Complex"
 date: 2025-10-15
+redirect_from:
+  - /til/2024-10-15-graphql-simple-resolvers/
 tags: [graphql, javascript, api]
 ---
 

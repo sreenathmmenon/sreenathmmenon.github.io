@@ -1,6 +1,8 @@
 ---
 title: "From Hackathon to Open Source: Why I Extracted My LLM Switching Logic"
 date: 2025-08-30
+redirect_from:
+  - /blog/2024-08-30-hackathon-to-open-source-llmswap/
 excerpt: "How a hackathon project that didn't win became a PyPI package with 30,000+ downloads."
 tags: [hackathon, open-source, ai, llm, python, openai, anthropic, gemini, watsonx, ollama, pypi, developer-tools, infrastructure, rag, mcp, cli-tools, machine-learning, artificial-intelligence, software-engineering, devops, cloud-computing, openstack, programming, coding, tech-story, startup, innovation, python-package, api, chatbot, automation]
 keywords: "LLM switching, AI providers, hackathon to open source, PyPI package, developer tools, infrastructure AI, OpenAI alternatives, multi-provider LLM, AI CLI tools, machine learning tools, developer productivity, open source Python, hackathon project, artificial intelligence, software engineering story"
