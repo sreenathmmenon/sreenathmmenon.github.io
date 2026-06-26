@@ -135,7 +135,7 @@ This is the heart of it, so let me build it carefully. Every AI editor sits some
     {t:'AI assists (agent in the loop)', b:'Now you give it a small task in plain words, and the AI reads your files, writes a change across several of them, and shows you a diff. But here is the key: <b>it waits for your approval before it does anything real.</b> You stay in the loop, approving each step. More power, but with a seatbelt.', e:'feels like: a junior developer who shows you every change before saving'},
     {t:'AI drives (agent first)', b:'You describe a goal, and the AI plans it, splits it into subtasks, edits files, runs the terminal, even opens a real browser to test the app it just built, all mostly on its own. You step back and <b>supervise the outcome</b> rather than each keystroke. Newer tools are built around this, with dashboards to watch several agents work at once.', e:'feels like: handing a project to a team and reviewing their work'}
   ];
-  function render(){var L=levels[+range.value]; t.textContent=L.t; b.innerHTML=L.body; e.textContent=L.e;}
+  function render(){var L=levels[+range.value]; t.textContent=L.t; b.innerHTML=L.b; e.textContent=L.e;}
   range.addEventListener('input',render); render();
 })();
 </script>
