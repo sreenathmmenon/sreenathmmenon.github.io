@@ -31,4 +31,10 @@
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
+
+  {%- comment -%} Private, cookieless analytics (GoatCounter). Dashboard-only, nothing shown on the site. Production only, so local previews are not counted. {%- endcomment -%}
+  {%- if jekyll.environment == 'production' -%}
+    <script data-goatcounter="https://sreenathmenon.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+  {%- endif -%}
 </head>
