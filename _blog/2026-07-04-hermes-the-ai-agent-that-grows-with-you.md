@@ -1,6 +1,6 @@
 ---
 title: "Hermes: The AI Agent That Learns From Itself"
-date: 2026-07-06
+date: 2026-07-04
 excerpt: "Most AI agents wake up every morning with amnesia. You teach them something Monday, and Monday's lesson is gone by Tuesday. Hermes, from Nous Research, made forgetting optional: it writes its own skills from experience and gets better at what you actually do. Here is what it is, why people are talking about it, how it stacks up against OpenClaw, and where it genuinely falls short."
 tags: [ai, agents, hermes, nous-research, open-source, explainer]
 ---

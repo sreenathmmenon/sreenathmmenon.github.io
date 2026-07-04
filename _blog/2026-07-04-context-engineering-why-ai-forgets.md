@@ -1,6 +1,6 @@
 ---
 title: "Context Engineering: Why AI Forgets, and How We Fight It"
-date: 2026-07-05
+date: 2026-07-04
 excerpt: "Every AI model has a working memory with a hard edge. Fill it and the oldest things fall off, and even before that, it quietly stops paying attention to the middle. Context engineering is the craft of deciding what the model gets to see on every single call. Here is why forgetting happens, the research that proved it, and the real techniques teams use to fight it."
 tags: [ai, context-engineering, llm, memory, agents, explainer]
 ---
