@@ -76,6 +76,21 @@ tags: [ai, agents, react, agent-loop, tool-use, explainer]
 .ag-run .cap{font-family:var(--font-mono);font-size:.74rem;color:var(--text-3);text-align:center;margin-top:.4rem;}
 .ag-run .cap b{color:var(--accent);}
 
+/* three-way dev comparison */
+.ag-three{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;max-width:720px;margin:0 auto;}
+@media(max-width:640px){.ag-three{grid-template-columns:1fr;}}
+.ag-three .card{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:.9rem;display:flex;flex-direction:column;}
+.ag-three .card.c3{border-color:var(--accent);}
+.ag-three .card .tier{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);}
+.ag-three .card .name{color:var(--text);font-weight:600;font-size:.92rem;margin:.15rem 0 .5rem;}
+.ag-three .card.c3 .name{color:var(--accent);}
+.ag-three .card .body{font-family:var(--font-mono);font-size:.72rem;line-height:1.7;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:.5rem .6rem;white-space:pre-wrap;flex:1;}
+.ag-three .card .body .c{color:var(--text-3);}
+.ag-three .card .body .a{color:var(--accent);}
+.ag-three .card .verdict{font-size:.78rem;color:var(--text-2);margin-top:.55rem;line-height:1.5;}
+.ag-three .card .verdict b{color:var(--text);}
+.ag-three .card .breaks{font-family:var(--font-mono);font-size:.68rem;color:var(--text-3);margin-top:.4rem;}
+
 @media (prefers-reduced-motion: reduce){
   .ag-trace .ag-line{transition:none !important;opacity:1 !important;transform:none !important;}
   .ag-run .fill{transition:none !important;width:100% !important;}
@@ -187,6 +202,70 @@ The loop is the runtime, but what's actually *running* inside it? A clean way to
 </figure>
 
 If you've read my earlier posts, this is the moment they all click into one picture. **MCP** is how the *Act* step reaches real tools. **Skills** are packaged know-how the agent can pull in when a task matches. **Modes** (like Roo's Architect/Code/Debug) shape how the *Think* step behaves. **Embeddings** power the *Memory*, recalling what's relevant to now. None of those were separate topics. They were all pieces of this one loop, and now you can see where each one plugs in.
+
+## The developer's version: same task, three ways
+
+If you write code, here's the comparison that makes it click for good. Forget booking tables. Take a real, ordinary developer moment: **your test suite just went red, and you want it green again.** Watch the same goal handled three ways, because the jump from the middle column to the right one is exactly what an agent *is*.
+
+<figure class="ag-fig">
+  <div class="ag-three">
+    <div class="card c1">
+      <div class="tier">1 · Normal use</div>
+      <div class="name">You, by hand</div>
+      <div class="body"><span class="c"># you run it</span>
+$ npm test
+<span class="c"># read the error</span>
+<span class="c"># open the file</span>
+<span class="c"># guess the fix</span>
+<span class="c"># run it again</span>
+<span class="c"># repeat, tired</span></div>
+      <div class="verdict"><b>Fully manual.</b> All the intelligence and every decision is you. The computer only does exactly what you type, one command at a time.</div>
+      <div class="breaks">slow, but you're in total control</div>
+    </div>
+    <div class="card c2">
+      <div class="tier">2 · Automation (a script)</div>
+      <div class="name">A script you wrote</div>
+      <div class="body"><span class="c"># fix-tests.sh</span>
+npm test
+<span class="c">if fail:</span>
+  npm run lint --fix
+  npm test
+<span class="c">if still fail:</span>
+  exit 1  <span class="c"># give up</span></div>
+      <div class="verdict"><b>Fast and repeatable,</b> but rigid. It only handles the exact failures you predicted in advance. A failure you didn't foresee? It has no idea. It can't reason, only follow.</div>
+      <div class="breaks">breaks the moment reality surprises it</div>
+    </div>
+    <div class="card c3">
+      <div class="tier">3 · Agent</div>
+      <div class="name">An agent, given the goal</div>
+      <div class="body"><span class="a">Think:</span> tests fail on auth.ts
+<span class="a">Act:</span> read auth.ts + the error
+<span class="a">Observe:</span> null token on line 42
+<span class="a">Think:</span> missing await
+<span class="a">Act:</span> edit, re-run tests
+<span class="a">Observe:</span> green ✓ → done</div>
+      <div class="verdict"><b>You give the goal, not the steps.</b> It reads the *actual* error, reasons about *this specific* cause, fixes it, and checks its own work, including failures nobody scripted for.</div>
+      <div class="breaks">flexible, but needs guardrails (see below)</div>
+    </div>
+  </div>
+  <figcaption>Left to right, the intelligence moves out of your head and into the loop. A script automates the steps you already know. An agent figures out the steps you didn't. That is the whole leap: a script follows a fixed path; an agent finds a path.</figcaption>
+</figure>
+
+The trap is thinking an agent is just "a smarter script." It isn't. A script is a *fixed decision tree you wrote at design time*, it can only ever do what you anticipated. An agent decides *at runtime*, looking at the real situation, so it can handle the failure you never saw coming. That flexibility is the gift and, as we're about to see, the danger.
+
+<figure class="ag-fig">
+<table class="ag-tab">
+<thead><tr><th></th><th>Normal use</th><th>Automation / script</th><th>Agent</th></tr></thead>
+<tbody>
+<tr><td>Who decides the steps</td><td>You, live</td><td>You, ahead of time</td><td>The model, at runtime</td></tr>
+<tr><td>Handles the unexpected</td><td>Yes (you adapt)</td><td>No (only what you coded)</td><td>Yes (it reasons about it)</td></tr>
+<tr><td>Speed / repeatability</td><td>Slow, manual</td><td>Fast, exact</td><td>Fast-ish, variable</td></tr>
+<tr><td>Predictable</td><td>Fully</td><td>Fully</td><td>Mostly, needs guardrails</td></tr>
+<tr><td>Best for</td><td>One-off, judgment calls</td><td>Known, stable, repeated tasks</td><td>Fuzzy, multi-step, changing tasks</td></tr>
+</tbody>
+</table>
+  <figcaption>None of these is "best." A stable, well-understood task wants a script, cheaper and 100% predictable. Save the agent for the messy, multi-step work where you can't write the path in advance. Using an agent where a script would do is how you get slow, expensive, unpredictable versions of things that used to just work.</figcaption>
+</figure>
 
 ## How modern agents quietly changed the format
 
