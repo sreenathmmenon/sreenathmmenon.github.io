@@ -7,7 +7,15 @@ rich: true
 
 Books that shaped how I think about software, systems, and life.
 
+## Currently Reading
+
+**"The Book of Elon" by Eric Jorgenson**  
+A guide drawn from Elon Musk's approach to purpose, risk, and building hard things. Reading it now.
+
 ## Recently Completed
+
+**"The Almanack of Naval Ravikant" by Eric Jorgenson**  
+A curated collection of Naval's thinking on wealth, happiness, and clear reasoning. Dense with ideas worth rereading.
 
 **"How to Live an Extraordinary Life" by Anthony Pompliano**  
 Practical insights on building a meaningful life and career. Great perspective on balancing ambition with fulfillment.
