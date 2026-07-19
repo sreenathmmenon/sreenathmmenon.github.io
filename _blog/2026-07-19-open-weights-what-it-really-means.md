@@ -1,7 +1,7 @@
 ---
 title: "Open Weights: What It Really Means (and Why It's Not Open Source)"
 date: 2026-07-19
-excerpt: "You keep hearing that Llama, DeepSeek, and Mistral are 'open source' AI. Most of them aren't, not really. They're open weight, which is a different, more limited thing that people constantly mix up. Here's what open weights actually means, how it differs from open source and closed models, in plain language, with a simple analogy anyone can follow."
+excerpt: "You keep hearing that models like GLM, DeepSeek, and Llama are 'open source' AI. Most of them aren't, not really. They're open weight, which is a different, more limited thing that people constantly mix up. Here's what open weights actually means, how it differs from open source and closed models, in plain language, with a simple analogy anyone can follow."
 tags: [ai, open-weights, open-source, models, explainer]
 ---
 
@@ -84,7 +84,7 @@ tags: [ai, open-weights, open-source, models, explainer]
 }
 </style>
 
-You've probably read that Llama, DeepSeek, Mistral, and Qwen are "open source" AI models, the free, community versions you can download and run yourself, unlike the locked-away GPT and Claude. It's a nice story. It's also, for most of them, not quite true.
+You've probably read that models like GLM, DeepSeek, Kimi, Qwen, and Llama are "open source" AI, the free, community versions you can download and run yourself, unlike the locked-away GPT and Claude. It's a nice story. It's also, for most of them, not quite true.
 
 Almost all of those models are **open weight**, not open source. And the difference isn't nitpicking, it's a real, meaningful gap that changes what you can actually do with the model, and how much you can trust it. People mix these two terms up constantly, including press releases and marketing that really should know better. So let me clear it up properly, in plain language, with an analogy anyone can follow. By the end you'll know exactly what "open weights" means, why it isn't the same as open source, and why it matters.
 
@@ -194,7 +194,7 @@ So where do the models you've heard of actually land? Here's the honest map.
 <figure class="ow-fig">
   <div class="ow-ex" id="ex">
     <div class="ow-erow"><div class="lb">closed (API only)</div><div class="items"><b>GPT, Claude, Gemini</b>: you use them through a service; you can't download them.</div></div>
-    <div class="ow-erow"><div class="lb">open weights (most "open" models)</div><div class="items"><b>Llama, DeepSeek, Mistral, Qwen, Gemma</b>: download and run them, but the training data stays secret. Widely (and wrongly) called "open source."</div></div>
+    <div class="ow-erow"><div class="lb">open weights (most "open" models)</div><div class="items"><b>GLM-5.2, DeepSeek, Kimi, Qwen, Llama, Mistral, Gemma, gpt-oss</b>: download and run them, but the training data stays secret. Widely (and wrongly) called "open source."</div></div>
     <div class="ow-erow"><div class="lb">genuinely open source (rarer)</div><div class="items"><b>OLMo (Allen Institute), Pythia (EleutherAI)</b>: weights AND training code AND the dataset, fully reproducible and auditable.</div></div>
   </div>
   <figcaption>Notice the middle row is where nearly all the famous "open" models sit, they're open weight, not open source, even when marketed otherwise. The genuinely-open-source models exist (OLMo and Pythia are the go-to examples) but they're the exception, usually from research institutes rather than companies protecting a competitive edge or worried about what's in their training data.</figcaption>
@@ -219,7 +219,7 @@ So open weights is a genuine middle ground: generous enough to let the world *us
 <tr><td>Run it yourself?</td><td>No</td><td>Yes</td><td>Yes</td></tr>
 <tr><td>See how it was made?</td><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><td>Reproducible / auditable?</td><td>No</td><td>No</td><td>Yes</td></tr>
-<tr><td>Examples</td><td>GPT, Claude, Gemini</td><td>Llama, DeepSeek, Mistral</td><td>OLMo, Pythia</td></tr>
+<tr><td>Examples</td><td>GPT, Claude, Gemini</td><td>GLM-5.2, DeepSeek, Kimi, Qwen, Llama</td><td>OLMo, Pythia</td></tr>
 </tbody>
 </table>
   <figcaption>The whole thing on one card. The line most people get wrong is the middle one: "open weights" is real openness, but it is <em>not</em> "open source," because you can't see how it was made. Keep the cake-versus-recipe picture and you'll never confuse them again.</figcaption>
