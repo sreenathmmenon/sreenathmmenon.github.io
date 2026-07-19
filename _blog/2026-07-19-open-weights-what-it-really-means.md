@@ -227,7 +227,7 @@ So open weights is a genuine middle ground: generous enough to let the world *us
 
 ## The takeaway
 
-"Open weights" means one clear thing: you can download the finished AI model, run it on your own hardware, and fine-tune it, without asking anyone's permission or paying per use. That's genuinely valuable, and it's why models like Llama and DeepSeek changed the landscape. But it is *not* the same as open source. Open weights gives you the cake; open source gives you the cake *and* the recipe *and* the ingredient list, so you could bake it yourself and check exactly what went in.
+"Open weights" means one clear thing: you can download the finished AI model, run it on your own hardware, and fine-tune it, without asking anyone's permission or paying per use. That's genuinely valuable, and it's why models like Llama, DeepSeek, and GLM changed the landscape. But it is *not* the same as open source. Open weights gives you the cake; open source gives you the cake *and* the recipe *and* the ingredient list, so you could bake it yourself and check exactly what went in.
 
 The next time you see a model called "open source," it's worth a small, healthy dose of skepticism: do they actually share the training data and code, or just the finished weights? Most of the time, it's just the weights. That's not a scandal, open weights is a real and useful kind of openness. It's just a smaller promise than "open source," and now you know exactly where the line sits, and why anyone who cares about trust, bias, or reproducibility should care where a model falls.
 
