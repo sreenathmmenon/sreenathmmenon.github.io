@@ -1,8 +1,11 @@
 ---
-title: "Chunking a Form for RAG: Why the Usual Way Breaks"
+title: "When AI Reads Your Forms and Quietly Gets the Numbers Wrong"
 date: 2026-07-19
-excerpt: "RAG works beautifully on paragraphs. Then you point it at a form, an insurance claim, a bank statement, a form full of labels, values, and tables, and it starts getting numbers wrong. The reason is chunking. The usual way of cutting documents into pieces quietly destroys a form's meaning. Here's why, the chunking approaches that fix it, and the honest side effect and accuracy cost of each."
-tags: [ai, rag, chunking, forms, retrieval, explainer]
+excerpt: "A client wants AI to pull the right numbers out of their forms: insurance claims, bank applications, statements. Point normal RAG at them and it starts getting values wrong, the policy number becomes the account number, one amount becomes another. Here's how I'd actually build it, why the naive approach fails on forms, the approaches that fix it, and the honest side effect and accuracy cost of each."
+tags: [ai, rag, chunking, forms, use-case, explainer]
+redirect_from:
+  - /blog/2026-07-19-teaching-ai-to-read-a-form/
+  - /blog/2026-07-19-building-an-ai-that-reads-insurance-and-bank-forms/
 ---
 
 <style>
@@ -95,11 +98,11 @@ tags: [ai, rag, chunking, forms, retrieval, explainer]
 }
 </style>
 
-RAG is a beautiful trick when your documents are paragraphs. You chop the text into chunks, find the chunk that matches the question, hand it to the model, and get a grounded answer. I've written about it a few times. It just works.
+Here's a request that lands on a lot of engineers' desks, especially anyone working near insurance, banking, or lending. A client has a mountain of *forms*, insurance claims, account applications, statements, and they want an AI that pulls the right values out of them: this policy number, that claim amount, this date, correctly, every time. It sounds like the document-chatbot problem from my last post. It isn't quite. A support bot answers questions from prose. This has to read a *form* and get exact numbers right, and in insurance or banking a wrong number is a mispaid claim or a compliance failure, real money on the line.
 
-Then someone points it at a *form*, an insurance claim, a bank statement, a loan application, and it starts quietly getting numbers wrong. It confuses one amount for another. It answers "what's the policy number?" with the account number. It reads a checkbox wrong. Nothing crashes; it just returns confidently incorrect values, which in insurance or banking is the worst kind of failure.
+So you reach for the obvious tool: RAG. It's brilliant on paragraphs, chop the text into chunks, find the matching chunk, hand it to the model, get a grounded answer. And then you point it at a form and it starts quietly getting numbers wrong. It answers "what's the policy number?" with the account number. It swaps one amount for another. Nothing crashes; it just returns confident, incorrect values, which is the worst kind of failure here.
 
-The culprit is almost never the model. It's **chunking**, the step where you cut the document into pieces before storing it. The way you'd naturally chunk a paragraph *destroys* a form, because a form's meaning lives in its structure, and naive chunking shreds that structure. This post is about exactly that: why the usual chunking breaks forms, the approaches that fix it, and, honestly, the side effect and accuracy cost of each. (I'll assume the text is already pulled off the page; getting text off a scan is its own topic. Here we care about what happens *after* you have the text: how you cut it up.)
+Let me walk through how I'd actually build this. The surprise is that the fix is almost never a bigger or smarter model. The whole battle is won or lost in one unglamorous step, **chunking**, how you cut the document into pieces before you ever store it. Naive chunking that works fine on prose *destroys* a form. So I'll show why it breaks, the approaches that fix it, and, honestly, the side effect and accuracy cost of each. (I'll assume the text is already pulled off the page, getting text off a scan is a separate job. Here we care about what happens after: how you cut it up.)
 
 ## The one thing that makes a form different
 
