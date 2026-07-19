@@ -1,5 +1,5 @@
 ---
-title: "When AI Reads Your Forms and Quietly Gets the Numbers Wrong"
+title: "Use Case: When AI Reads Your Forms and Quietly Gets the Numbers Wrong"
 date: 2026-07-19
 excerpt: "A client wants AI to pull the right numbers out of their forms: insurance claims, bank applications, statements. Point normal RAG at them and it starts getting values wrong, the policy number becomes the account number, one amount becomes another. Here's how I'd actually build it, why the naive approach fails on forms, the approaches that fix it, and the honest side effect and accuracy cost of each."
 tags: [ai, rag, chunking, forms, use-case, explainer]
