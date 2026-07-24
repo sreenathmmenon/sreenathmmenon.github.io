@@ -25,7 +25,7 @@ social:
 
 # Homepage hero + content (used by _layouts/home.html)
 hero:
-  eyebrow: "Staff Software Engineer · IBM · Bengaluru"
+  eyebrow: "Staff Software Engineer · Bengaluru"
   headline: "Sreenath M Menon"
   lede: >-
     I'm a staff software engineer with 14+ years building enterprise software and open-source AI
