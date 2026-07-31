@@ -4,9 +4,15 @@
   featured: true
   tagline: The operating system for autonomous work.
   blurb: >-
-    You declare intent; Krelvan compiles an agent, signs every action, enforces every budget, and
-    audits the proof. Every plugin hot-swappable, every run crash-recoverable, every decision
-    human-reversible. Self-hostable, on a signed append-only event-sourced runtime.
+    I built Krelvan around a simple belief: AI agents should become reusable software that people can
+    install, connect, extend and genuinely own, not temporary prompts trapped inside closed platforms.
+    A user describes an outcome, and Krelvan turns it into a working multi-step agent system with the
+    right capabilities, tools, memory, schedules and approval controls. Its open registry provides an
+    expanding ecosystem of installable agents, capabilities and connectors, while support for multiple
+    model providers lets every user choose how their intelligence runs. Behind the experience is a
+    signed, replayable execution ledger that makes every decision and action inspectable. Krelvan is
+    more than an agent builder. It is an open foundation for creating, distributing and operating
+    trusted AI systems on infrastructure controlled by the people who depend on them.
   stack: [TypeScript, Next.js, Event-sourced, MCP]
   links:
     - { label: krelvan.com, url: "https://krelvan.com" }
