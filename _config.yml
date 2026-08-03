@@ -1,6 +1,7 @@
 # Site settings
 title: Sreenath M Menon
 lang: en
+timezone: Asia/Kolkata
 email: zreenathmenon@gmail.com
 description: >-
   Staff Software Engineer (14+ years). Creator of llmswap (41K+ downloads).
