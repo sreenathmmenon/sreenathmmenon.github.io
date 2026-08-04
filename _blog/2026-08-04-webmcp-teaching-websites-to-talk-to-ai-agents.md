@@ -83,6 +83,27 @@ tags: [ai, webmcp, mcp, agents, web, browser]
 .wm-status p{font-size:.86rem;color:var(--text-2);line-height:1.55;margin:0;}
 .wm-status code{font-family:var(--font-mono);font-size:.8rem;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:.08em .4em;color:var(--text);}
 
+/* live demo callout */
+.wm-live{max-width:660px;margin:0 auto;border:1px solid var(--accent);border-radius:14px;background:var(--surface);overflow:hidden;}
+.wm-live .lh{padding:.85rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;}
+.wm-live .lh .d{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);flex:none;}
+.wm-live .lh b{color:var(--text);font-size:.95rem;}
+.wm-live .lb{padding:1.1rem;}
+.wm-live p{font-size:.86rem;color:var(--text-2);line-height:1.55;margin:0 0 .8rem;}
+.wm-live .go{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.82rem;background:var(--accent);color:var(--accent-ink);border-radius:9px;padding:.55rem 1rem;font-weight:600;}
+.wm-live .go:hover{filter:brightness(1.08);color:var(--accent-ink);}
+
+/* recreated tool-activity log (real data from the live run) */
+.wm-term{max-width:620px;margin:0 auto;border:1px solid var(--border-2);border-radius:12px;background:var(--code-bg);overflow:hidden;}
+.wm-term .bar{display:flex;gap:.4rem;padding:.55rem .8rem;border-bottom:1px solid var(--border);align-items:center;}
+.wm-term .bar i{width:9px;height:9px;border-radius:50%;background:var(--border-2);}
+.wm-term .bar .lbl{margin-left:auto;font-family:var(--font-mono);font-size:.68rem;color:var(--text-3);}
+.wm-term .body{padding:.8rem 1rem;font-family:var(--font-mono);font-size:.74rem;line-height:1.75;max-height:340px;overflow-y:auto;}
+.wm-term .ln{display:flex;gap:.6rem;}
+.wm-term .ln .w{flex:none;}
+.wm-term .w.sys{color:var(--text-3);} .wm-term .w.tool{color:var(--accent);} .wm-term .w.res{color:var(--green);} .wm-term .w.gate{color:var(--amber);}
+.wm-term .m{color:var(--text-2);} .wm-term .m b{color:var(--text);}
+
 @media (prefers-reduced-motion: reduce){
   .wm-vs .col,.wm-node,.wm-line,.wm-pc .side,.wm-use{opacity:1!important;transform:none!important;}
   .wm-cursor{animation:none!important;}
@@ -209,6 +230,51 @@ This is the part that makes people want to try it. Registering a tool is one cal
 Notice what `execute` does: it calls `addTodoToPage`, a function that already exists on your site. WebMCP isn't asking you to rebuild anything. You're wrapping the actions your site can already do in a thin, declared interface so an agent can reach them cleanly. That's why the ten-minutes claim is real.
 
 One accuracy note, because the API is young and moving: the entry point recently moved from `navigator.modelContext` (the original name, now deprecated) to `document.modelContext`, since tools really belong to a document, not the whole browser. If you follow an older tutorial showing `navigator`, that's why. A one-line shim (`const mc = document.modelContext || navigator.modelContext`) bridges both while the change rolls out. Expect a few more edges like this to shift; it's a draft.
+
+## I built a live one you can try
+
+The official demos are all "call one tool and you're done", order a pizza, book a table. Useful, but they undersell the idea. So I built something more agentic to go with this post: **Career Copilot**, a job-search workspace where an agent doesn't fill one form, it runs a whole *mission* by chaining tools.
+
+<figure class="wm-fig">
+<div class="wm-live">
+  <div class="lh"><span class="d"></span><b>Career Copilot, a live WebMCP demo</b></div>
+  <div class="lb">
+    <p>It's a single page that registers real WebMCP tools: <code>search_jobs</code>, <code>match_profile</code>, <code>tailor_resume</code>, <code>shortlist</code>, and a consequential <code>submit_application</code> that asks for your approval. Then you tell an agent something like "find remote backend roles that fit me, shortlist the top two, tailor my resume for each, and ask before applying", and it chains all of them, live, on screen. There's a walkthrough button if you don't have an in-browser agent handy.</p>
+    <a class="go" href="https://webmcp-career-copilot-production.up.railway.app/" target="_blank" rel="noopener">Open the live demo &rarr;</a>
+  </div>
+</div>
+<figcaption>Deployed and running. Note: to see the real tool registration in the DevTools WebMCP panel, you need Chrome 149+ with <code>chrome://flags/#enable-webmcp-testing</code> on. The walkthrough runs regardless, so you can watch the flow either way.</figcaption>
+</figure>
+
+Why this shows off WebMCP better than a form-filler: the agent has to *reason across tools*. It searches, then scores each role against the candidate's actual skills and salary preferences (real logic a DOM scraper could never run), then tailors, then pauses for human approval on the one action that matters. Here's the actual tool-call log from a run, the agent working, not a mockup:
+
+<figure class="wm-fig">
+<div class="wm-term">
+  <div class="bar"><i></i><i></i><i></i><span class="lbl">tool activity · 13 calls</span></div>
+  <div class="body">
+    <div class="ln"><span class="w sys">·</span><span class="m">Agent mission: find remote backend roles that fit, shortlist top 2, tailor resumes, ask before applying.</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">search_jobs(remote, $150,000+)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">6 roles match</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j1)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m"><b>99% fit</b>, no gaps</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j4)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">88% fit, gaps: Kafka</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j7)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">88% fit, gaps: incident-response</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">shortlist(j1)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">shortlisted Senior Backend Engineer</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">tailor_resume(j1)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">resume tailored for Northwind Systems</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">submit_application(j1)</span></div>
+    <div class="ln"><span class="w gate">&#9208; gate</span><span class="m">awaiting your approval to apply&hellip;</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">applied to Northwind Systems &check;</span></div>
+    <div class="ln"><span class="w sys">·</span><span class="m">Mission complete.</span></div>
+  </div>
+</div>
+<figcaption>A real run. Notice the agent scored six roles differently (99%, 88%, 88%) and found distinct skill gaps for each, that matching runs against the candidate's profile, which is exactly the kind of logic scraping the page can't do. And the apply step stopped for a human. That is the whole WebMCP thesis in one screen.</figcaption>
+</figure>
+
+The full source is a single self-contained HTML file, if you want to see how the tools are registered, it's about a page of `registerTool` calls wrapping functions the page already had.
 
 ## The trust model, because this is the scary part
 
