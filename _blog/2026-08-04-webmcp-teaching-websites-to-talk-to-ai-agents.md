@@ -104,8 +104,31 @@ tags: [ai, webmcp, mcp, agents, web, browser]
 .wm-term .w.sys{color:var(--text-3);} .wm-term .w.tool{color:var(--accent);} .wm-term .w.res{color:var(--green);} .wm-term .w.gate{color:var(--amber);}
 .wm-term .m{color:var(--text-2);} .wm-term .m b{color:var(--text);}
 
+/* the real Career Copilot workflow (agent loop) */
+.cc-flow{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:.5rem;}
+.cc-step{display:flex;align-items:center;gap:.85rem;border:1px solid var(--border);border-radius:11px;background:var(--surface);padding:.7rem .9rem;opacity:0;transform:translateX(-10px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.cc-flow.go .cc-step{opacity:1;transform:none;}
+.cc-flow.go .cc-step:nth-child(1){transition-delay:.05s} .cc-flow.go .cc-step:nth-child(2){transition-delay:.15s} .cc-flow.go .cc-step:nth-child(3){transition-delay:.25s} .cc-flow.go .cc-step:nth-child(4){transition-delay:.35s} .cc-flow.go .cc-step:nth-child(5){transition-delay:.45s} .cc-flow.go .cc-step:nth-child(6){transition-delay:.55s} .cc-flow.go .cc-step:nth-child(7){transition-delay:.65s}
+.cc-step .cc-tool{flex:none;font-family:var(--font-mono);font-size:.72rem;color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:.2rem .5rem;min-width:118px;text-align:center;}
+.cc-step.gate .cc-tool{color:var(--amber);border-color:var(--amber);}
+.cc-step .cc-what{font-size:.86rem;color:var(--text-2);line-height:1.4;}
+.cc-step .cc-what b{color:var(--text);}
+.cc-step .cc-tag{margin-left:auto;flex:none;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3);border:1px solid var(--border-2);border-radius:5px;padding:.1rem .4rem;}
+.cc-step.gate .cc-tag{color:var(--amber);border-color:var(--amber);}
+
+/* tools grouped by kind */
+.cc-tools{max-width:700px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;}
+@media(max-width:620px){.cc-tools{grid-template-columns:1fr;}}
+.cc-tgroup{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:1rem;opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.cc-tools.go .cc-tgroup{opacity:1;transform:none;}
+.cc-tools.go .cc-tgroup:nth-child(2){transition-delay:.15s} .cc-tools.go .cc-tgroup:nth-child(3){transition-delay:.3s}
+.cc-tgroup .cc-gh{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.6rem;}
+.cc-tgroup.read .cc-gh{color:var(--accent);} .cc-tgroup.act .cc-gh{color:var(--accent-2);} .cc-tgroup.cons .cc-gh{color:var(--amber);}
+.cc-tgroup .cc-t{font-family:var(--font-mono);font-size:.74rem;color:var(--text-2);padding:.18rem 0;}
+.cc-tgroup .cc-t b{color:var(--text);}
+
 @media (prefers-reduced-motion: reduce){
-  .wm-vs .col,.wm-node,.wm-line,.wm-pc .side,.wm-use{opacity:1!important;transform:none!important;}
+  .wm-vs .col,.wm-node,.wm-line,.wm-pc .side,.wm-use,.cc-step,.cc-tgroup{opacity:1!important;transform:none!important;}
   .wm-cursor{animation:none!important;}
 }
 </style>
@@ -231,52 +254,109 @@ Notice what `execute` does: it calls `addTodoToPage`, a function that already ex
 
 One accuracy note, because the API is young and moving: the entry point recently moved from `navigator.modelContext` (the original name, now deprecated) to `document.modelContext`, since tools really belong to a document, not the whole browser. If you follow an older tutorial showing `navigator`, that's why. A one-line shim (`const mc = document.modelContext || navigator.modelContext`) bridges both while the change rolls out. Expect a few more edges like this to shift; it's a draft.
 
-## I built a live one you can try
+## A real one, worked all the way through
 
-The official demos are all "call one tool and you're done", order a pizza, book a table. Useful, but they undersell the idea. So I built something more agentic to go with this post: **Career Copilot**, an experimental agentic career portal where you hand the agent your resume and it runs a whole *mission*: parse your profile, pull openings from several sources, match each against you, tailor applications, and apply, with your approval.
+The official WebMCP demos are all "call one tool and you're done", order a pizza, book a table. Useful, but they undersell the idea, because the interesting part of WebMCP isn't one tool call. It's an agent *chaining* tools to do real work, with a human gate on the part that matters. So instead of a toy, I built and deployed a real one to go with this post, and this section is the honest walk-through of it, because it teaches the whole model better than any abstract example.
+
+**Career Copilot** is an experimental agentic career portal. You give it a resume; it reads real job descriptions from live company boards, scores your true fit, tells you your skill gaps, and prepares a batch of applications you approve in one click. Nothing is faked: the jobs are real, the matching is computed from real job-description text, and it applies nothing without your explicit OK.
 
 <figure class="wm-fig">
 <div class="wm-live">
   <div class="lh"><span class="d"></span><b>Career Copilot, a live WebMCP career portal</b></div>
   <div class="lb">
-    <p>Paste your resume and the agent parses it into a real profile, sets your preferences, then registers eight WebMCP tools: <code>parse_resume</code>, <code>set_preferences</code>, <code>aggregate_openings</code>, <code>match_profile</code>, <code>tailor_resume</code>, <code>shortlist</code>, <code>pipeline_status</code>, and a consequential <code>submit_application</code> that asks before applying in your name. Tell an agent "match my profile across the sources, shortlist the top two, tailor my resume, and ask before applying", and it chains all of them, live. A walkthrough button runs the same mission if you don't have an in-browser agent handy.</p>
+    <p>Open it, tap "See it work instantly", and watch an agent run a full job-search mission over live data: read a resume, pull real openings from GitLab, Stripe and Databricks, read each job description, score your fit, surface your skill gaps, and propose a batch of applications for you to approve. It registers <b>13 real WebMCP tools</b> on the page.</p>
     <a class="go" href="https://webmcp-career-copilot-production.up.railway.app/" target="_blank" rel="noopener">Open the live demo &rarr;</a>
   </div>
 </div>
-<figcaption>Deployed and confirmed working: with <code>chrome://flags/#enable-webmcp-testing</code> enabled, the page reports "WebMCP live, 8 tools registered" and the tools appear in the DevTools WebMCP panel. No flag? The walkthrough runs the same flow anyway. It's the Phase 0/1 slice of a real product idea: automate the whole job hunt, keep a human on the one action that matters, pressing apply.</figcaption>
+<figcaption>Deployed and validated. With <code>chrome://flags/#enable-webmcp-testing</code> on, the page reports "WebMCP live, 13 tools registered" and they show up in the DevTools WebMCP panel. No flag needed to try it: one button runs the whole mission anyway. It never really submits an application, it prepares them and stops for you.</figcaption>
 </figure>
 
-Why this shows off WebMCP better than a form-filler: the agent has to *reason across tools*, using a profile it parsed from your actual resume. It aggregates roles from several sources, scores each against your real skills and salary preferences (logic a DOM scraper could never run), tailors a resume per role, then pauses for human approval on the one action that applies in your name. Here's an actual tool-call log from a run, the agent working, not a mockup:
+### The workflow: what the agent actually does
+
+Here's the real mission, step by step. Each row is a WebMCP tool the page exposes; the agent chains them. Notice the shape: a run phase, then a consequential act phase that stops for a human.
+
+<figure class="wm-fig">
+<div class="cc-flow wm-anim">
+  <div class="cc-step"><span class="cc-tool">parse_resume</span><span class="cc-what">Reads <b>any</b> resume into a real profile: skills, seniority, focus area</span><span class="cc-tag">read</span></div>
+  <div class="cc-step"><span class="cc-tool">aggregate_openings</span><span class="cc-what">Pulls live roles from three real company job boards</span><span class="cc-tag">read</span></div>
+  <div class="cc-step"><span class="cc-tool">match_profile</span><span class="cc-what">Fetches each real <b>job description</b> and scores your true fit + gaps</span><span class="cc-tag">read</span></div>
+  <div class="cc-step"><span class="cc-tool">find_gaps</span><span class="cc-what">Aggregates the gaps into a learning signal: "learn X to unlock more roles"</span><span class="cc-tag">read</span></div>
+  <div class="cc-step"><span class="cc-tool">shortlist</span><span class="cc-what">Adds the strongest fits to your pipeline. Reversible</span><span class="cc-tag">act</span></div>
+  <div class="cc-step"><span class="cc-tool">prepare_applications</span><span class="cc-what">Tailors a summary per role, ready to review</span><span class="cc-tag">act</span></div>
+  <div class="cc-step gate"><span class="cc-tool">submit_batch</span><span class="cc-what">Opens a <b>human approval</b> panel: review the set, uncheck any, then apply</span><span class="cc-tag">gate</span></div>
+</div>
+<figcaption>The real agent loop. The first four tools are read-only, the agent gathers and reasons freely. Then shortlist and prepare change reversible state. Only the last one, applying in your name, is consequential, and it cannot happen without you clicking approve. That split is the entire safety model of WebMCP, made concrete.</figcaption>
+</figure>
+
+### The tools, grouped by what they can do
+
+This grouping is worth internalizing, because it's how you should design any WebMCP surface: separate what merely *reads* from what *acts*, and put the human gate only where it's truly needed.
+
+<figure class="wm-fig">
+<div class="cc-tools wm-anim">
+  <div class="cc-tgroup read">
+    <div class="cc-gh">Read (safe, no gate)</div>
+    <div class="cc-t"><b>parse_resume</b></div>
+    <div class="cc-t"><b>aggregate_openings</b></div>
+    <div class="cc-t"><b>match_profile</b></div>
+    <div class="cc-t"><b>find_gaps</b></div>
+    <div class="cc-t"><b>explain_match</b></div>
+    <div class="cc-t"><b>compare_jobs</b></div>
+    <div class="cc-t"><b>pipeline_status</b></div>
+  </div>
+  <div class="cc-tgroup act">
+    <div class="cc-gh">Act (reversible)</div>
+    <div class="cc-t"><b>set_preferences</b></div>
+    <div class="cc-t"><b>refine_search</b></div>
+    <div class="cc-t"><b>shortlist</b></div>
+    <div class="cc-t"><b>prepare_applications</b></div>
+    <div class="cc-t"><b>draft_outreach</b></div>
+  </div>
+  <div class="cc-tgroup cons">
+    <div class="cc-gh">Consequential (human gate)</div>
+    <div class="cc-t"><b>submit_batch</b></div>
+    <div class="cc-t" style="color:var(--text-3);margin-top:.5rem;">Just one. This is the only tool that does something in your name, so it's the only one that stops for approval.</div>
+  </div>
+</div>
+<figcaption>13 tools, three tiers. WebMCP lets a tool flag itself with hints like <code>readOnlyHint</code>, so the agent (and the browser) know which calls are safe to make freely and which need a human. Getting this taxonomy right is most of what makes an agentic surface trustworthy.</figcaption>
+</figure>
+
+### A real run, not a mockup
+
+Here's the actual tool-activity log from a validated run with a frontend engineer's resume. Watch it read real descriptions and score honestly, no fake 99%s:
 
 <figure class="wm-fig">
 <div class="wm-term">
-  <div class="bar"><i></i><i></i><i></i><span class="lbl">tool activity · 15 calls</span></div>
+  <div class="bar"><i></i><i></i><i></i><span class="lbl">tool activity · real run</span></div>
   <div class="body">
     <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">parse_resume(&hellip;)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">profile: Senior Backend Engineer, 9 skills, 8y</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">set_preferences(&hellip;)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">remote, $150,000+, staff</span></div>
-    <div class="ln"><span class="w sys">·</span><span class="m">Agent mission: match my profile across sources, shortlist top 2, tailor, ask before applying.</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">aggregate_openings(remote, $150,000+)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">6 roles from Greenhouse, Lever, Ashby</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j2)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m"><b>99% fit</b>, no gaps</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j4)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">98% fit, gaps: Kafka</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">shortlist(j2)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">shortlisted Staff Platform Engineer</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">tailor_resume(j2)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">resume tailored for Lumen Cloud</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">submit_application(j2)</span></div>
-    <div class="ln"><span class="w gate">&#9208; gate</span><span class="m">awaiting your approval to apply to Lumen Cloud&hellip;</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">applied to Lumen Cloud &check;</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">Sam Patel, Senior Frontend Engineer · 11 skills · frontend focus</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">aggregate_openings()</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">75 live roles from GitLab, Stripe, Databricks</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile()</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">reading 24 real job descriptions&hellip;</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m"><b>Design Engineer, Presence @ GitLab: 80%</b>, no gaps</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">Senior Software Engineer, Fullstack @ Stripe: 57%, gaps: python</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">AI Engineer @ GitLab: 54%, gaps: python, llm</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">find_gaps()</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">top gaps across matches: python, testing, api</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">shortlist([4 roles])</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">prepare_applications([4])</span></div>
+    <div class="ln"><span class="w gate">&#9208; gate</span><span class="m">awaiting your approval for 4 applications&hellip;</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">applied to 3 (you unchecked 1) &check;</span></div>
     <div class="ln"><span class="w sys">·</span><span class="m">Mission complete.</span></div>
   </div>
 </div>
-<figcaption>A real run. It parsed a resume into a profile, set preferences, aggregated roles from three sources, then scored each differently (99%, 98%) against that profile with distinct skill gaps, logic scraping the page can't do. Change the seniority preference and the ranking changes; here "staff" pushed the Staff Platform role to the top. And the apply step stopped for a human. That's the whole WebMCP thesis in one screen.</figcaption>
+<figcaption>A genuine run. The frontend resume's true best fit, a Design Engineer role at 80%, came from reading the real job description, not the title (the title never says "React"). The scores are honest and capped, the gaps are real, and the human approved 3 of 4 in the batch. Swap in a backend or data resume and the whole thing re-ranks to that person's real best matches. That's what a scraper fundamentally cannot do.</figcaption>
 </figure>
 
-The full source is a single self-contained HTML file, and I wrote up the product thinking behind it (candidate side, employer side, the honest limits of auto-applying into ATS portals) as a design note in the repo. The short version: automate the entire job hunt, keep a human on the one consequential action, applying as you.
+### The one hard thing, and why the human gate is the right answer
+
+Building this taught me the honest limit of "auto-apply", and it's worth stating plainly because it's the real engineering lesson. Everything up to the apply button is easy to automate and genuinely useful: reading resumes, aggregating openings, matching, tailoring. The *last mile*, actually submitting into a company's application system, is the hard part. Those systems (Workday, Greenhouse and friends) are deliberately not open APIs, they sit behind logins and bot-detection, and automating submission usually violates their terms.
+
+This is exactly the gap WebMCP is meant to close. If a careers site exposed a `submit_application` tool the way this demo does, an agent could apply cleanly, in your own authenticated session, with your approval. Until sites do that, the correct design isn't to fake the last mile, it's to **automate everything up to it and keep a human on the submit.** That's not a compromise. An agent that silently applies to jobs in your name is a liability; one that does all the work and asks before it acts as you is a superpower. WebMCP's consent model is what makes that line enforceable.
+
+The full source is a single self-contained HTML file, and I wrote up the deeper product thinking, the candidate and employer sides, the phased build, the honest limits, as a design note in the repo.
 
 ## The trust model, because this is the scary part
 
@@ -369,7 +449,7 @@ Written from scratch after reading the official documentation. These are the pri
 
 <script>
 (function(){
-  var els=document.querySelectorAll('.wm-vs,.wm-frow,.wm-demo,.wm-pc,.wm-uses');
+  var els=document.querySelectorAll('.wm-vs,.wm-frow,.wm-demo,.wm-pc,.wm-uses,.cc-flow,.cc-tools');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('go')});return;}
   var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('go');io.unobserve(x.target)}})},{threshold:.18});
   els.forEach(function(e){io.observe(e)});
