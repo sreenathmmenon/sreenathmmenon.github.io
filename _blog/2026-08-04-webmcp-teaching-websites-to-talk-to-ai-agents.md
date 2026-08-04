@@ -233,48 +233,50 @@ One accuracy note, because the API is young and moving: the entry point recently
 
 ## I built a live one you can try
 
-The official demos are all "call one tool and you're done", order a pizza, book a table. Useful, but they undersell the idea. So I built something more agentic to go with this post: **Career Copilot**, a job-search workspace where an agent doesn't fill one form, it runs a whole *mission* by chaining tools.
+The official demos are all "call one tool and you're done", order a pizza, book a table. Useful, but they undersell the idea. So I built something more agentic to go with this post: **Career Copilot**, an experimental agentic career portal where you hand the agent your resume and it runs a whole *mission*: parse your profile, pull openings from several sources, match each against you, tailor applications, and apply, with your approval.
 
 <figure class="wm-fig">
 <div class="wm-live">
-  <div class="lh"><span class="d"></span><b>Career Copilot, a live WebMCP demo</b></div>
+  <div class="lh"><span class="d"></span><b>Career Copilot, a live WebMCP career portal</b></div>
   <div class="lb">
-    <p>It's a single page that registers real WebMCP tools: <code>search_jobs</code>, <code>match_profile</code>, <code>tailor_resume</code>, <code>shortlist</code>, and a consequential <code>submit_application</code> that asks for your approval. Then you tell an agent something like "find remote backend roles that fit me, shortlist the top two, tailor my resume for each, and ask before applying", and it chains all of them, live, on screen. There's a walkthrough button if you don't have an in-browser agent handy.</p>
+    <p>Paste your resume and the agent parses it into a real profile, sets your preferences, then registers eight WebMCP tools: <code>parse_resume</code>, <code>set_preferences</code>, <code>aggregate_openings</code>, <code>match_profile</code>, <code>tailor_resume</code>, <code>shortlist</code>, <code>pipeline_status</code>, and a consequential <code>submit_application</code> that asks before applying in your name. Tell an agent "match my profile across the sources, shortlist the top two, tailor my resume, and ask before applying", and it chains all of them, live. A walkthrough button runs the same mission if you don't have an in-browser agent handy.</p>
     <a class="go" href="https://webmcp-career-copilot-production.up.railway.app/" target="_blank" rel="noopener">Open the live demo &rarr;</a>
   </div>
 </div>
-<figcaption>Deployed and confirmed working: with <code>chrome://flags/#enable-webmcp-testing</code> enabled, the page reports "WebMCP live, 7 tools registered" and the tools show up in the DevTools WebMCP panel. No flag? The walkthrough button runs the same flow anyway, so you can watch it either way.</figcaption>
+<figcaption>Deployed and confirmed working: with <code>chrome://flags/#enable-webmcp-testing</code> enabled, the page reports "WebMCP live, 8 tools registered" and the tools appear in the DevTools WebMCP panel. No flag? The walkthrough runs the same flow anyway. It's the Phase 0/1 slice of a real product idea: automate the whole job hunt, keep a human on the one action that matters, pressing apply.</figcaption>
 </figure>
 
-Why this shows off WebMCP better than a form-filler: the agent has to *reason across tools*. It searches, then scores each role against the candidate's actual skills and salary preferences (real logic a DOM scraper could never run), then tailors, then pauses for human approval on the one action that matters. Here's the actual tool-call log from a run, the agent working, not a mockup:
+Why this shows off WebMCP better than a form-filler: the agent has to *reason across tools*, using a profile it parsed from your actual resume. It aggregates roles from several sources, scores each against your real skills and salary preferences (logic a DOM scraper could never run), tailors a resume per role, then pauses for human approval on the one action that applies in your name. Here's an actual tool-call log from a run, the agent working, not a mockup:
 
 <figure class="wm-fig">
 <div class="wm-term">
-  <div class="bar"><i></i><i></i><i></i><span class="lbl">tool activity · 13 calls</span></div>
+  <div class="bar"><i></i><i></i><i></i><span class="lbl">tool activity · 15 calls</span></div>
   <div class="body">
-    <div class="ln"><span class="w sys">·</span><span class="m">Agent mission: find remote backend roles that fit, shortlist top 2, tailor resumes, ask before applying.</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">search_jobs(remote, $150,000+)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">6 roles match</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j1)</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">parse_resume(&hellip;)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">profile: Senior Backend Engineer, 9 skills, 8y</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">set_preferences(&hellip;)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">remote, $150,000+, staff</span></div>
+    <div class="ln"><span class="w sys">·</span><span class="m">Agent mission: match my profile across sources, shortlist top 2, tailor, ask before applying.</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">aggregate_openings(remote, $150,000+)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">6 roles from Greenhouse, Lever, Ashby</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j2)</span></div>
     <div class="ln"><span class="w res">&check; result</span><span class="m"><b>99% fit</b>, no gaps</span></div>
     <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j4)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">88% fit, gaps: Kafka</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">match_profile(j7)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">88% fit, gaps: incident-response</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">shortlist(j1)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">shortlisted Senior Backend Engineer</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">tailor_resume(j1)</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">resume tailored for Northwind Systems</span></div>
-    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">submit_application(j1)</span></div>
-    <div class="ln"><span class="w gate">&#9208; gate</span><span class="m">awaiting your approval to apply&hellip;</span></div>
-    <div class="ln"><span class="w res">&check; result</span><span class="m">applied to Northwind Systems &check;</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">98% fit, gaps: Kafka</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">shortlist(j2)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">shortlisted Staff Platform Engineer</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">tailor_resume(j2)</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">resume tailored for Lumen Cloud</span></div>
+    <div class="ln"><span class="w tool">&rarr; tool</span><span class="m">submit_application(j2)</span></div>
+    <div class="ln"><span class="w gate">&#9208; gate</span><span class="m">awaiting your approval to apply to Lumen Cloud&hellip;</span></div>
+    <div class="ln"><span class="w res">&check; result</span><span class="m">applied to Lumen Cloud &check;</span></div>
     <div class="ln"><span class="w sys">·</span><span class="m">Mission complete.</span></div>
   </div>
 </div>
-<figcaption>A real run. Notice the agent scored six roles differently (99%, 88%, 88%) and found distinct skill gaps for each, that matching runs against the candidate's profile, which is exactly the kind of logic scraping the page can't do. And the apply step stopped for a human. That is the whole WebMCP thesis in one screen.</figcaption>
+<figcaption>A real run. It parsed a resume into a profile, set preferences, aggregated roles from three sources, then scored each differently (99%, 98%) against that profile with distinct skill gaps, logic scraping the page can't do. Change the seniority preference and the ranking changes; here "staff" pushed the Staff Platform role to the top. And the apply step stopped for a human. That's the whole WebMCP thesis in one screen.</figcaption>
 </figure>
 
-The full source is a single self-contained HTML file, if you want to see how the tools are registered, it's about a page of `registerTool` calls wrapping functions the page already had.
+The full source is a single self-contained HTML file, and I wrote up the product thinking behind it (candidate side, employer side, the honest limits of auto-applying into ATS portals) as a design note in the repo. The short version: automate the entire job hunt, keep a human on the one consequential action, applying as you.
 
 ## The trust model, because this is the scary part
 
