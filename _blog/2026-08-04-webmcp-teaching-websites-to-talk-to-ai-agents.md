@@ -243,7 +243,7 @@ The official demos are all "call one tool and you're done", order a pizza, book 
     <a class="go" href="https://webmcp-career-copilot-production.up.railway.app/" target="_blank" rel="noopener">Open the live demo &rarr;</a>
   </div>
 </div>
-<figcaption>Deployed and running. Note: to see the real tool registration in the DevTools WebMCP panel, you need Chrome 149+ with <code>chrome://flags/#enable-webmcp-testing</code> on. The walkthrough runs regardless, so you can watch the flow either way.</figcaption>
+<figcaption>Deployed and confirmed working: with <code>chrome://flags/#enable-webmcp-testing</code> enabled, the page reports "WebMCP live, 7 tools registered" and the tools show up in the DevTools WebMCP panel. No flag? The walkthrough button runs the same flow anyway, so you can watch it either way.</figcaption>
 </figure>
 
 Why this shows off WebMCP better than a form-filler: the agent has to *reason across tools*. It searches, then scores each role against the candidate's actual skills and salary preferences (real logic a DOM scraper could never run), then tailors, then pauses for human approval on the one action that matters. Here's the actual tool-call log from a run, the agent working, not a mockup:
