@@ -131,7 +131,7 @@ Here's where I stop critiquing and start dreaming, because the *pattern*, an alw
 <figure class="gb-fig">
 <div class="gb-poss gb-anim">
   <div class="gb-tier">
-    <div class="th"><span class="em">&#128100;</span> For an individual</div>
+    <div class="th"><span class="em">ð¤</span> For an individual</div>
     <div class="tb">
       <div class="idea"><b>A morning-brief bot</b> that reads your inbox, calendar, and the three sites you check, and hands you one summary before you're awake.</div>
       <div class="idea"><b>A "chase it for me" bot</b> for the follow-ups you forget: refunds, replies, that form you keep meaning to fill.</div>
@@ -139,7 +139,7 @@ Here's where I stop critiquing and start dreaming, because the *pattern*, an alw
     </div>
   </div>
   <div class="gb-tier">
-    <div class="th"><span class="em">&#128101;</span> For a team</div>
+    <div class="th"><span class="em">ð¥</span> For a team</div>
     <div class="tb">
       <div class="idea"><b>A standup bot</b> that collects updates, drafts the summary, and posts it, so nobody runs the meeting.</div>
       <div class="idea"><b>A triage teammate</b> on the shared inbox: sorts, labels, drafts replies, escalates the hard ones to a human.</div>
@@ -147,7 +147,7 @@ Here's where I stop critiquing and start dreaming, because the *pattern*, an alw
     </div>
   </div>
   <div class="gb-tier">
-    <div class="th"><span class="em">&#127970;</span> For a company</div>
+    <div class="th"><span class="em">ð¢</span> For a company</div>
     <div class="tb">
       <div class="idea"><b>Ops bots</b> for the repetitive spine: invoice chasing, vendor onboarding, data entry across systems that don't talk.</div>
       <div class="idea"><b>A support drafter</b> that reads a ticket, pulls the context, and writes the reply, then waits for a human to send.</div>
@@ -155,7 +155,7 @@ Here's where I stop critiquing and start dreaming, because the *pattern*, an alw
     </div>
   </div>
   <div class="gb-tier">
-    <div class="th"><span class="em">&#127974;</span> For an enterprise</div>
+    <div class="th"><span class="em">ðï¸</span> For an enterprise</div>
     <div class="tb">
       <div class="idea"><b>Compliance-gated agents</b> where every consequential action is logged, attributed to a bot not a person, and reversible.</div>
       <div class="idea"><b>Least-privilege teammates</b>, each bot scoped to exactly one system, so a mistake can't reach the rest.</div>
