@@ -231,7 +231,7 @@ Two of these deserve to be spelled out, because they're where tools quietly go w
 <span class="surf">ServiceError: try again later</span>   <span class="lbl">surface (printed last)</span>
   File "api.py", line 44, in handle</pre>
   </div>
-</figure>
+</div>
 <figcaption>Same incident, opposite layouts. In Java the origin is the deepest <span class="mono">Caused by:</span> (near the bottom); in Python it's the top-most exception, above the "direct cause of" separator, and the last line is the symptom. So "read the last line" is accidentally right in Python and actively wrong in Java. A real parser splits on <span class="mono">Caused by:</span> (Java) or the chaining separators (Python), walks to the origin end, and surfaces the first frame in <em>your</em> code, not the framework's. The 50-plus lines before the final line are frequently where the truth lives.</figcaption>
 </figure>
 
