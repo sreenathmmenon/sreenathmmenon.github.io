@@ -180,34 +180,38 @@ Two design choices in there deserve a spotlight, because they're where the accur
 
 **The loudest error is usually the victim, not the cause.** When one service fails, the failure climbs *up* the call tree through timeouts and retries. The service screaming the most errors is typically the user-facing one at the top, timing out because something deep and quiet broke first. So root-cause localization means finding the *earliest* anomalous event on the *most upstream* service in the dependency graph, not the most frequent or most recent error. This is exactly the judgment an exhausted engineer gets wrong at 2am, and exactly where deterministic correlation earns its place, before the model ever speaks.
 
+**And the honest caveat under all of it: correlation IDs are often missing.** The clean version of this design assumes every service stamps a shared request/trace ID on every line, so you can grep one ID and get the whole request across 20 services. In real on-prem bundles, plenty of services don't. When the ID is there, stitching is exact and this tool is at its best. When it isn't, you fall back to fuzzy correlation, shared business keys (an order or session ID), request/response pairing, and time-window proximity, and that is lossy. This is exactly where the tool is *most* likely to be confidently wrong, so it's exactly where it should show its stitching and lower its confidence, not present a fuzzy guess as a clean trace.
+
 ## Does every request hit the LLM? No, and that's the point
 
-Here's a question I got asked about this design, and it's the right one: *do all the calls go to the model?* Absolutely not, and if they did, you'd have built the slow, expensive, hallucination-prone version. Most requests should never touch the LLM at all. The front door is a **router** that classifies what's being asked and sends the deterministic questions to code and only the genuinely generative ones to the model.
+Here's a question I got asked about this design, and it's the right one: *do all the calls go to the model?* Absolutely not, and if they did, you'd have built the slow, expensive, hallucination-prone version. Most of the *work* should never touch the LLM at all. Every capability below is a real operation, exposed as a structured call (a CLI flag, a UI control, or an MCP tool with a typed schema). What varies is whether answering it needs the model.
 
 <figure class="lg-fig">
 <div class="lg-router wm-anim">
   <div class="req">a request comes in</div>
-  <div class="split">&darr; classify &darr;</div>
+  <div class="split">&darr; route &darr;</div>
   <div class="branches">
     <div class="br code">
       <div class="bh">Deterministic (no model)</div>
-      <div class="ex">"errors for service X between 2 and 3pm"</div>
-      <div class="ex">"trace this correlation ID across services"</div>
-      <div class="ex">"what's the first error in this window?"</div>
-      <div class="ex">"show the timeline for this request"</div>
-      <div class="pct">the large majority of calls · instant · works even air-gapped with no model</div>
+      <div class="ex"><span class="mono">errors(service, from, to)</span></div>
+      <div class="ex"><span class="mono">trace(correlation_id)</span></div>
+      <div class="ex"><span class="mono">first_error(window)</span></div>
+      <div class="ex"><span class="mono">timeline(request)</span></div>
+      <div class="pct">the large majority of the work · instant · works even air-gapped with no model</div>
     </div>
     <div class="br model">
       <div class="bh">Model (over found evidence)</div>
-      <div class="ex">"explain what happened and why"</div>
-      <div class="ex">"summarize this incident for the ticket"</div>
-      <div class="ex">"which of these is the likely root cause?"</div>
+      <div class="ex"><span class="mono">explain(incident)</span></div>
+      <div class="ex"><span class="mono">summarize(for: ticket)</span></div>
+      <div class="ex"><span class="mono">rank_hypotheses(candidates)</span></div>
       <div class="pct">the minority · runs only on evidence the code already retrieved and cited</div>
     </div>
   </div>
 </div>
-<figcaption>The router is the quiet hero. Retrieval, filtering, correlation, and ordering are code, fast, cheap, deterministic, and available with no model at all. The LLM is reserved for synthesis and narration, and even then it only ever sees the small evidence set the deterministic side handed it. Routing correctly is most of what makes the tool both fast and trustworthy.</figcaption>
+<figcaption>Retrieval, filtering, correlation, and ordering are code: fast, cheap, deterministic, and available with no model at all. The LLM is reserved for synthesis and narration over the small evidence set the deterministic side hands it.</figcaption>
 </figure>
+
+One honest wrinkle worth stating, because it's the thing a sharp reviewer catches: turning a person's typed English ("show me errors in checkout around 2pm") *into* one of those structured calls is itself a language task. So there is often a tiny model-shaped step at the very front, an intent parser that maps free text to `errors(service, from, to)`. But note what it does and doesn't do: it picks the tool and fills the arguments, and then **deterministic code answers.** The model chooses the question; it never invents the answer. And on a CLI or a structured UI, even that step disappears, the user supplies the arguments directly, and nothing generative runs at all.
 
 ## What about 20GB? Or 50? Accuracy comes from the funnel, not the context
 
@@ -219,10 +223,12 @@ The tar in the story was 5GB, but that's the floor. In the field these bundles r
   <div class="down">&darr;</div>
   <div class="lg-band b2"><div class="num">a few hundred candidates</div><div class="lb">indexed, correlated, ranked, the interesting lines and their neighbours</div></div>
   <div class="down">&darr;</div>
-  <div class="lg-band b3"><div class="num">a few dozen lines</div><div class="lb">the evidence set the model actually reads, constant regardless of input size</div></div>
+  <div class="lg-band b3"><div class="num">a small, bounded evidence set</div><div class="lb">what the model actually reads, sized to the incident, not to the tarball</div></div>
 </div>
-<figcaption>The same cheap-wide then expensive-narrow shape as RAG and recommendations. Notice the bottom band: what the model reads stays roughly constant whether the input is 5GB or 50GB. That's why size doesn't erode accuracy, as long as the wide pass has good recall.</figcaption>
+<figcaption>The same cheap-wide then expensive-narrow shape as RAG and recommendations. The bottom band is bounded by the incident's complexity, not the input's size: a simple failure is a dozen lines, a sprawling cascade is more, but a 50GB tar of an otherwise-quiet system still reduces to a small set. Size doesn't erode accuracy, as long as the wide pass has good recall.</figcaption>
 </figure>
+
+A complex cascade genuinely can produce more evidence than fits comfortably in one prompt, spanning many services and a wide window. That's not solved by a bigger context window (things get lost in the middle of a huge dump); it's solved by *hierarchical* handling, summarize each service's slice first, then reason over the summaries. The point stands: the model's input is bounded by how tangled the incident is, never by how big the file is.
 
 The honest correction to make here: at 20GB, size stops being an *accuracy* problem and becomes a **latency and memory** problem. Gzip is serial, so decompression is often the bottleneck; you stream member-by-member, build offset indexes, and parallelize per service across the 20-plus folders. The model's job doesn't get harder as the tar grows. The plumbing does. Which, once more, is the argument for putting your engineering into the deterministic core.
 
@@ -235,7 +241,7 @@ For most AI features, a guardrail is a safety net. Here it *is* the product. An 
   <div class="lg-guard"><span class="n">1</span><p><b>Cite from the index, never emit a raw line.</b> The model references evidence by line ID; the code then checks each quoted line byte-for-byte against the index and rejects any non-match before it reaches the user. "Did it invent a timestamp?" becomes a deterministic string-equality check, not a hope.</p></div>
   <div class="lg-guard"><span class="n">2</span><p><b>Abstention is a first-class, rewarded answer.</b> "I don't have logs showing that" must be an acceptable, even encouraged, output. Models hallucinate partly because evals score a confident wrong answer the same as an honest "I don't know", so guessing is rational. Reward the refusal and you get fewer confident fabrications.</p></div>
   <div class="lg-guard"><span class="n">3</span><p><b>Scope-locked to this tar.</b> The tool answers only from the provided bundle. No training-data memory, no "in general, checkout failures are usually…". If it isn't in these logs, it doesn't exist for this answer.</p></div>
-  <div class="lg-guard"><span class="n">4</span><p><b>Redaction before the model, not after.</b> Logs leak bearer tokens, API keys, IPs, emails. Scrub at ingestion (tools like Presidio do the detection). The honest catch: redaction is a precision/recall trap, over-redact and you destroy the correlating key you needed; under-redact and you leak a secret. Layer regex + entity detection + allowlists, and never claim "fully scrubbed".</p></div>
+  <div class="lg-guard"><span class="n">4</span><p><b>Redaction before the model, not after.</b> Logs leak bearer tokens, API keys, IPs, emails. Scrub at ingestion (tools like Presidio do the detection). The honest catch: redaction is a precision/recall trap, over-redact and you destroy the correlating key you needed; under-redact and you leak a secret. The fix for the first half is to <b>tokenize, not just mask</b>: replace a sensitive value with a stable pseudonym (the same email always becomes the same token), so you can still join and correlate on it without ever exposing it. Layer regex + entity detection + allowlists, and never claim "fully scrubbed".</p></div>
   <div class="lg-guard"><span class="n">5</span><p><b>Flag, don't paper over.</b> Missing hour in a service's timeline? Duplicate lines at a rotation seam? Clock skew between two services? Surface it. A tool that shows a clean, confident, silently-incomplete timeline is more dangerous than one that says "there's a 12-minute gap here I can't see into."</p></div>
   <div class="lg-guard"><span class="n">6</span><p><b>Grounding is not correctness.</b> The uncomfortable one. A faithfully-quoted wrong log line is still wrong, and a citation proves a pointer exists, not that it supports the claim. Even frontier models top out around 85% grounded factuality on "answer only from this document" tasks. Design for a human who verifies, not one who trusts.</p></div>
 </div>
@@ -271,7 +277,7 @@ Now the asterisk, because pretending this is easy would be the dishonest part:
 
 - **Real incidents rarely have one clean cause.** Good postmortems say "contributing causes," plural. A single-label golden set encodes a simplification and will unfairly punish a model that names a real *contributing* cause. Let labels accept a *set* of acceptable causes and evidence lines.
 - **Which line is "the evidence"?** For a chain like DB timeout ← pool exhaustion ← slow dependency, the true evidence is several lines across several services. One gold line isn't enough.
-- **Sometimes the decisive event was never logged.** Then ground truth requires inferring a cause with no evidence line, which directly conflicts with a tool that correctly refuses to answer without evidence. Your abstention metric and your golden labels can legitimately disagree, and you have to decide, in advance, which one wins.
+- **Sometimes the decisive event was never logged.** Then ground truth requires inferring a cause with no evidence line, which directly conflicts with a tool that correctly refuses to answer without evidence. My call, stated up front so the eval isn't rigged: the tool *should* abstain when the evidence isn't in the logs, and the eval should score that abstention as **correct**, even when a "true" off-log cause existed. A tool that guesses right with no evidence got lucky; a tool that says "the logs don't show why" was right about what it could see. Reward the honest behaviour, not the lucky one.
 - **Labelers disagree, and postmortems are written under hindsight.** Measure inter-annotator agreement; the "official" cause is sometimes just the convenient one.
 
 That's not a reason to skip the golden set. It's a reason to build it with humility and to report accuracy with its caveats, not as a single triumphant number. For context, the best *deployed* root-cause accuracy in the research I trust sits around 0.77, and that was with hand-built, per-category diagnostic handlers, not a clever prompt. Anyone claiming near-perfect automated RCA is selling something.
