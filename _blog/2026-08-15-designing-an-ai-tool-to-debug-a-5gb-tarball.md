@@ -118,8 +118,28 @@ tags: [ai, system-design, observability, on-prem, agents, rag]
 .lg-frow .ic{flex:none;font-family:var(--font-mono);font-size:.7rem;color:var(--accent-2);border:1px solid var(--accent-2);border-radius:6px;padding:.12rem .45rem;margin-top:.05rem;}
 .lg-frow p{font-size:.85rem;color:var(--text-2);line-height:1.5;margin:0;} .lg-frow p b{color:var(--text);}
 
+/* the six log-reality traps */
+.lg-traps{max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:.55rem;}
+.lg-trap{border:1px solid var(--border);border-radius:11px;background:var(--surface);padding:.85rem 1rem;opacity:0;transform:translateY(8px);transition:opacity .45s var(--ease),transform .45s var(--ease);}
+.lg-traps.go .lg-trap{opacity:1;transform:none;}
+.lg-traps.go .lg-trap:nth-child(1){transition-delay:.05s} .lg-traps.go .lg-trap:nth-child(2){transition-delay:.12s} .lg-traps.go .lg-trap:nth-child(3){transition-delay:.19s} .lg-traps.go .lg-trap:nth-child(4){transition-delay:.26s} .lg-traps.go .lg-trap:nth-child(5){transition-delay:.33s} .lg-traps.go .lg-trap:nth-child(6){transition-delay:.40s}
+.lg-trap .naive{font-family:var(--font-mono);font-size:.74rem;color:var(--text-3);}
+.lg-trap .naive b{color:var(--red);}
+.lg-trap .real{font-size:.87rem;color:var(--text-2);line-height:1.5;margin-top:.3rem;}
+.lg-trap .real b{color:var(--text);}
+
+/* traceback java vs python */
+.lg-trace{max-width:720px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.lg-trace{grid-template-columns:1fr;}}
+.lg-tcol{border:1px solid var(--border);border-radius:12px;background:var(--code-bg);overflow:hidden;}
+@media (prefers-color-scheme: light){.lg-tcol{background:var(--surface-2);}}
+.lg-tcol .th{padding:.6rem .9rem;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.76rem;font-weight:600;color:var(--accent);}
+.lg-tcol pre{margin:0;padding:.8rem .9rem;font-family:var(--font-mono);font-size:.72rem;line-height:1.6;color:var(--text-3);overflow-x:auto;white-space:pre;}
+.lg-tcol .root{color:var(--accent);font-weight:600;} .lg-tcol .surf{color:var(--text-3);}
+.lg-tcol .lbl{display:block;color:var(--accent-2);font-size:.68rem;margin-top:.2rem;}
+
 @media (prefers-reduced-motion: reduce){
-  .lg-stage,.lg-guard,.lg-col,.lg-s,.lg-router .br,.lg-band,.lg-pcol,.lg-frow{opacity:1!important;transform:none!important;}
+  .lg-stage,.lg-guard,.lg-col,.lg-s,.lg-router .br,.lg-band,.lg-pcol,.lg-frow,.lg-trap{opacity:1!important;transform:none!important;}
 }
 </style>
 
@@ -158,6 +178,57 @@ Then normalize every timestamp to UTC, and be humble about it: normalization fix
 
 None of this is glamorous. All of it is load-bearing. Get it wrong and every clever thing downstream is reasoning over corrupted facts.
 
+## Why naive log analysis finds the symptom, not the cause
+
+Before the architecture, the part that actually decides whether the tool is useful. Someone who's debugged real incidents at 2am will tell you: logs are far messier, and the cause is far sneakier, than a clean design assumes. Here are the six traps that sink the naive version, and the design has to answer every one of them.
+
+<figure class="lg-fig">
+<div class="lg-traps wm-anim">
+  <div class="lg-trap"><div class="naive"><b>Trap:</b> filter to <span class="mono">level=ERROR</span> to cut noise.</div><div class="real"><b>The cause is usually not at ERROR level.</b> The ERROR is where something finally gave up, the symptom. The trigger is often an earlier <span class="mono">WARN</span> ("pool at 90%", "retrying") or a routine <span class="mono">INFO</span> ("config reloaded", "deploy v9 started"). Severity is assigned when the line is written, with no idea it'll later turn out to be an origin. So you must read <b>across all levels</b>, never just the errors.</div></div>
+  <div class="lg-trap"><div class="naive"><b>Trap:</b> assume the interesting lines stand out.</div><div class="real"><b>99% of a log is noise.</b> Health checks, heartbeats, routine retries, access logs. You can't spot the anomaly without first modelling "normal for this system", template-mine the lines (Drain-style), learn the high-frequency baseline, then surface what's rare, novel, or deviating. No baseline, no signal.</div></div>
+  <div class="lg-trap"><div class="naive"><b>Trap:</b> the cause is in one service's logs.</div><div class="real"><b>The cause is spread across services and time.</b> Service A warns, B retries 30s later, C throws the error the user sees 2 minutes on. With a shared trace ID you can stitch that exactly; without one (common on-prem) you fall back to temporal + topology + shared-key correlation, which gives ranked <b>hypotheses, not proof.</b> Say so, don't present a guess as a trace.</div></div>
+  <div class="lg-trap"><div class="naive"><b>Trap:</b> look at the window around the error.</div><div class="real"><b>The trigger can be hours before the symptom.</b> A deploy at 09:00, a config flip, a slow leak crossing a threshold, a cert nearing expiry, then the pager fires at 14:30. The trigger is usually an <span class="mono">INFO</span> line or a deploy event in another system entirely. You have to look <b>back in time, across all levels, and correlate with change/deploy events</b>, most serious incidents are triggered by a change.</div></div>
+  <div class="lg-trap"><div class="naive"><b>Trap:</b> the last line of a stack trace is the cause.</div><div class="real"><b>The last line is where the exception surfaced, not where it started.</b> The origin is deeper in the chain, and, the detail everyone gets wrong, Java and Python print it in <b>opposite orders.</b> Grabbing "the error line" gets you the symptom. (Own section below, it matters.)</div></div>
+  <div class="lg-trap"><div class="naive"><b>Trap:</b> all logs share one format.</div><div class="real"><b>Formats vary, wildly.</b> Sometimes all 20 services emit clean JSON with the same schema, the dream. Usually it's a mix: JSON here, <span class="mono">key=value</span> there, free-form text somewhere, a third-party component in its own format, and a service that changed its format mid-bundle after an upgrade. The parser layer must detect-then-route per source and normalize everything into one internal shape.</div></div>
+</div>
+<figcaption>Every one of these is a way the obvious design finds the loud, recent, single-service, error-level symptom, and misses the quiet, earlier, cross-service, info-level cause. The architecture that follows is shaped by having to survive all six.</figcaption>
+</figure>
+
+Two of these deserve to be spelled out, because they're where tools quietly go wrong.
+
+**Structured logs are a gift; unstructured logs are where accuracy leaks.** When a line is clean JSON with `timestamp`, `service`, `level`, `trace_id`, and `message`, everything downstream is reliable, you filter, correlate, and rank on real fields. When it's free-form text ("Started processing order 4471, retrying..."), you have to *extract* those fields: which level is this? is there an ID buried in the sentence? That extraction is lossy, and it's exactly where confidence should drop. The design principle: **normalize every source, whatever its format, into one internal representation** (`timestamp, service, level, message, fields, trace_id?, raw`), lean hard on structure where it exists, and be honest that the free-text corners are lower-confidence. Template mining is the fallback that makes even the unknown formats queryable.
+
+**And the stack trace, because "read the last line" is folklore that's half wrong.** In a stack trace, the line at the very end is where the exception *surfaced* (the outermost catch), not where it *originated*. The true origin is the innermost cause, and here's the trap: Java and Python print the chain in opposite directions.
+
+<figure class="lg-fig">
+<div class="lg-trace">
+  <div class="lg-tcol">
+    <div class="th">Java: root cause is at the bottom</div>
+<pre><span class="surf">Exception: "try again later"</span>   <span class="lbl">surface (printed first)</span>
+    at Api.handle(Api.java:44)
+<span class="surf">Caused by: ServiceException</span>
+    at Svc.call(Svc.java:88)
+<span class="root">Caused by: ConnectException:</span>
+<span class="root">  Omega server not available</span>   <span class="lbl">ROOT (deepest, printed last)</span>
+    at Net.open(Net.java:210)
+    ... 11 common frames omitted</pre>
+  </div>
+  <div class="lg-tcol">
+    <div class="th">Python: root cause is at the top</div>
+<pre><span class="root">ConnectionError:</span>
+<span class="root">  Omega server not available</span>   <span class="lbl">ROOT / original (printed first)</span>
+  File "net.py", line 210, in open
+<span class="surf">The above exception was the direct</span>
+<span class="surf">cause of the following exception:</span>
+<span class="surf">ServiceError: try again later</span>   <span class="lbl">surface (printed last)</span>
+  File "api.py", line 44, in handle</pre>
+  </div>
+</figure>
+<figcaption>Same incident, opposite layouts. In Java the origin is the deepest <span class="mono">Caused by:</span> (near the bottom); in Python it's the top-most exception, above the "direct cause of" separator, and the last line is the symptom. So "read the last line" is accidentally right in Python and actively wrong in Java. A real parser splits on <span class="mono">Caused by:</span> (Java) or the chaining separators (Python), walks to the origin end, and surfaces the first frame in <em>your</em> code, not the framework's. The 50-plus lines before the final line are frequently where the truth lives.</figcaption>
+</figure>
+
+That's the domain reality. Now the architecture, built to respect it.
+
 ## The architecture: code finds the truth, the model explains it
 
 Here's the whole pipeline. Read the tags on the left: almost every stage is deterministic code. The model appears exactly once, at the end, working only on evidence the code already found and structured.
@@ -168,7 +239,7 @@ Here's the whole pipeline. Read the tags on the left: almost every stage is dete
   <div class="lg-stage"><span class="tag code">code</span><div class="body"><b>Extract structure</b><div class="d">Pull errors, exceptions, log levels, stack traces, and correlation / trace IDs. Mine templates (Drain-style) so millions of lines become a few hundred patterns.</div></div></div>
   <div class="lg-stage"><span class="tag code">code</span><div class="body"><b>Redact</b><div class="d">Strip tokens, keys, emails, IPs before anything is indexed or shown to a model. This is a hard gate, not an output filter.</div></div></div>
   <div class="lg-stage"><span class="tag code">code</span><div class="body"><b>Index</b><div class="d">Every line gets a stable ID and its exact <span class="mono">service : file : line @ timestamp</span>. Build a correlation-ID index to stitch a request across services. Hybrid search: keyword + vector.</div></div></div>
-  <div class="lg-stage"><span class="tag code">code</span><div class="body"><b>Correlate + rank</b><div class="d">For a time window or a trace, pull the real lines. Find the first error vs the downstream cascade. Rank the root, not the loudest.</div></div></div>
+  <div class="lg-stage"><span class="tag code">code</span><div class="body"><b>Correlate + rank</b><div class="d">Pull the real lines for a trace or window, but look <b>back</b> in time and <b>across all levels</b> (the trigger is often an earlier INFO/WARN or a deploy, not the loud ERROR). Stitch across services, overlay change events, rank the root, not the loudest.</div></div></div>
   <div class="lg-stage"><span class="tag model">model</span><div class="body"><b>Explain</b><div class="d">The LLM narrates the incident over the already-found evidence, and must cite every claim to a real line ID. That's its entire job.</div></div></div>
 </div>
 <figcaption>The deterministic core does the work; the model does the writing. The payoff: swap the last box for a frontier local model or a quantized 7B and nothing upstream changes. Better hardware buys a richer explanation, not different facts.</figcaption>
@@ -387,12 +458,16 @@ Written from scratch after reading the primary sources; the engineering claims a
 - Microsoft Presidio (PII/secret redaction): <https://github.com/microsoft/presidio>
 - Loghub, real-world log datasets: <https://github.com/logpai/loghub>
 - Model Context Protocol, tools spec: <https://modelcontextprotocol.io/specification/2025-06-18/server/tools>
+- PEP 3134, Python exception chaining and traceback order: <https://peps.python.org/pep-3134/>
+- On reading Java stack traces root-cause first (the Caused-by chain): <https://nurkiewicz.com/2011/09/logging-exceptions-root-cause-first.html>
+- Log levels and observability: <https://middleware.io/blog/log-levels-guide/>
+- Change tracking / deploy correlation for incidents: <https://newrelic.com/blog/observability/change-tracking-for-better-post-incident-monitoring>
 
 *Related system-design pieces: [designing a RAG system that actually retrieves](/blog/2026-07-24-designing-a-rag-system-that-actually-retrieves/), [designing an agent that doesn't go off the rails](/blog/2026-07-24-designing-an-agent-that-doesnt-go-off-the-rails/), and [LLM security](/blog/2026-08-02-llm-security-prompt-injection-and-the-cost-of-defending/) for the redaction and prompt-injection angles.*
 
 <script>
 (function(){
-  var els=document.querySelectorAll('.lg-pipe,.lg-guards,.lg-split,.lg-surf,.lg-router,.lg-funnel,.lg-pc,.lg-future');
+  var els=document.querySelectorAll('.lg-pipe,.lg-guards,.lg-split,.lg-surf,.lg-router,.lg-funnel,.lg-pc,.lg-future,.lg-traps');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('go')});return;}
   var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('go');io.unobserve(x.target)}})},{threshold:.18});
   els.forEach(function(e){io.observe(e)});
