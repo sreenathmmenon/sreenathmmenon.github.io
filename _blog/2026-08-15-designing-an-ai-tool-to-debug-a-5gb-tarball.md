@@ -71,8 +71,55 @@ tags: [ai, system-design, observability, on-prem, agents, rag]
 .lg-s .t{font-family:var(--font-mono);font-size:.82rem;color:var(--accent);font-weight:600;margin-bottom:.3rem;}
 .lg-s .d{font-size:.8rem;color:var(--text-2);line-height:1.45;}
 
+/* the router: which calls hit the LLM */
+.lg-router{max-width:640px;margin:0 auto;}
+.lg-router .req{text-align:center;font-family:var(--font-mono);font-size:.78rem;color:var(--text);border:1px solid var(--border-2);border-radius:9px;padding:.5rem .8rem;max-width:280px;margin:0 auto .3rem;}
+.lg-router .split{text-align:center;color:var(--text-3);font-family:var(--font-mono);font-size:.9rem;margin:.2rem 0;}
+.lg-router .branches{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+@media(max-width:560px){.lg-router .branches{grid-template-columns:1fr;}}
+.lg-router .br{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:.9rem 1rem;opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.lg-router.go .br{opacity:1;transform:none;} .lg-router.go .br:nth-child(2){transition-delay:.16s;}
+.lg-router .br.code{border-color:var(--accent);} .lg-router .br.model{border-color:var(--accent-2);}
+.lg-router .br .bh{font-family:var(--font-mono);font-size:.72rem;font-weight:600;margin-bottom:.5rem;}
+.lg-router .br.code .bh{color:var(--accent);} .lg-router .br.model .bh{color:var(--accent-2);}
+.lg-router .br .ex{font-size:.8rem;color:var(--text-2);line-height:1.45;padding-left:1rem;position:relative;margin:.3rem 0;}
+.lg-router .br .ex::before{content:"\203A";position:absolute;left:0;font-family:var(--font-mono);}
+.lg-router .br.code .ex::before{color:var(--accent);} .lg-router .br.model .ex::before{color:var(--accent-2);}
+.lg-router .br .pct{font-family:var(--font-mono);font-size:.68rem;color:var(--text-3);margin-top:.5rem;}
+
+/* scale funnel with numbers */
+.lg-funnel{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:.4rem;align-items:center;}
+.lg-band{border:1px solid var(--border-2);border-radius:10px;background:var(--surface);padding:.7rem 1rem;text-align:center;opacity:0;transform:scale(.96);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.lg-funnel.go .lg-band{opacity:1;transform:none;}
+.lg-funnel.go .lg-band:nth-child(1){transition-delay:.06s} .lg-funnel.go .lg-band:nth-child(3){transition-delay:.2s} .lg-funnel.go .lg-band:nth-child(5){transition-delay:.34s}
+.lg-band.b1{width:100%;} .lg-band.b2{width:70%;border-color:var(--accent);} .lg-band.b3{width:42%;border-color:var(--accent-2);}
+.lg-band .num{font-family:var(--font-mono);font-size:.9rem;color:var(--text);font-weight:600;}
+.lg-band.b2 .num{color:var(--accent);} .lg-band.b3 .num{color:var(--accent-2);}
+.lg-band .lb{font-size:.76rem;color:var(--text-2);margin-top:.15rem;}
+.lg-funnel .down{color:var(--text-3);font-family:var(--font-mono);}
+
+/* pros/cons */
+.lg-pc{max-width:720px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.lg-pc{grid-template-columns:1fr;}}
+.lg-pcol{border:1px solid var(--border);border-radius:13px;background:var(--surface);overflow:hidden;opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.lg-pc.go .lg-pcol{opacity:1;transform:none;} .lg-pc.go .lg-pcol:nth-child(2){transition-delay:.16s;}
+.lg-pcol .h{padding:.75rem 1rem;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.8rem;font-weight:600;}
+.lg-pcol.win .h{color:var(--accent);} .lg-pcol.lose .h{color:var(--text-2);}
+.lg-pcol .b{padding:.85rem 1rem;}
+.lg-pcol .li{font-size:.83rem;color:var(--text-2);line-height:1.45;padding-left:1.2rem;position:relative;margin:.4rem 0;}
+.lg-pcol .li::before{position:absolute;left:0;font-family:var(--font-mono);}
+.lg-pcol.win .li::before{content:"+";color:var(--accent);} .lg-pcol.lose .li::before{content:"\2212";color:var(--text-3);}
+
+/* future list */
+.lg-future{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:.5rem;}
+.lg-frow{display:flex;gap:.85rem;align-items:flex-start;border:1px solid var(--border);border-radius:10px;background:var(--surface);padding:.7rem .95rem;opacity:0;transform:translateX(-8px);transition:opacity .45s var(--ease),transform .45s var(--ease);}
+.lg-future.go .lg-frow{opacity:1;transform:none;}
+.lg-future.go .lg-frow:nth-child(1){transition-delay:.06s} .lg-future.go .lg-frow:nth-child(2){transition-delay:.14s} .lg-future.go .lg-frow:nth-child(3){transition-delay:.22s} .lg-future.go .lg-frow:nth-child(4){transition-delay:.30s} .lg-future.go .lg-frow:nth-child(5){transition-delay:.38s} .lg-future.go .lg-frow:nth-child(6){transition-delay:.46s}
+.lg-frow .ic{flex:none;font-family:var(--font-mono);font-size:.7rem;color:var(--accent-2);border:1px solid var(--accent-2);border-radius:6px;padding:.12rem .45rem;margin-top:.05rem;}
+.lg-frow p{font-size:.85rem;color:var(--text-2);line-height:1.5;margin:0;} .lg-frow p b{color:var(--text);}
+
 @media (prefers-reduced-motion: reduce){
-  .lg-stage,.lg-guard,.lg-col,.lg-s{opacity:1!important;transform:none!important;}
+  .lg-stage,.lg-guard,.lg-col,.lg-s,.lg-router .br,.lg-band,.lg-pcol,.lg-frow{opacity:1!important;transform:none!important;}
 }
 </style>
 
@@ -132,6 +179,52 @@ Two design choices in there deserve a spotlight, because they're where the accur
 **Hybrid search, not just vectors.** For logs, pure semantic search is weak. If an engineer searches for `ERR_CONN_RST` or a specific correlation ID, vector similarity returns passages that are *semantically nearby* but may never contain the literal string. Keyword search nails exact error codes and IDs; vector search catches paraphrase. You run both and fuse the rankings. In log analysis, keyword search never stopped being essential, and anyone who replaced it wholesale with embeddings regretted it.
 
 **The loudest error is usually the victim, not the cause.** When one service fails, the failure climbs *up* the call tree through timeouts and retries. The service screaming the most errors is typically the user-facing one at the top, timing out because something deep and quiet broke first. So root-cause localization means finding the *earliest* anomalous event on the *most upstream* service in the dependency graph, not the most frequent or most recent error. This is exactly the judgment an exhausted engineer gets wrong at 2am, and exactly where deterministic correlation earns its place, before the model ever speaks.
+
+## Does every request hit the LLM? No, and that's the point
+
+Here's a question I got asked about this design, and it's the right one: *do all the calls go to the model?* Absolutely not, and if they did, you'd have built the slow, expensive, hallucination-prone version. Most requests should never touch the LLM at all. The front door is a **router** that classifies what's being asked and sends the deterministic questions to code and only the genuinely generative ones to the model.
+
+<figure class="lg-fig">
+<div class="lg-router wm-anim">
+  <div class="req">a request comes in</div>
+  <div class="split">&darr; classify &darr;</div>
+  <div class="branches">
+    <div class="br code">
+      <div class="bh">Deterministic (no model)</div>
+      <div class="ex">"errors for service X between 2 and 3pm"</div>
+      <div class="ex">"trace this correlation ID across services"</div>
+      <div class="ex">"what's the first error in this window?"</div>
+      <div class="ex">"show the timeline for this request"</div>
+      <div class="pct">the large majority of calls · instant · works even air-gapped with no model</div>
+    </div>
+    <div class="br model">
+      <div class="bh">Model (over found evidence)</div>
+      <div class="ex">"explain what happened and why"</div>
+      <div class="ex">"summarize this incident for the ticket"</div>
+      <div class="ex">"which of these is the likely root cause?"</div>
+      <div class="pct">the minority · runs only on evidence the code already retrieved and cited</div>
+    </div>
+  </div>
+</div>
+<figcaption>The router is the quiet hero. Retrieval, filtering, correlation, and ordering are code, fast, cheap, deterministic, and available with no model at all. The LLM is reserved for synthesis and narration, and even then it only ever sees the small evidence set the deterministic side handed it. Routing correctly is most of what makes the tool both fast and trustworthy.</figcaption>
+</figure>
+
+## What about 20GB? Or 50? Accuracy comes from the funnel, not the context
+
+The tar in the story was 5GB, but that's the floor. In the field these bundles run 15, 20, 50GB. The instinct is to panic about the model's context window, but that's the wrong worry, because **the model never sees the tarball, at any size.** Accuracy at scale is a *retrieval* problem, not a *context* problem, and the answer is a funnel: a cheap deterministic pass over everything collapses millions of lines to a handful of candidates, and only that handful reaches the model.
+
+<figure class="lg-fig">
+<div class="lg-funnel wm-anim">
+  <div class="lg-band b1"><div class="num">~20 GB · millions of lines</div><div class="lb">the whole bundle, cheap deterministic pass: parse, extract errors, IDs, templates, anomalies</div></div>
+  <div class="down">&darr;</div>
+  <div class="lg-band b2"><div class="num">a few hundred candidates</div><div class="lb">indexed, correlated, ranked, the interesting lines and their neighbours</div></div>
+  <div class="down">&darr;</div>
+  <div class="lg-band b3"><div class="num">a few dozen lines</div><div class="lb">the evidence set the model actually reads, constant regardless of input size</div></div>
+</div>
+<figcaption>The same cheap-wide then expensive-narrow shape as RAG and recommendations. Notice the bottom band: what the model reads stays roughly constant whether the input is 5GB or 50GB. That's why size doesn't erode accuracy, as long as the wide pass has good recall.</figcaption>
+</figure>
+
+The honest correction to make here: at 20GB, size stops being an *accuracy* problem and becomes a **latency and memory** problem. Gzip is serial, so decompression is often the bottleneck; you stream member-by-member, build offset indexes, and parallelize per service across the 20-plus folders. The model's job doesn't get harder as the tar grows. The plumbing does. Which, once more, is the argument for putting your engineering into the deterministic core.
 
 ## Guardrails: accuracy is the entire product
 
@@ -222,9 +315,53 @@ The last piece is delivery, and here the customers genuinely differ: some want a
 <figcaption>One core, three adapters. MCP is the interesting one: it turns your engine into tools any capable AI IDE can call, so the customer brings their own model and your tool becomes its hands. (If you're new to MCP, I wrote about it <a href="/blog/2026-06-30-mcp-the-port-that-let-ai-touch-the-world/">here</a> and <a href="/blog/2026-08-04-webmcp-teaching-websites-to-talk-to-ai-agents/">here</a>.)</figcaption>
 </figure>
 
+## Designing for what's coming, not just today's tar
+
+A design you'll regret is one that only fits today's exact problem. A few things I'd bake in from the start, because they *will* happen:
+
+<figure class="lg-fig">
+<div class="lg-future wm-anim">
+  <div class="lg-frow"><span class="ic">1</span><p><b>Bundles keep growing, and services keep multiplying.</b> Make the index incremental and the parser set pluggable: a new service format should be a new small parser, not a rewrite. Twenty services today is forty next year.</p></div>
+  <div class="lg-frow"><span class="ic">2</span><p><b>Log formats drift.</b> A service quietly changes its format next release and hardcoded regex silently breaks. Template mining adapts to drift; brittle patterns don't. Plan for the format you haven't seen.</p></div>
+  <div class="lg-frow"><span class="ic">3</span><p><b>The model will change under you.</b> Customers swap local models, better ones ship. Because the deterministic core does the facts, a model swap changes only the quality of the prose, never the correctness. That's future-proofing by construction.</p></div>
+  <div class="lg-frow"><span class="ic">4</span><p><b>From one tar to a live stream.</b> Today it's a handed-over bundle; tomorrow customers want it watching logs continuously. The same core should extend to a live index rather than being rebuilt.</p></div>
+  <div class="lg-frow"><span class="ic">5</span><p><b>A feedback loop that compounds.</b> Every "this answer was right / wrong" an engineer gives is a labeled example. Capture it, and your golden dataset grows itself over time.</p></div>
+  <div class="lg-frow"><span class="ic">6</span><p><b>Cross-incident memory.</b> "We've seen this signature before, here's what it was and how it got fixed." A growing known-error knowledge base turns each solved incident into leverage on the next.</p></div>
+</div>
+<figcaption>None of these are speculative. They're the predictable directions this kind of tool gets pulled, and each is cheap to accommodate if the architecture anticipated it, and painful to retrofit if it didn't.</figcaption>
+</figure>
+
 ## The honest bottom line
 
 If you take one thing from this: **the hard, valuable engineering is the deterministic core, not the prompt.** Streaming nested tars, reconciling 20 services' worth of rotated logs into a trustworthy timeline, correlating a request across services, finding the earliest upstream fault instead of the loudest downstream symptom, redacting secrets without destroying evidence. Do that well, and even a modest local model can write a genuinely useful, cited explanation on top. Skip it and reach for a bigger model, and you've built something that sounds like an expert and misleads like a stranger.
+
+The whole choice comes down to which way you point the effort:
+
+<figure class="lg-fig">
+<div class="lg-pc wm-anim">
+  <div class="lg-pcol win">
+    <div class="h">Deterministic-first (what I'd build)</div>
+    <div class="b">
+      <div class="li">Answers are verifiable, every claim cites a real line</div>
+      <div class="li">Accuracy holds as the tarball grows, the model's input stays small</div>
+      <div class="li">Most queries need no model: fast, cheap, works air-gapped</div>
+      <div class="li">Swap the model freely; the facts don't change</div>
+      <div class="li">Testable with deterministic evals, not vibes</div>
+    </div>
+  </div>
+  <div class="lg-pcol lose">
+    <div class="h">LLM-first (the tempting shortcut)</div>
+    <div class="b">
+      <div class="li">Fast to demo, slow to trust</div>
+      <div class="li">Chokes or hallucinates as logs exceed the context window</div>
+      <div class="li">Every query is a model call: costly, slower, and useless with no model</div>
+      <div class="li">Confident wrong answers with no evidence trail</div>
+      <div class="li">Nearly impossible to eval or reproduce</div>
+    </div>
+  </div>
+</div>
+<figcaption>The honest trade. Deterministic-first costs more engineering up front and it's the version that survives contact with a real 20GB tar and a real incident. LLM-first is the demo that impresses in the meeting and misleads in production.</figcaption>
+</figure>
 
 There are real ceilings, and a credible tool names them: grounding isn't correctness, the best deployed root-cause accuracy is far from perfect, redaction can't promise to catch everything, and if the decisive event was never logged, no tool can conjure it, instrumentation is the ceiling, not model cleverness. The right product doesn't hide those. It shows its evidence, flags its gaps, abstains when it's blind, and keeps the human holding the judgment.
 
@@ -249,7 +386,7 @@ Written from scratch after reading the primary sources; the engineering claims a
 
 <script>
 (function(){
-  var els=document.querySelectorAll('.lg-pipe,.lg-guards,.lg-split,.lg-surf');
+  var els=document.querySelectorAll('.lg-pipe,.lg-guards,.lg-split,.lg-surf,.lg-router,.lg-funnel,.lg-pc,.lg-future');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('go')});return;}
   var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('go');io.unobserve(x.target)}})},{threshold:.18});
   els.forEach(function(e){io.observe(e)});
