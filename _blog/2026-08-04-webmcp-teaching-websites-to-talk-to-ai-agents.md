@@ -259,7 +259,7 @@ This is the part that makes people want to try it. Registering a tool is one cal
 
 Notice what `execute` does: it calls `addTodoToPage`, a function that already exists on your site. WebMCP isn't asking you to rebuild anything. You're wrapping the actions your site can already do in a thin, declared interface so an agent can reach them cleanly. That's why the ten-minutes claim is real.
 
-One accuracy note, because the API is young and moving: the entry point recently moved from `navigator.modelContext` (the original name, now deprecated) to `document.modelContext`, since tools really belong to a document, not the whole browser. If you follow an older tutorial showing `navigator`, that's why. A one-line shim (`const mc = document.modelContext || navigator.modelContext`) bridges both while the change rolls out. Expect a few more edges like this to shift; it's a draft.
+One accuracy note, because the API is young and moving: the current entry point is `document.modelContext`, while earlier drafts used `navigator.modelContext`, the move makes sense because tools really belong to a document, not the whole browser. If you follow an older tutorial showing `navigator`, that's why. A one-line shim (`const mc = document.modelContext || navigator.modelContext`) bridges both while the change rolls out. Expect a few more edges like this to shift; it's a draft.
 
 ## A real one, worked all the way through
 
@@ -386,7 +386,7 @@ The full source is a single self-contained HTML file, and I wrote up the deeper 
 The obvious worry: if a page can hand tools to an agent, can a malicious page trick the agent into doing something awful? The design takes this seriously, and it's worth knowing the guards.
 
 - **It runs visibly, in the tab.** No headless, background execution. A browsing context has to be open, so actions happen where the user can see them.
-- **Origin-isolated only.** Tools can only be registered in origin-isolated documents, and it's gated by a `tools` Permissions Policy that defaults to `self`, so a random cross-origin iframe can't quietly register tools.
+- **Same-origin only.** Tool registration is gated by a `tools` Permissions Policy that defaults to `self`, so a random cross-origin iframe can't quietly register tools unless the top page explicitly allows it.
 - **Sensitive actions can demand a human.** For things like making a purchase, a tool can require an explicit user confirmation dialog before it proceeds. Human-in-the-loop is built into the pattern, not bolted on.
 - **Untrusted content is flagged.** Tools carry annotation hints like `readOnlyHint` and `untrustedContentHint`, so the agent can treat a tool that returns third-party content with appropriate suspicion, which matters given everything we know about [prompt injection](/blog/2026-08-02-llm-security-prompt-injection-and-the-cost-of-defending/).
 
