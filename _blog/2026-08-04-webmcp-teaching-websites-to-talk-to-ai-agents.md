@@ -440,6 +440,8 @@ Now the fun part, because the ceiling here is high.
 
 The obvious next step is **standardization across browsers.** Right now it's a Chrome trial; the destination is a web standard every browser implements, the way fetch or the clipboard API are everywhere. When that lands, "does this site have an agent interface?" becomes as normal a question as "is this site mobile-friendly?"
 
+That direction just got a real push. On August 26, 2026, OpenAI announced it's **adding WebMCP support to the ChatGPT desktop app's built-in browser** (and to ChatGPT Sites): visit a WebMCP-enabled page and ChatGPT or Codex can automatically use the tools it declares to complete your task. That's the interesting signal, it's not just Google and Microsoft (who wrote the draft) anymore. When a second major AI vendor starts consuming page-declared tools, a proposal in its incubation window starts looking like a direction the ecosystem is actually moving in.
+
 Then there's the **agentic web** itself. Imagine sites shipping an agent interface alongside their visual one, on purpose, the way they ship a mobile layout today. Your site's UI is for humans; its declared tools are for agents; both are first-class. A site that's good at being operated by an agent gets used by more agents, which becomes a real reason to invest in the tool surface.
 
 It gets more interesting when you **combine WebMCP with remote MCP.** WebMCP handles what lives in the browser (the page's own actions, the user's session), while remote MCP servers handle backend tools and data. An agent could fluidly use both: call a page's `add_to_cart` tool via WebMCP, then hit a remote inventory MCP server for stock, stitching client and server tools into one task.
@@ -466,6 +468,7 @@ Written from scratch after reading the official documentation. These are the pri
 - Chrome Platform Status, WebMCP feature: <https://chromestatus.com/feature/5117755740913664>
 - WebMCP demo sites (Google Chrome Labs): <https://github.com/GoogleChromeLabs/webmcp-tools/tree/main/demos>
 - Patrick Brosset (Microsoft Edge), WebMCP updates and clarifications: <https://patrickbrosset.com/articles/2026-02-23-webmcp-updates-clarifications-and-next-steps/>
+- OpenAI Developers, WebMCP support in the ChatGPT desktop browser (Aug 26, 2026): <https://x.com/OpenAIDevs/status/2092344959248761263>
 - Model Context Protocol (MCP), for the underlying protocol: <https://modelcontextprotocol.io>
 
 *Background reading: [MCP: The Port That Let AI Finally Touch the World](/blog/2026-06-30-mcp-the-port-that-let-ai-touch-the-world/) for the protocol WebMCP builds on, and [LLM security](/blog/2026-08-02-llm-security-prompt-injection-and-the-cost-of-defending/) for why the trust model here matters.*
