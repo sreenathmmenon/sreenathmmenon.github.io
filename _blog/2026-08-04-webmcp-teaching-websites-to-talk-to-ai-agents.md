@@ -294,6 +294,24 @@ And this isn't a diagram of what *should* happen, here's the actual browser prov
 <figcaption>Real screenshots from the deployed demo. The left of the panel is the tool list an agent sees; the right is one tool's full contract. This is what "the website talks to the agent" actually looks like in the browser today.</figcaption>
 </figure>
 
+### And a real agent actually drove it
+
+Listing tools in a panel is one thing. Getting a production AI agent to *use* them is the real test. [ChatGPT supports WebMCP now](https://x.com/OpenAIDevs/status/2092344959248761263), so I pointed it at the live demo and asked it, in plain English, to read the sample frontend resume, find the best job matches with skill gaps, and stop before applying to anything. It did the whole thing through the page's declared tools.
+
+<figure class="wm-fig">
+<div class="wm-shots">
+  <div class="wm-shot">
+    <img src="/assets/images/webmcp/chatgpt-webmcp-trace.jpg" alt="ChatGPT's working trace: it planned to run the page's WebMCP demo, its page view shows 'WebMCP live, 13 tools registered', and it ends with 'Completed using the page's WebMCP tools.'" loading="lazy">
+    <div class="cap"><b>ChatGPT, using the tools.</b> Its own trace reads the page as <code>WebMCP live · 13 tools registered</code>, names the <code>parse_resume</code> tool, and signs off with "Completed using the page's WebMCP tools." No DOM scraping, it called the declared tools.</div>
+  </div>
+  <div class="wm-shot">
+    <img src="/assets/images/webmcp/chatgpt-webmcp-result.jpg" alt="ChatGPT's result: profile read for Sam Patel, 75 live roles aggregated from GitLab/Stripe/Databricks, 24 job descriptions scored, ranked matches with honest percentages and gaps, and '4 shortlisted, 0 applied.'" loading="lazy">
+    <div class="cap"><b>The result it produced.</b> It read the profile, aggregated 75 live roles, scored 24 real job descriptions, ranked the matches with honest percentages and real gaps, and stopped: <b>4 shortlisted, 0 applied.</b> The human gate held, exactly as designed.</div>
+  </div>
+</div>
+<figcaption>A different vendor's agent, using the same declared tools the DevTools panel lists. The scores aren't scraped from the page, they're computed by the <code>match_profile</code> tool when the agent calls it. That's the whole promise of WebMCP working end to end: describe the task in words, and the agent operates the site through a clean interface instead of guessing at its buttons.</figcaption>
+</figure>
+
 ### The workflow: what the agent actually does
 
 Here's the real mission, step by step. Each row is a WebMCP tool the page exposes; the agent chains them. Notice the shape: a run phase, then a consequential act phase that stops for a human.
@@ -440,7 +458,7 @@ Now the fun part, because the ceiling here is high.
 
 The obvious next step is **standardization across browsers.** Right now it's a Chrome trial; the destination is a web standard every browser implements, the way fetch or the clipboard API are everywhere. When that lands, "does this site have an agent interface?" becomes as normal a question as "is this site mobile-friendly?"
 
-That direction just got a real push. On August 26, 2026, OpenAI announced it's **adding WebMCP support to the ChatGPT desktop app's built-in browser** (and to ChatGPT Sites): visit a WebMCP-enabled page and ChatGPT or Codex can automatically use the tools it declares to complete your task. That's the interesting signal, it's not just Google and Microsoft (who wrote the draft) anymore. When a second major AI vendor starts consuming page-declared tools, a proposal in its incubation window starts looking like a direction the ecosystem is actually moving in.
+That direction just got a real push: **[ChatGPT now supports WebMCP](https://x.com/OpenAIDevs/status/2092344959248761263).** Visit a WebMCP-enabled page and it can automatically use the tools the page declares to complete your task. That's the interesting signal, it's not just Google and Microsoft (who wrote the draft) anymore. When a second major AI vendor starts consuming page-declared tools, a proposal in its incubation window starts looking like a direction the ecosystem is actually moving in.
 
 Then there's the **agentic web** itself. Imagine sites shipping an agent interface alongside their visual one, on purpose, the way they ship a mobile layout today. Your site's UI is for humans; its declared tools are for agents; both are first-class. A site that's good at being operated by an agent gets used by more agents, which becomes a real reason to invest in the tool surface.
 
