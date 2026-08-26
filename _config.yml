@@ -10,6 +10,7 @@ baseurl: ""
 url: "https://sreenathmenon.com"
 github_username: sreenathmmenon
 linkedin_username: sreenathmmenon
+twitter_username: _sreenathmenon
 
 # SEO / jekyll-seo-tag
 author:
@@ -17,12 +18,14 @@ author:
   email: zreenathmenon@gmail.com
 twitter:
   card: summary_large_image
+  username: _sreenathmenon
 logo: /assets/favicon.svg
 social:
   name: Sreenath M Menon
   links:
     - https://github.com/sreenathmmenon
     - https://www.linkedin.com/in/sreenathmmenon
+    - https://x.com/_sreenathmenon
 
 # Homepage hero + content (used by _layouts/home.html)
 hero:

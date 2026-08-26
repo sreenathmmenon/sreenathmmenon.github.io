@@ -127,6 +127,13 @@ tags: [ai, webmcp, mcp, agents, web, browser]
 .cc-tgroup .cc-t{font-family:var(--font-mono);font-size:.74rem;color:var(--text-2);padding:.18rem 0;}
 .cc-tgroup .cc-t b{color:var(--text);}
 
+/* real DevTools screenshots */
+.wm-shots{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:1rem;}
+.wm-shot{border:1px solid var(--border-2);border-radius:12px;overflow:hidden;background:var(--surface);}
+.wm-shot img{display:block;width:100%;height:auto;}
+.wm-shot .cap{font-family:var(--font-mono);font-size:.74rem;color:var(--text-3);padding:.6rem .85rem;border-top:1px solid var(--border);line-height:1.45;}
+.wm-shot .cap b{color:var(--text);}
+
 @media (prefers-reduced-motion: reduce){
   .wm-vs .col,.wm-node,.wm-line,.wm-pc .side,.wm-use,.cc-step,.cc-tgroup{opacity:1!important;transform:none!important;}
   .wm-cursor{animation:none!important;}
@@ -269,6 +276,22 @@ The official WebMCP demos are all "call one tool and you're done", order a pizza
   </div>
 </div>
 <figcaption>Deployed and validated. With <code>chrome://flags/#enable-webmcp-testing</code> on, the page reports "WebMCP live, 13 tools registered" and they show up in the DevTools WebMCP panel. No flag needed to try it: one button runs the whole mission anyway. It never really submits an application, it prepares them and stops for you.</figcaption>
+</figure>
+
+And this isn't a diagram of what *should* happen, here's the actual browser proving it. Turn the flag on, open DevTools, and Chrome grows a **WebMCP** panel that lists every tool the page registered, each with the same name and description the agent sees. This is the whole pitch made visible: the website *declares* its tools, and the browser reads them straight off the page.
+
+<figure class="wm-fig">
+<div class="wm-shots">
+  <div class="wm-shot">
+    <img src="/assets/images/webmcp/devtools-tools-list.png" alt="Chrome DevTools WebMCP panel showing Career Copilot's registered tools: aggregate_openings, compare_jobs, draft_outreach, explain_match, each with a plain-language description." loading="lazy">
+    <div class="cap"><b>The tools, straight from the page.</b> Chrome's DevTools &rarr; Application &rarr; WebMCP panel. Every tool the page registered is listed with its real name and description, <code>aggregate_openings</code>, <code>compare_jobs</code>, <code>draft_outreach</code>, <code>explain_match</code>, exactly what an agent would discover.</div>
+  </div>
+  <div class="wm-shot">
+    <img src="/assets/images/webmcp/devtools-tool-details.png" alt="The same panel with parse_resume selected, showing a Details pane with its Name, Description, Frame (top), and Origin pointing at registerTools in the page source." loading="lazy">
+    <div class="cap"><b>Click one, see its contract.</b> Selecting <code>parse_resume</code> opens a Details pane: name, full description, the frame it lives in, and an Origin that points right back at <code>registerTools</code> in the page's own source. No scraping, no guessing, the tool <i>is</i> the interface.</div>
+  </div>
+</div>
+<figcaption>Real screenshots from the deployed demo. The left of the panel is the tool list an agent sees; the right is one tool's full contract. This is what "the website talks to the agent" actually looks like in the browser today.</figcaption>
 </figure>
 
 ### The workflow: what the agent actually does
