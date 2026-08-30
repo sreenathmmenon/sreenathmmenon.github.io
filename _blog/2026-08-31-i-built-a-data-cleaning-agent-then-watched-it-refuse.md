@@ -84,9 +84,11 @@ tags: [ai, agents, data, system-design]
 }
 </style>
 
+*Cleanroom runs on [TrueForge](https://trueforge.dev), TrueFoundry's open-source agent harness, which is what makes the "stop and ask a human" part enforceable rather than aspirational. It's live at [cleanroom-production.up.railway.app](https://cleanroom-production.up.railway.app).*
+
 I pointed it at 6,000 rows of New York City payroll. Real salaries, real people, public record. I told it nothing about what was wrong. I wanted to see what it would do with money.
 
-It found 762 rows where the pay doesn't add up: gross pay that doesn't equal base rate times hours worked. On the demo data I'd been building against, that exact mismatch is a bug, and my agent fixes it without being asked. Recompute the total, move on.
+It found 762 rows where the pay doesn't add up: gross pay that doesn't equal base rate times hours worked. On the demo data I'd been building against, that exact mismatch is a bug, and the agent offers to fix it: recompute the total from quantity times unit price, which is the right call there, because a stored total that disagrees with its own line items is wrong by definition.
 
 Here it stopped and told me it wouldn't.
 
