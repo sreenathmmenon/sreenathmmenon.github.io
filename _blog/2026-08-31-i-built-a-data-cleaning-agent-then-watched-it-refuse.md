@@ -74,6 +74,10 @@ tags: [ai, agents, data, system-design]
 .cr-find .ft{font-family:var(--font-mono);font-size:.8rem;color:var(--accent-2);margin-bottom:.3rem;}
 .cr-find .fd{font-size:.86rem;color:var(--text-2);line-height:1.5;} .cr-find .fd b{color:var(--text);}
 
+/* real product screenshots */
+.cr-shot{max-width:820px;margin:0 auto;border:1px solid var(--border-2);border-radius:12px;overflow:hidden;background:var(--surface);}
+.cr-shot img{display:block;width:100%;height:auto;}
+
 @media (prefers-reduced-motion: reduce){
   .cr-stage,.cr-col,.cr-find{opacity:1!important;transform:none!important;}
   .cr-chart .cr-crow .cbar{transition:none!important;}
@@ -111,7 +115,14 @@ So I built **Cleanroom**: an agent that does the tedious part and stops at the p
 
 You hand it a messy file. It profiles the data by writing actual pandas code and running it in an isolated container, so when it says "42 rows, 2 exact duplicates, 13 mixed date formats, 2 totals that don't reconcile," those numbers came out of code that executed, not out of a language model's impression of a file. It works on a copy. Your original is never touched.
 
-Then it stops. It shows you what it found, asks about anything genuinely ambiguous, and lays out a plan where every step is labelled safe or destructive. Nothing is applied until you pick. After you approve, it applies the changes, verifies them with assertions (42 rows in, 2 dropped, 40 out, every row accounted for), and delivers the result as a pull request you review and merge.
+Then it stops. It shows you what it found, asks about anything genuinely ambiguous, and lays out a plan where every step is labelled safe or destructive. Nothing is applied until you pick.
+
+<figure class="cr-fig">
+<div class="cr-shot"><img src="/assets/images/cleanroom/gate.jpg" alt="Cleanroom's approval gate: a clarifying question naming the exact ambiguities (an exact duplicate of order_id 1007, missing customers, region naming and mismatched totals), four radio options from safe-only to normalize-and-correct, an Other field, and a Submit button." loading="lazy"></div>
+<figcaption>The gate. It names the specific rows it's unsure about and will not proceed until you choose.</figcaption>
+</figure>
+
+After you approve, it applies the changes, verifies them with assertions (42 rows in, 2 dropped, 40 out, every row accounted for), and delivers the result as a pull request you review and merge.
 
 The acceptance is your act, not the agent's. That distinction is the product.
 
@@ -167,6 +178,11 @@ It runs on TrueForge, TrueFoundry's open-source agent harness. The run moves thr
 Six of the harness's capabilities ended up as load-bearing parts, not things I could say I'd used:
 
 - **The sandbox is the compute boundary.** The agent never processes your data in its own context. It writes a Python program, runs it in a Daytona container, and reads back the output. That's what makes the numbers trustworthy, and it's also why your original is safe.
+
+<figure class="cr-fig">
+<div class="cr-shot"><img src="/assets/images/cleanroom/steps.jpg" alt="The Agent steps panel: two reasoning blocks ('Fetching and inspecting data', 'Analyzing profile requirements') and two tool calls, with the profiling script showing a 'Running...' state." loading="lazy"></div>
+<figcaption>Every tool call and every piece of reasoning is shown as it works, not summarized after the fact.</figcaption>
+</figure>
 - **The approval gate is enforced by the harness.** Applying fixes and writing output are structurally gated. It cannot proceed past the gate without an explicit human yes.
 - **Delivery goes through MCP with writes gated.** The agent can prepare a pull request. It cannot merge one. That's a policy boundary in config, not a rule I asked it to follow.
 - **Category analysis runs as a subagent.** Deciding whether `NYC`, `n-y-c`, and `New York` are the same place happens on a separate thread. It returns a recommendation with reasoning, and the main agent's context stays on the repair plan.
@@ -196,6 +212,11 @@ This is the heart of why the refusal matters. The same column name, the same ari
 ## What I tested it on
 
 I didn't want to only test on data I'd written myself, because data you write yourself is data you already know the answers to. I ran it against 21,000+ rows across five corpora. Two were real public datasets it had never seen.
+
+<figure class="cr-fig">
+<div class="cr-shot"><img src="/assets/images/cleanroom/result.jpg" alt="The final output: 'Rows before: 42, Rows after: 40, Missing customers: 3', a link to sales_export_cleaned.csv, and a quick preview of the cleaned CSV rows." loading="lazy"></div>
+<figcaption>42 rows in, 40 out, every row accounted for in a change report.</figcaption>
+</figure>
 
 **NYC 311 service requests, 5,000 rows, 44 columns.** Eight of eight checks exact against a reference I'd measured separately. It found 32 tickets closed before they were created.
 
