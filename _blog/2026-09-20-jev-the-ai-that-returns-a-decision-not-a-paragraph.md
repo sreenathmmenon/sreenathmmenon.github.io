@@ -80,9 +80,27 @@ tags: [ai, models, system-design]
 .jv-tab tr:last-child td{border-bottom:none;}
 
 @media (prefers-reduced-motion: reduce){
-  .jv-card,.jv-tok,.jv-prim,.jv-calrow{opacity:1!important;transform:none!important;transition:none!important;}
-  .jv-chart .jv-crow .cb,.jv-cal .jv-calrow .fill{transition:none!important;}
+  .jv-card,.jv-tok,.jv-prim,.jv-calrow,.jv-drow{opacity:1!important;transform:none!important;transition:none!important;}
+  .jv-chart .jv-crow .cb,.jv-cal .jv-calrow .fill,.jv-demo .jv-drow .dfill{transition:none!important;}
 }
+
+/* real demo: confidence split */
+.jv-demo{max-width:620px;margin:0 auto;border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:1.2rem;}
+.jv-demo .dh{font-family:var(--font-mono);font-size:.74rem;color:var(--text-3);margin-bottom:1rem;text-align:center;}
+.jv-drow{display:flex;align-items:center;gap:.7rem;margin:.7rem 0;opacity:0;transform:translateX(-8px);transition:opacity .45s var(--ease),transform .45s var(--ease);}
+.jv-demo.go .jv-drow{opacity:1;transform:none;}
+.jv-demo.go .jv-drow:nth-child(3){transition-delay:.12s}
+.jv-drow .dlab{flex:none;width:110px;font-family:var(--font-mono);font-size:.72rem;line-height:1.3;}
+.jv-drow.clear .dlab{color:var(--accent);} .jv-drow.amb .dlab{color:var(--accent-2);}
+.jv-drow .dtrack{flex:1;background:var(--surface-2);border-radius:6px;height:26px;overflow:hidden;position:relative;}
+.jv-drow .dfill{height:100%;width:0;border-radius:6px;transition:width 1s var(--ease);}
+.jv-drow.clear .dfill{background:var(--accent);} .jv-drow.amb .dfill{background:var(--accent-2);}
+.jv-demo.go .jv-drow .dfill{width:var(--w);}
+.jv-drow .dval{flex:none;width:54px;font-family:var(--font-mono);font-size:.8rem;color:var(--text);text-align:right;}
+.jv-demo .dex{margin-top:1rem;border-top:1px solid var(--border);padding-top:.8rem;font-size:.83rem;color:var(--text-2);line-height:1.6;}
+.jv-demo .dex .q{font-family:var(--font-mono);font-size:.76rem;color:var(--text);}
+.jv-demo .dex .c{font-family:var(--font-mono);font-size:.76rem;}
+.jv-demo .dex .c.hi{color:var(--accent);} .jv-demo .dex .c.lo{color:var(--accent-2);}
 </style>
 
 Most AI you use writes. You ask a question, it produces a paragraph, and if your program needs a real answer out of that paragraph, you parse it, hope the JSON is valid, and add a retry for when it isn't. The intelligence is great. The *shape* of the output is a hassle: it's text, and text has to be turned back into something your code can use.
@@ -211,7 +229,28 @@ Calibration means exactly what a good weather forecast means: on the days a fore
 <figcaption>An overconfident model gives you a number you can't trust, so you can't threshold on it. A calibrated one turns "how sure are you?" into an if-statement.</figcaption>
 </figure>
 
-Typesafe's headline numbers put those two consequences on one picture. Read them as vendor claims, not gospel (more on that below), but the *shape* is the point:
+## I ran it, so here's real data, not a claim
+
+I got an API key and pointed Jev at 320 product reviews where I already knew the true sentiment, including 19 deliberately mixed ones. The whole run: **320 decisions in 7.8 seconds**, **97.8% accurate**, and it cost me **under half a cent** (Jev bills input only, and this run was about 92k input tokens). The same 320 decisions on a mid-tier LLM, made to emit a structured answer each time, works out to roughly **72x more expensive** on token pricing alone.
+
+But the number I actually care about is this one. When I split Jev's confidence by whether a review was clear-cut or genuinely mixed, the confidence *tracked the ambiguity on its own*:
+
+<figure class="jv-fig">
+<div class="jv-demo wm-anim">
+  <div class="dh">Jev's average confidence, split by how clear the review was (real run, n=320)</div>
+  <div class="jv-drow clear"><span class="dlab">clear-cut reviews</span><span class="dtrack"><span class="dfill" style="--w:98.1%"></span></span><span class="dval">98%</span></div>
+  <div class="jv-drow amb"><span class="dlab">genuinely mixed reviews</span><span class="dtrack"><span class="dfill" style="--w:64.2%"></span></span><span class="dval">64%</span></div>
+  <div class="dex">
+    <div><span class="q">"Overpriced and underwhelming in every way."</span> → negative, <span class="c hi">0.99</span></div>
+    <div><span class="q">"Loved the location, hated the noise."</span> → <span class="c lo">0.53</span>, it's genuinely torn, and it says so</div>
+  </div>
+</div>
+<figcaption>Nobody told Jev which reviews were ambiguous. It reported high confidence on the obvious ones and low confidence on the truly mixed ones, entirely on its own. That gap is the whole product: you can auto-act on the 98% ones and route the 53% ones to a human. Ask an LLM the same and it'll say "99%" to both.</figcaption>
+</figure>
+
+This is the thing an LLM can't hand you. Not the answer, LLMs classify sentiment fine, but a confidence number honest enough to *branch on*, produced fast and cheap enough to run over your whole dataset. That combination is what "System One" is for.
+
+Typesafe's own headline numbers put the speed and cost side on one picture. Read them as vendor claims, not gospel (more on that below), but the *shape* matches what I measured:
 
 <figure class="jv-fig">
 <div class="jv-chart wm-anim">
@@ -267,7 +306,7 @@ Even if you never use Jev, the framing is the takeaway: a lot of what we bolt LL
 
 <script>
 (function(){
-  var els=document.querySelectorAll('.jv-hero,.jv-lane,.jv-prims,.jv-chart,.jv-cal');
+  var els=document.querySelectorAll('.jv-hero,.jv-lane,.jv-prims,.jv-chart,.jv-cal,.jv-demo');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('go')});return;}
   var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('go');io.unobserve(x.target)}})},{threshold:.18});
   els.forEach(function(e){io.observe(e)});
