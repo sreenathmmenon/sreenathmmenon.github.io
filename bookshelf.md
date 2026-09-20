@@ -9,10 +9,13 @@ Books that shaped how I think about software, systems, and life.
 
 ## Currently Reading
 
-**"The Book of Elon" by Eric Jorgenson**  
-A guide drawn from Elon Musk's approach to purpose, risk, and building hard things. Reading it now.
+**"Protocols: An Operating Manual for the Human Body" by Andrew Huberman**  
+Evidence-based routines for sleep, focus, exercise, stress, and nutrition, with the science behind each one. Reading it now.
 
 ## Recently Completed
+
+**"The Book of Elon" by Eric Jorgenson**  
+A guide drawn from Elon Musk's approach to purpose, risk, and building hard things.
 
 **"The Almanack of Naval Ravikant" by Eric Jorgenson**  
 A curated collection of Naval's thinking on wealth, happiness, and clear reasoning. Dense with ideas worth rereading.
@@ -27,6 +30,9 @@ More than a tennis book. Fascinating insights on mental training, nutrition, med
 A practical guide to personal productivity and wellbeing from Google's executive productivity advisor. Good, grounded ideas on protecting focus and avoiding burnout.
 
 ## Want to Read
+
+**"Rearview" by Sandeep Mall**  
+Stories and reflections from his own life on managing the self: missed chances, failures, choices, and purpose. Waiting for this one.
 
 **"Database Internals" by Alex Petrov**  
 For when I want to really understand what happens under the hood.

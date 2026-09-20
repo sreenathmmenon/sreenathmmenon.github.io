@@ -1,5 +1,19 @@
 # Single source of truth for projects. featured:true shows on the homepage; all show on /labs/.
 
+- name: Mela
+  featured: true
+  tagline: Play with friends and AI, and let the crowd change the game.
+  blurb: >-
+    A browser gaming platform where a game isn't just you versus an opponent. You play solo, invite
+    friends by QR code, drop in AI agents as players, or open it up to a crowd that can actively change
+    the match as it happens. It runs entirely in the browser with no download and no signup, ships 18
+    games and three-game circuits, and keeps your scorecards and clips. Agents join through WebMCP and
+    remote MCP, with a deterministic default bot so a game still works even when no model is available.
+  stack: [WebMCP, MCP, Browser, "Real-time"]
+  links:
+    - { label: melahop.com, url: "https://www.melahop.com/" }
+    - { label: Product Hunt, url: "https://www.producthunt.com/products/mela-3" }
+
 - name: Krelvan
   featured: true
   tagline: The operating system for autonomous work.
