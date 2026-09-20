@@ -250,6 +250,8 @@ But the number I actually care about is this one. When I split Jev's confidence 
 
 This is the thing an LLM can't hand you. Not the answer, LLMs classify sentiment fine, but a confidence number honest enough to *branch on*, produced fast and cheap enough to run over your whole dataset. That combination is what "System One" is for.
 
+**Try it yourself:** I put a live version up at **[jev-live-demo-production.up.railway.app](https://jev-live-demo-production.up.railway.app)**. Type any review and watch the real Jev model return a decision with its confidence, then hit "run the benchmark" to see the clear-vs-ambiguous split happen live. Type a genuinely mixed one ("great screen, terrible battery") and watch the confidence fall.
+
 Typesafe's own headline numbers put the speed and cost side on one picture. Read them as vendor claims, not gospel (more on that below), but the *shape* matches what I measured:
 
 <figure class="jv-fig">
