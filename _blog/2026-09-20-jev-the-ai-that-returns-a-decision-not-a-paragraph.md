@@ -250,7 +250,7 @@ But the number I actually care about is this one. When I split Jev's confidence 
 
 This is the thing an LLM can't hand you. Not the answer, LLMs classify sentiment fine, but a confidence number honest enough to *branch on*, produced fast and cheap enough to run over your whole dataset. That combination is what "System One" is for.
 
-**Try it yourself:** I put a live version up at **[jev-live-demo-production.up.railway.app](https://jev-live-demo-production.up.railway.app)**. Type any review and watch the real Jev model return a decision with its confidence, then hit "run the benchmark" to see the clear-vs-ambiguous split happen live. Type a genuinely mixed one ("great screen, terrible battery") and watch the confidence fall.
+**Try it yourself:** I put a live version up at **[jev-live-demo-production.up.railway.app](https://jev-live-demo-production.up.railway.app)**. It runs Jev **and a real LLM side by side** on the same review, at the same moment. Type a genuinely mixed one ("loved the location, hated the noise") and watch both the speed gap and the confidence gap: Jev answers in ~150ms and honestly drops to around 50%, while the LLM takes over a second and still says 80%. That overconfidence, live and next to Jev, is the whole argument in one screen. There's also a "run the benchmark" button for the clear-vs-ambiguous split.
 
 Typesafe's own headline numbers put the speed and cost side on one picture. Read them as vendor claims, not gospel (more on that below), but the *shape* matches what I measured:
 
