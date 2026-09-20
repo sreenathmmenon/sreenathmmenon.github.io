@@ -12,10 +12,10 @@ Books that shaped how I think about software, systems, and life.
 **"Protocols: An Operating Manual for the Human Body" by Andrew Huberman**  
 Evidence-based routines for sleep, focus, exercise, stress, and nutrition, with the science behind each one. Reading it now.
 
-## Recently Completed
-
 **"The Book of Elon" by Eric Jorgenson**  
-A guide drawn from Elon Musk's approach to purpose, risk, and building hard things.
+A guide drawn from Elon Musk's approach to purpose, risk, and building hard things. Still working through this one.
+
+## Recently Completed
 
 **"The Almanack of Naval Ravikant" by Eric Jorgenson**  
 A curated collection of Naval's thinking on wealth, happiness, and clear reasoning. Dense with ideas worth rereading.
