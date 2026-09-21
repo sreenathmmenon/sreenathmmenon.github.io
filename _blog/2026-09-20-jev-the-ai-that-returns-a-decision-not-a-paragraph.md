@@ -250,7 +250,11 @@ But the number I actually care about is this one. When I split Jev's confidence 
 
 This is the thing an LLM can't hand you. Not the answer, LLMs classify sentiment fine, but a confidence number honest enough to *branch on*, produced fast and cheap enough to run over your whole dataset. That combination is what "System One" is for.
 
-**Try it yourself:** I put a live version up at **[jev-live-demo-production.up.railway.app](https://jev-live-demo-production.up.railway.app)**. It runs Jev **and a real LLM side by side** on the same review, at the same moment. Type a genuinely mixed one ("loved the location, hated the noise") and watch both the speed gap and the confidence gap: Jev answers in ~150ms and honestly drops to around 50%, while the LLM takes over a second and still says 80%. That overconfidence, live and next to Jev, is the whole argument in one screen. There's also a "run the benchmark" button for the clear-vs-ambiguous split.
+**Try it yourself:** I put live versions up at **[jev-live-demo-production.up.railway.app](https://jev-live-demo-production.up.railway.app)**, each runs Jev **and a real LLM side by side**:
+
+- **The sentiment demo** (the home page): the same review to both at once. Type a genuinely mixed one ("loved the location, hated the noise") and watch the gaps: Jev answers in ~150ms and honestly drops to around 50%, while the LLM takes over a second and still says 80%. That overconfidence, live and next to Jev, is the whole argument in one screen.
+- **[The maze race](https://jev-live-demo-production.up.railway.app/)**: two runners navigate the same maze, each move a decision. Jev decides ~10 a second and reaches the goal; the LLM stalls, because you can't put a one-second, few-cents call inside a real-time loop.
+- **[Jev routing WebMCP tools](https://jev-live-demo-production.up.railway.app/webmcp)**: a page declaring 13 real [WebMCP](/blog/2026-08-04-webmcp-teaching-websites-to-talk-to-ai-agents/) tools. Say what you want in plain words; Jev picks the tool with a calibrated confidence and gates the one that acts in your name, while the LLM picks a tool but gives you no honest number to gate on.
 
 Typesafe's own headline numbers put the speed and cost side on one picture. Read them as vendor claims, not gospel (more on that below), but the *shape* matches what I measured:
 
